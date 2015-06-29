@@ -30,12 +30,27 @@ exampleFileX <- file.path(path.package('gdata'),'xls',
 sheetCount(exampleFile)
 
 if( 'XLSX' %in% xlsFormats() )
-  sheetCount(exampleFileX)
+  {
+    sheetCount(exampleFileX)
+  } else {
+      cat("************************************************************\n")
+      cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
+      cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED                  **\n")
+      cat("************************************************************\n")
+  }
 
 sheetNames(exampleFile)
 
 if( 'XLSX' %in% xlsFormats() )
-  sheetNames(exampleFileX)
+  {
+    sheetNames(exampleFileX)
+  } else {
+      cat("************************************************************\n")
+      cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
+      cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED                  **\n")
+      cat("************************************************************\n")
+  }
+
 
 example.1 <- read.xls(exampleFile, sheet=1) # default is first worksheet
 example.1
@@ -70,7 +85,7 @@ if( 'XLSX' %in% xlsFormats() )
     data <- read.xls(exampleFileX, sheet="Sheet with initial text", skip=2)
     print(data)
   } else {
-      cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
+    cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
     cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED **\n")
   }
 
