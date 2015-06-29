@@ -515,7 +515,14 @@ The following object is masked from 'package:utils':
 [1] 4
 > 
 > if( 'XLSX' %in% xlsFormats() )
-+   sheetCount(exampleFileX)
++   {
++     sheetCount(exampleFileX)
++   } else {
++       cat("************************************************************\n")
++       cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
++       cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED                  **\n")
++       cat("************************************************************\n")
++   }
 [1] 4
 > 
 > sheetNames(exampleFile)
@@ -523,9 +530,17 @@ The following object is masked from 'package:utils':
 [3] "Sheet with a very long name!" "Sheet with initial text"     
 > 
 > if( 'XLSX' %in% xlsFormats() )
-+   sheetNames(exampleFileX)
++   {
++     sheetNames(exampleFileX)
++   } else {
++       cat("************************************************************\n")
++       cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
++       cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED                  **\n")
++       cat("************************************************************\n")
++   }
 [1] "Sheet First"                  "Sheet Second"                
 [3] "Sheet with a very long name!" "Sheet with initial text"     
+> 
 > 
 > example.1 <- read.xls(exampleFile, sheet=1) # default is first worksheet
 > example.1
@@ -611,7 +626,7 @@ The following object is masked from 'package:utils':
 +     data <- read.xls(exampleFileX, sheet="Sheet with initial text", skip=2)
 +     print(data)
 +   } else {
-+       cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
++     cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
 +     cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED **\n")
 +   }
   A  B   C
@@ -883,4 +898,4 @@ The following object is masked from 'package:utils':
 > 
 > proc.time()
    user  system elapsed 
- 13.275   0.831  14.313 
+ 14.560   0.980  15.861 
