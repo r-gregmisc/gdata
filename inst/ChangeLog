@@ -1,5 +1,6 @@
 2015-06-29  warnes
 
+	* [r2055] inst/ChangeLog: Update ChangeLog
 	* [r2054] tests/test.humanReadable.Rout.save,
 	  tests/test.read.xls.R, tests/test.read.xls.Rout.save,
 	  tests/test.reorder.factor.Rout.save,

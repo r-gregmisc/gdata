@@ -1,3 +1,21 @@
+Changes in 2.17.0 (2015-07-02)
+------------------------------
+
+New features:
+
+- Add new argument 'byrow' to upperTriangle(), lowerTriangle(),
+  upperTriangle<-(), and lowerTriangle<-() to specify by-row rather
+  by-column order.  This makes it simpler to copy values between the
+  lower and upper triangular areas, e.g. to construct a symmetric
+  matrix.
+
+Other changes:
+
+- Add inline comments to tests to alert reviewers of expected diffs on
+  systems lacking the libraries for read.xls() to support XLSX
+  formatted files.
+
+
 Changes in 2.16.1 (2015-04-28)
 -----------------------------
 
