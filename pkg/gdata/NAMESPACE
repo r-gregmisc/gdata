@@ -66,6 +66,8 @@ export(
 importFrom(stats, reorder)
 importFrom(stats, nobs)
 importFrom(gtools, mixedsort)
+importFrom(methods, is)
+importFrom(utils, data, download.file, head, read.csv, read.delim, read.table, tail, write.table)
 
 S3method(reorder, factor)
 
@@ -161,3 +163,5 @@ S3method(left,  data.frame)
 S3method(left,  matrix)
 S3method(right, data.frame)
 S3method(right, matrix)
+
+

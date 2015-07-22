@@ -29,26 +29,27 @@ exampleFileX <- file.path(path.package('gdata'),'xls',
 # see the number and names of sheets:
 sheetCount(exampleFile)
 
-if( 'XLSX' %in% xlsFormats() )
+if(! 'XLSX' %in% xlsFormats() )
   {
-    sheetCount(exampleFileX)
+    cat("************************************************************\n")
+    cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
+    cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED                  **\n")
+    cat("************************************************************\n")
   } else {
-      cat("************************************************************\n")
-      cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
-      cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED                  **\n")
-      cat("************************************************************\n")
+    sheetCount(exampleFileX)
   }
+
 
 sheetNames(exampleFile)
 
-if( 'XLSX' %in% xlsFormats() )
+if(! 'XLSX' %in% xlsFormats() )
   {
-    sheetNames(exampleFileX)
+    cat("************************************************************\n")
+    cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
+    cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED                  **\n")
+    cat("************************************************************\n")
   } else {
-      cat("************************************************************\n")
-      cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
-      cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED                  **\n")
-      cat("************************************************************\n")
+    sheetNames(exampleFileX)
   }
 
 
@@ -64,8 +65,13 @@ example.3
 example.4 <- read.xls(exampleFile, sheet=4, header=FALSE) # fourth worksheet by number
 example.4
 
-if( 'XLSX' %in% xlsFormats() )
+if(! 'XLSX' %in% xlsFormats() )
   {
+    cat("************************************************************\n")
+    cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
+    cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED                  **\n")
+    cat("************************************************************\n")
+  } else {
     example.x.1 <- read.xls(exampleFileX, sheet=1) # default is first worksheet
     print(example.x.1)
 
@@ -84,9 +90,6 @@ if( 'XLSX' %in% xlsFormats() )
     # load the third worksheet, skipping the first two non-data lines...
     data <- read.xls(exampleFileX, sheet="Sheet with initial text", skip=2)
     print(data)
-  } else {
-    cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
-    cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED **\n")
   }
 
 ## Check handling of skip.blank.lines=FALSE
@@ -94,16 +97,17 @@ if( 'XLSX' %in% xlsFormats() )
 example.skip <- read.xls(exampleFile, sheet=2, blank.lines.skip=FALSE)
 example.skip
 
-if( 'XLSX' %in% xlsFormats() )
+if(! 'XLSX' %in% xlsFormats() )
   {
+    cat("************************************************************\n")
+    cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
+    cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED                  **\n")
+    cat("************************************************************\n")
+  } else {
     example.x.skip <- read.xls(exampleFileX, sheet=2, blank.lines.skip=FALSE)
     example.x.skip
-  } else {
-      cat("************************************************************\n")
-      cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
-      cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED                  **\n")
-      cat("************************************************************\n")
   }
+
 
 
 ## Check handing of fileEncoding for latin-1 characters
@@ -124,8 +128,13 @@ if(.Platform$OS.type=="unix")
                                  stringsAsFactors=FALSE)
   }
 
-if( 'XLSX' %in% xlsFormats() )
+if(! 'XLSX' %in% xlsFormats() )
   {
+    cat("************************************************************\n")
+    cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
+    cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED                  **\n")
+    cat("************************************************************\n")
+  } else {
       if(.Platform$OS.type=="unix")
           {
               example.latin1.x <- read.xls(latin1FileX,
@@ -138,12 +147,7 @@ if( 'XLSX' %in% xlsFormats() )
                                          encoding='latin1',
                                          stringsAsFactors=FALSE)
           }
-  } else {
-    cat("************************************************************\n")
-    cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
-    cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED                  **\n")
-    cat("************************************************************\n")
-}
+  }
 
 
 ## Check handling of very wide file
@@ -154,13 +158,15 @@ wideFileX <- file.path(path.package('gdata'),'xls', 'wide.xlsx')
 example.wide <- read.xls(wideFile)
 stopifnot(dim(example.wide)==c(0,256))
 
-if( 'XLSX' %in% xlsFormats() )
+if( !'XLSX' %in% xlsFormats() )
   {
-     example.wide.x <- read.xls(wideFileX)
-     stopifnot(dim(example.wide.x)==c(0,16384))
-  } else {
+    cat("************************************************************\n")
     cat("** DIFF IN THIS SECTION IS EXPECTED BECAUSE PERL PACKAGES **\n")
-    cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED **\n")
+    cat("** FOR SUPPORTING XLSX ARE NOT INSTALLED                  **\n")
+    cat("************************************************************\n")
+  } else {
+    example.wide.x <- read.xls(wideFileX)
+    stopifnot(dim(example.wide.x)==c(0,16384))
   }
 
 ## Check handling of files with dates calulcated relative to
