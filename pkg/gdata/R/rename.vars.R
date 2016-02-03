@@ -44,14 +44,20 @@ rename.vars <- function(data,from='',to='',info=TRUE) {
 }
 
 
-# GRW 2004-04-01
 remove.vars <- function( data, names, info=TRUE)
+{
+  dsn <- deparse(substitute(data))
+  if (info) cat('\nChanging in',dsn, "\n")
+  
+  
+  flag <- names %in% colnames(data)
+  if(any(!flag))
+    warning("Variable(s) not found: ", paste(names[!flag], collapse=", ") )
+  if(any(flag))
   {
-    for( i in names )
-      {
-        if(info)
-          cat("Removing variable '", i, "'\n", sep="")
-        data[[i]] <- NULL
-      }
-    data
+    if(info) cat("Dropping variables:", paste(names[flag], collapse=", "), "\n\n")
+    for(var in names[flag])
+      data[[var]] <- NULL
   }
+  data
+}
