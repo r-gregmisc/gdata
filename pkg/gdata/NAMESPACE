@@ -14,12 +14,14 @@ export(
        elem,
        env,
        first,
+       'first<-',
        frameApply,
        installXLSXsupport,
        interleave,
        is.what,
        keep,
        last,
+       'last<-',
        left,
        ll,
        ls.funs,
@@ -40,6 +42,8 @@ export(
        trim,
        trimSum,
        unmatrix,
+       update.list,
+       update.data.frame,
        upperTriangle,
        "upperTriangle<-",
        wideByFactor,
@@ -164,4 +168,6 @@ S3method(left,  matrix)
 S3method(right, data.frame)
 S3method(right, matrix)
 
-
+# update methods for list, data.frame
+S3method(update, list)
+S3method(update, data.frame)
