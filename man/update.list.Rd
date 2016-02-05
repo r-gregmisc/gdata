@@ -1,5 +1,6 @@
 \name{update.list}
 \alias{update.list}
+\alias{update.data.frame}
 \title{
   Update the elements of a list
 }
@@ -11,11 +12,13 @@
 \usage{
 update.list(object, new, unnamed=FALSE, ...)
 \method{update}{list}(object, new, unnamed=FALSE, ...)
+\method{update}{data.frame}(object, new, unnamed=FALSE, ...)
 }
 \arguments{
   \item{object}{List to be updated.}
   \item{new}{List containing new elements.}
   \item{unnamed}{Logical. If \code{TRUE}, unnamed elements of \code{new} will be appended to \code{object}}
+  \item{...}{optional method arguments (ignored)}
 }
 \note{
   This method can be called directly, or as via the S3 base method for \code{update}.
