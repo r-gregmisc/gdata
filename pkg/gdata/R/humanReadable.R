@@ -14,7 +14,7 @@ humanReadable <- function(x,
   suffix.Unix <- c("B" ,  "K",   "M",   "G",   "T",   "P",   "E",   "Z",   "Y")
 
   standard <- match.arg(standard)
-  if(length(justify)==1) justfy <- c(justify, justify)
+  if(length(justify)==1) justify <- c(justify, justify)
 
   ## --- Functions ---
 
