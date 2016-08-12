@@ -30,6 +30,7 @@ export(
        matchcols,
        nobs,  # default method now provided by stats package
        nPairs,
+       mv,
        read.xls,
        rename.vars,
        remove.vars,
