@@ -21,6 +21,14 @@ Various R programming tools for data manipulation, including:
    - wrapper for `sample` that ensures consistent behavior for both
      scalar and vector arguments (`resample`).
 
-Authors: Gregory R. Warnes, Ben Bolker, Gregor Gorjanc, Gabor
-  Grothendieck, Ales Korosec, Thomas Lumley, Don MacQueen, Arni
-  Magnusson, Jim Rogers, and others
+Authors: 
+  * Gregory R. Warnes, 
+  * Ben Bolker, 
+  * Gregor Gorjanc, 
+  * Gabor Grothendieck, 
+  * Ales Korosec, 
+  * Thomas Lumley, 
+  * Don MacQueen, 
+  * Arni Magnusson, 
+  * Jim Rogers, 
+  * and others
