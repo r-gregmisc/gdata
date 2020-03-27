@@ -12,6 +12,7 @@
 \SweaveOpts{strip.white=all, keep.source=TRUE}
 
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 
 \begin{article}
 
