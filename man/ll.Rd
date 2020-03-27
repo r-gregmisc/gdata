@@ -7,14 +7,14 @@
   elements are listed and described.
 }
 \usage{
-ll(pos=1, unit=c("KB","MB","GB","bytes"), digits=0,
-   dim=FALSE, sort=FALSE, class=NULL, invert=FALSE, ...)
+ll(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
+   invert=FALSE, ...)
 }
 \arguments{
   \item{pos}{environment position number, environment name, data frame,
     list, model, S4 object, or any object that \code{is.list}.}
-  \item{unit}{unit for displaying object size: "bytes", "KB", "MB", "GB", or
-    first letter.}
+  \item{unit}{unit for displaying object size: "B", "KB", "MB", "GB", or
+    first letter (case-insensitive).}
   \item{digits}{number of decimals to display when rounding object
     size.}
   \item{dim}{whether object dimensions should be returned.}

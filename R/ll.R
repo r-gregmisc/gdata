@@ -1,5 +1,5 @@
-ll <- function(pos=1, unit=c("KB","MB","GB","bytes"), digits=0,
-               dim=FALSE, sort=FALSE, class=NULL, invert=FALSE, ...)
+ll <- function(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
+               invert=FALSE, ...)
 {
   get.object.class <- function(object.name, pos)
   {
@@ -29,7 +29,7 @@ ll <- function(pos=1, unit=c("KB","MB","GB","bytes"), digits=0,
   }
 
   ## 1  Set unit, denominator, original.rank
-  unit <- match.arg(unit, c("KB","MB","GB","bytes"))
+  unit <- match.arg(toupper(substring(unit,1,1)), c("B","KB","MB","GB"))
   denominator <- switch(unit, "KB"=1024, "MB"=1024^2, "GB"=1024^3, 1)
   original.rank <- NULL
 

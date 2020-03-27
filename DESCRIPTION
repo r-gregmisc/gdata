@@ -5,7 +5,7 @@ Description: Various R programming tools for data manipulation, including:
    - combining objects ('bindData', 'cbindX', 'combine', 'interleave'),
    - character vector operations ('centerText', 'startsWith', 'trim'),
    - factor manipulation ('levels', 'reorder.factor', 'mapLevels'),
-   - obtaining information about R objects ('object.size', 'elem', 'env',
+   - obtaining information about R objects ('object.size', 'env',
      'humanReadable', 'is.what', 'll', 'keep', 'ls.funs',
      'Args','nPairs', 'nobs'),
    - manipulating MS-Excel formatted files ('read.xls',
