@@ -71,7 +71,7 @@ export(
 importFrom(stats, reorder)
 importFrom(stats, nobs)
 importFrom(gtools, mixedsort)
-importFrom(methods, is)
+importFrom(methods, is, slot, slotNames)
 importFrom(utils, data, download.file, head, read.csv, read.delim, read.table, tail, write.table)
 
 S3method(reorder, factor)

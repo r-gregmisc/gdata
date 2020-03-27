@@ -1,3 +1,24 @@
+Version 2.18.0 (2017-06-05)
+---------------------------
+
+New functions:
+
+- Add update.list() function to replace named elements a list.
+- Add mv() function to rename an object.
+- Add first(), last(), 'first<-'() and 'last<-'() functions to extract
+  or replace first or last vector/list elements.
+
+New features:
+
+- Add 'byrow' argument to lowerTriangle()/upperTriangle() functions.
+
+Other User-visible Changes:
+
+- humanReadable() now properly handles a single value for the argument 'justify'.
+- Improve logging and error reporting for remove.vars()
+- read.xls() now handles latin-1 files properly on MS-Windows.
+- write.fwf() now properly handles matrix arguments.
+
 Changes in 2.17.0 (2015-07-02)
 ------------------------------
 
