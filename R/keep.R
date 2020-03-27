@@ -1,4 +1,4 @@
-keep <- function(..., list=character(0), all=FALSE, sure=FALSE)
+keep <- function(..., list=character(), all=FALSE, sure=FALSE)
 {
   if(missing(...) && missing(list))
   {
@@ -16,8 +16,8 @@ keep <- function(..., list=character(0), all=FALSE, sure=FALSE)
     return(invisible(NULL))
   }
 
+  obj <- ls(1, all.names=all)[-keep.elements]
   if(sure)
-    rm(list=ls(1,all.names=all)[-keep.elements], pos=1)
-  else
-    return(ls(1,all.names=all)[-keep.elements])
+    rm(list=obj, pos=1)
+  obj
 }
