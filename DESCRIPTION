@@ -23,8 +23,8 @@ Description: Various R programming tools for data manipulation, including:
 Depends: R (>= 2.3.0)
 SystemRequirements: perl (>= 5.10.0)
 Imports: gtools, stats, methods, utils
-Version: 2.18.0
-Date: 2017-06-05
+Version: 2.18.1
+Date: 2020-03-27
 Author: Gregory R. Warnes, Ben Bolker, Gregor Gorjanc, Gabor
         Grothendieck, Ales Korosec, Thomas Lumley, Don MacQueen, Arni
         Magnusson, Jim Rogers, and others

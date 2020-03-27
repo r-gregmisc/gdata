@@ -1,3 +1,9 @@
+Version 2.18.1 (2020-03-27)
+---------------------------
+
+Other changes:
+- ll() now handles S4 objects.
+
 Version 2.18.0 (2017-06-05)
 ---------------------------
 
@@ -16,7 +22,6 @@ Other User-visible Changes:
 
 - humanReadable() now properly handles a single value for the argument 'justify'.
 - Improve logging and error reporting for remove.vars()
-- ll() now handles S4 objects.
 - read.xls() now handles latin-1 files properly on MS-Windows.
 - write.fwf() now properly handles matrix arguments.
 
