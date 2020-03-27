@@ -44,7 +44,7 @@ export(
        trimSum,
        unmatrix,
        update.list,
-       update.data.frame,
+       #update.data.frame,
        upperTriangle,
        "upperTriangle<-",
        wideByFactor,
@@ -171,4 +171,4 @@ S3method(right, matrix)
 
 # update methods for list, data.frame
 S3method(update, list)
-S3method(update, data.frame)
+#S3method(update, data.frame)

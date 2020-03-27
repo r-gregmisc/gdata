@@ -34,8 +34,8 @@ disabled by setting \code{recode.factor=FALSE}. Recoding is done with
 }
 \author{Gregory R. Warnes \email{greg@warnes.net}  with
   contributions by Gregor Gorjanc}
-\seealso{ \code{\link[base]{sub}}, \code{\link[base]{gsub}} as well as
-  argument \code{strip.white} in \code{\link{read.table}} and
+\seealso{ \code{\link[base]{trimws}}, \code{\link[base]{sub}},\code{\link[base]{gsub}}
+as well as argument \code{strip.white} in \code{\link{read.table}} and
   \code{\link{reorder.factor}}
 }
 \examples{
