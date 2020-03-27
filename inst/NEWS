@@ -2,7 +2,9 @@ Version 2.18.1 (2020-03-27)
 ---------------------------
 
 Other changes:
-- ll() now handles S4 objects.
+
+- ll() now handles S4 objects. Also accepts unit="GB" (contributed by Michael
+  Chirico).
 
 Version 2.18.0 (2017-06-05)
 ---------------------------

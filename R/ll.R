@@ -1,5 +1,5 @@
-ll <- function(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
-               invert=FALSE, ...)
+ll <- function(pos=1, unit=c("KB","MB","GB","bytes"), digits=0,
+               dim=FALSE, sort=FALSE, class=NULL, invert=FALSE, ...)
 {
   get.object.class <- function(object.name, pos)
   {
@@ -29,8 +29,8 @@ ll <- function(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
   }
 
   ## 1  Set unit, denominator, original.rank
-  unit <- match.arg(unit, c("bytes","KB","MB"))
-  denominator <- switch(unit, "KB"=1024, "MB"=1024^2, 1)
+  unit <- match.arg(unit, c("KB","MB","GB","bytes"))
+  denominator <- switch(unit, "KB"=1024, "MB"=1024^2, "GB"=1024^3, 1)
   original.rank <- NULL
 
   ## 2  Detect what 'pos' is like, then get class, size, dim
