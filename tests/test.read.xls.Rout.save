@@ -17,8 +17,6 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-[Previously saved workspace restored]
-
 > library(gdata)
 gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
 
@@ -912,4 +910,4 @@ The following object is masked from ‘package:base’:
 > 
 > proc.time()
    user  system elapsed 
- 13.507   1.908  18.208 
+ 12.611   1.690  16.911 
