@@ -17,8 +17,6 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-[Previously saved workspace restored]
-
 > ## Test results before and after loading gdata
 > 
 > m <- factor(c('a','b','c'))
@@ -61,4 +59,4 @@ Levels: c b a
 > 
 > proc.time()
    user  system elapsed 
-  0.393   0.107   0.557 
+  0.425   0.109   0.605 

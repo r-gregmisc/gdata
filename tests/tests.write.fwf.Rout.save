@@ -17,8 +17,6 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
-[Previously saved workspace restored]
-
 > ### tests.write.fwf.R
 > ###------------------------------------------------------------------------
 > ### What: Tests for write.fwf
@@ -239,4 +237,4 @@ HI! num1 num2 num3 int1 fac1 fac2 cha1 cha2 Date POSIXt
 > 
 > proc.time()
    user  system elapsed 
-  0.461   0.110   0.592 
+  0.629   0.153   1.468 
