@@ -19,17 +19,6 @@ Type 'q()' to quit R.
 
 [Previously saved workspace restored]
 
-> ## Test results before and after loading gdata
-> 
-> m <- factor(c('a','b','c'))
-> 
-> ( m1 <- reorder(m, X=c(3, 2, 1)) )
-[1] a b c
-attr(,"scores")
-a b c 
-3 2 1 
-Levels: c b a
-> 
 > library(gdata)
 gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
 
@@ -49,16 +38,11 @@ The following object is masked from ‘package:base’:
 
     startsWith
 
+> saveto <- tempfile(pattern = "test.txt", tmpdir = tempdir())
 > 
-> ( m2 <- reorder(m, X=c(3, 2, 1)) )
-[1] a b c
-attr(,"scores")
-a b c 
-3 2 1 
-Levels: c b a
-> 
-> stopifnot(identical(m1,m2))
+> write.fwf(x = data.frame(a=1:length(LETTERS), b=LETTERS),
++           file=saveto, eol="\r\n")
 > 
 > proc.time()
    user  system elapsed 
-  0.440   0.126   0.687 
+  0.535   0.137   1.398 

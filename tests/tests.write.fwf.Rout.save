@@ -1,11 +1,13 @@
 
-R version 3.2.0 (2015-04-16) -- "Full of Ingredients"
-Copyright (C) 2015 The R Foundation for Statistical Computing
-Platform: x86_64-apple-darwin13.4.0 (64-bit)
+R version 4.0.2 (2020-06-22) -- "Taking Off Again"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
 Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
 
 R is a collaborative project with many contributors.
 Type 'contributors()' for more information and
@@ -15,10 +17,12 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
+[Previously saved workspace restored]
+
 > ### tests.write.fwf.R
 > ###------------------------------------------------------------------------
 > ### What: Tests for write.fwf
-> ### $Id: tests.write.fwf.R 1300 2008-08-05 11:47:18Z ggorjan $
+> ### $Id$
 > ### Time-stamp: <2008-08-05 12:25:05 ggorjan>
 > ###------------------------------------------------------------------------
 > 
@@ -27,15 +31,19 @@ gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
 
 gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
 
-Attaching package: 'gdata'
+Attaching package: ‘gdata’
 
-The following object is masked from 'package:stats':
+The following object is masked from ‘package:stats’:
 
     nobs
 
-The following object is masked from 'package:utils':
+The following object is masked from ‘package:utils’:
 
     object.size
+
+The following object is masked from ‘package:base’:
+
+    startsWith
 
 > 
 > ## --- Test data ---
@@ -231,4 +239,4 @@ HI! num1 num2 num3 int1 fac1 fac2 cha1 cha2 Date POSIXt
 > 
 > proc.time()
    user  system elapsed 
-  0.426   0.048   0.462 
+  0.532   0.117   0.888 
