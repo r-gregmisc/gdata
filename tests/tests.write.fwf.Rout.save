@@ -239,4 +239,4 @@ HI! num1 num2 num3 int1 fac1 fac2 cha1 cha2 Date POSIXt
 > 
 > proc.time()
    user  system elapsed 
-  0.532   0.117   0.888 
+  0.461   0.110   0.592 
