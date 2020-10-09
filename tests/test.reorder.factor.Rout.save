@@ -28,7 +28,6 @@ Levels: c b a
 > 
 > library(gdata)
 gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
-
 gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
 
 Attaching package: 'gdata'
@@ -57,4 +56,4 @@ Levels: c b a
 > 
 > proc.time()
    user  system elapsed 
-  0.354   0.122   0.475 
+  0.357   0.104   0.504 

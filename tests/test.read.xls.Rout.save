@@ -17,7 +17,6 @@ Type 'q()' to quit R.
 
 > library(gdata)
 gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
-
 gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
 
 Attaching package: 'gdata'
@@ -908,4 +907,4 @@ The following object is masked from 'package:base':
 > 
 > proc.time()
    user  system elapsed 
- 12.341   1.612  14.737 
+ 12.852   1.637  16.100 

@@ -9,3 +9,5 @@ clea^\.Rproj\.user$
 \.aux$
 \.tex$
 \.bbl$
+^\.Rprofile$
+^\.RData$

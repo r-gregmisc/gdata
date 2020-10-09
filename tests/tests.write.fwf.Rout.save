@@ -24,7 +24,6 @@ Type 'q()' to quit R.
 > 
 > library(gdata)
 gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
-
 gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
 
 Attaching package: 'gdata'
@@ -235,4 +234,4 @@ HI! num1 num2 num3 int1 fac1 fac2 cha1 cha2 Date POSIXt
 > 
 > proc.time()
    user  system elapsed 
-  0.433   0.112   0.550 
+  0.464   0.108   0.874 
