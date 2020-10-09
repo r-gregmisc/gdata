@@ -1,6 +1,11 @@
 \name{left}
+
 \alias{right}
 \alias{left}
+\alias{right.data.frame}
+\alias{left.data.frame}
+\alias{right.matrix}
+\alias{left.matrix}
 \title{Return the leftmost or rightmost columns of a matrix or dataframe}
 \description{
   Return the leftmost or rightmost or  columns of a matrix or dataframe

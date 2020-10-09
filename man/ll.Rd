@@ -13,7 +13,7 @@ ll(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
 \arguments{
   \item{pos}{environment position number, environment name, data frame,
     list, model, S4 object, or any object that \code{is.list}.}
-  \item{unit, system}{unit and system for displaying object size.  
+  \item{unit, standard}{unit and standard for displaying object size.  
     See \code{\link{humanReadable}} for details.}
   \item{digits}{number of decimals to display when rounding object
     size.}
@@ -32,7 +32,7 @@ ll(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
   \item{Dim}{object dimensions \emph{(optional)}.}
 }
 \note{The name of the object size column is the same as the unit used.}
-\author{Arni Magnusson, with a contribution by Jim Rogers}
+\author{Arni Magnusson, with contributions by Jim Rogers and Greg Warnes}
 \seealso{
   \code{ll} is a verbose alternative to \code{\link{ls}} (objects in an
   environment), \code{\link{names}} (elements in a list-like object),
@@ -43,6 +43,8 @@ ll(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
 
   \code{\link{env}} is a related function that describes all loaded
   environments.
+  
+  See \code{\link{humanReadable}} for handling of units ("KB", "MB", etc.)
 }
 \examples{
 ll()
@@ -55,6 +57,19 @@ model <- glm(case~spontaneous+induced, family=binomial, data=infert)
 ll(model, dim=TRUE)
 ll(model, sort=TRUE)
 ll(model$family)
+
+# demonstrate units, by default uses SI standard (K=1000)
+ll(model, unit="B")
+ll(model, unit="KB")
+ll(model, unit="MB")
+
+# use EIC standard (K=1024)
+ll(model, unit="K", standard="IEC")
+ll(model, unit="KiB", standard="IEC")
+ll(model, unit="MiB", standard="IEC")
+
+# Use varying units
+ll(model, unit="auto")
 }
 % Basics
 \keyword{data}
