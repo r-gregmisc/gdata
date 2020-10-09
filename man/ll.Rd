@@ -8,13 +8,13 @@
 }
 \usage{
 ll(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
-   invert=FALSE, ...)
+   invert=FALSE, standard="SI", ...)
 }
 \arguments{
   \item{pos}{environment position number, environment name, data frame,
     list, model, S4 object, or any object that \code{is.list}.}
-  \item{unit}{unit for displaying object size: "B", "KB", "MB", "GB", or
-    first letter (case-insensitive).}
+  \item{unit, system}{unit and system for displaying object size.  
+    See \code{\link{humanReadable}} for details.}
   \item{digits}{number of decimals to display when rounding object
     size.}
   \item{dim}{whether object dimensions should be returned.}

@@ -1,5 +1,5 @@
 ll <- function(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
-               invert=FALSE, ...)
+               invert=FALSE, standard="SI", ...)
 {
   get.object.class <- function(object.name, pos)
   {
@@ -28,9 +28,7 @@ ll <- function(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
     size
   }
 
-  ## 1  Set unit, denominator, original.rank
-  unit <- match.arg(toupper(substring(unit,1,1)), c("B","KB","MB","GB"))
-  denominator <- switch(unit, "KB"=1024, "MB"=1024^2, "GB"=1024^3, 1)
+  ## 1  Set original.rank
   original.rank <- NULL
 
   ## 2  Detect what 'pos' is like, then get class, size, dim
@@ -64,13 +62,27 @@ ll <- function(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
   }
   else
   {
-    class.vector <- sapply(ls(pos,...), get.object.class, pos=pos)
-    size.vector <- sapply(ls(pos,...), get.object.size, pos=pos)
-    size.vector <- round(size.vector/denominator, digits)
+    class.vector <- sapply(ls(pos,...),
+                           get.object.class, 
+                           pos=pos)
+    
+    size.vector <- sapply(ls(pos,...), 
+                          get.object.size, 
+                          pos=pos)
+    
+    row.names <- names(size.vector)
+    
+    size.vector <- humanReadable(size.vector, 
+                                 units=unit, 
+                                 standard=standard, 
+                                 digits=digits)
+    
     object.frame <- data.frame(class.vector=class.vector,
                                size.vector=size.vector,
-                               row.names=names(size.vector))
+                               row.names=row.names)
+    
     names(object.frame) <- c("Class", unit)
+    
     if(dim)
       object.frame <- cbind(object.frame,
                             Dim=sapply(ls(pos,...),get.object.dim,pos=pos))
