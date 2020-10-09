@@ -23,12 +23,24 @@ Description: Various R programming tools for data manipulation, including:
 Depends: R (>= 2.3.0)
 SystemRequirements: perl (>= 5.10.0)
 Imports: gtools, stats, methods, utils
-Version: 2.18.1
-Date: 2020-03-27
-Author: Gregory R. Warnes, Ben Bolker, Gregor Gorjanc, Gabor
-        Grothendieck, Ales Korosec, Thomas Lumley, Don MacQueen, Arni
-        Magnusson, Jim Rogers, and others
+Version: 2.19.0
+Date: 2020-10-09
+Authors@R: c(
+   person("Gregory", "Warnes", middle="R", email = "greg@warnes.net",
+      role = c("aut", "cre")),
+   person("Arni", "Magnusson", emaol="Arni.magnusson@ices.dk", 
+      role=c("aut")),
+   person("Ben", "Bolker", role="ctb")),
+   person("Gregor", "Gorjanc", role="ctb")),
+   person("Gabor", "Grothendieck", role="ctb")),
+   person("Ales", "Korosec", role="ctb")),
+   person("Thomas", "Lumley", rol="ctb")), 
+   person("Don", "MacQueen", role="ctb")),
+   person("Jim", "Rogers", role="ctb"))
+   )
 Maintainer: Gregory R. Warnes <greg@warnes.net>
 License: GPL-2
 NeedsCompilation: no
 Suggests: RUnit
+URL: https://github.com/r-gregmisc/gdata
+BugReports: https://github.com/r-gregmisc/gdata/issues
