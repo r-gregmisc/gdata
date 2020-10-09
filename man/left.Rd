@@ -9,16 +9,16 @@
 right(x, n = 6L, ...)
 left(x, n=6L, ...)
 
-\method{right}{matrix}(x, n=6L, addcolnums=TRUE, ...)
-\method{left}{matrix}(x, n=6L, addcolnums=TRUE, ...)
+\method{right}{matrix}(x, n=6L, add.col.nums=TRUE, ...)
+\method{left}{matrix}(x, n=6L, add.col.nums=TRUE, ...)
 
-\method{right}{data.frame}(x, n=6L, addcolnums=TRUE, ...)
-\method{left}{data.frame}(x, n=6L, addcolnums=TRUE, ...)
+\method{right}{data.frame}(x, n=6L, add.col.nums=TRUE, ...)
+\method{left}{data.frame}(x, n=6L, add.col.nums=TRUE, ...)
 }
 \arguments{
   \item{x}{Matrix or dataframe}
   \item{n}{If positive, number of columns to return. If negative, number of columns to omit. See examples.}
-  \item{addcolnums}{Logical. If no column names are present, 
+  \item{add.col.nums}{Logical. If no column names are present, 
     add names giving original column number. (See example below.)}
   \item{\dots}{Additional arguments used by methods}
 }
@@ -55,8 +55,8 @@ left(x, n=6L, ...)
  left(m, add.col.nums = FALSE)
  colnames(left(m, add.col.nums = FALSE))
  
- right(m, add.col.nums = FALSE)          # columns are labeled 1:6 ..
- colnames(right(m, add.col.nums = FALSE) #   instead of 5:10
+ right(m, add.col.nums = FALSE)           # columns are labeled 1:6 ..
+ colnames(right(m, add.col.nums = FALSE)) #   instead of 5:10
  
  # Works for data frames too!
  d <- data.frame(m)
