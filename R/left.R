@@ -1,5 +1,5 @@
 left  <- function(x, n=6L) UseMethod("left")
-right <- function(x, n=6L) UseMethod("left")
+right <- function(x, n=6L) UseMethod("right")
 
 left.data.frame <- function(x, n=6)
 {
