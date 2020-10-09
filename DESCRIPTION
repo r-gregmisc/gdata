@@ -26,17 +26,24 @@ Imports: gtools, stats, methods, utils
 Version: 2.19.0
 Date: 2020-10-09
 Authors@R: c(
-   person("Gregory", "Warnes", "R", email = "greg@warnes.net",
-      role = c("aut", "cre")),
-   person("Arni", "Magnusson", email="Arni.magnusson@ices.dk", 
-      role=c("aut", "cre")),
+   person(
+      c("Gregory", "R"), "Warnes",
+      email = c("greg@warnes.net"),
+      role = c("aut", "cre")
+      ),
+   person(
+      "Arni", "Magnusson", 
+      email="Arni.magnusson@ices.dk", 
+      role="aut"
+      ),
    person("Ben", "Bolker", role="ctb"),
    person("Gregor", "Gorjanc", role="ctb"),
    person("Gabor", "Grothendieck", role="ctb"),
    person("Ales", "Korosec", role="ctb"),
    person("Thomas", "Lumley", rol="ctb"), 
    person("Don", "MacQueen", role="ctb"),
-   person("Jim", "Rogers", role="ctb")
+   person("Jim", "Rogers", role="ctb"),
+   person("inoui llc", role="fnd", )
    )
 Maintainer: Gregory R. Warnes <greg@warnes.net>
 License: GPL-2
