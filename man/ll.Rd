@@ -44,7 +44,7 @@ ll(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
   \code{\link{env}} is a related function that describes all loaded
   environments.
   
-  See \code{\link{humanReadable}} for handling of units ("KB", "MB", etc.)}
+  See \code{\link{humanReadable}} for handling of units ("KB", "MB", etc.)
 }
 \examples{
 ll()
