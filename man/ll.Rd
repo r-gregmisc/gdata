@@ -3,18 +3,18 @@
 \title{Describe Objects or Elements}
 \description{
   Display name, class, size, and dimensions of each object in a given
-  environment. Alternatively, if the main argument is a list-like
-  object, its elements are listed and described.
+  environment. Alternatively, if the main argument is an object, its
+  elements are listed and described.
 }
 \usage{
 ll(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
-   invert=FALSE, ...)
+   invert=FALSE, standard="SI", ...)
 }
 \arguments{
   \item{pos}{environment position number, environment name, data frame,
-    list, model, or any object that \code{is.list}.}
-  \item{unit}{unit for displaying object size: "bytes", "KB", "MB", or
-    first letter.}
+    list, model, S4 object, or any object that \code{is.list}.}
+  \item{unit, system}{unit and system for displaying object size.  
+    See \code{\link{humanReadable}} for details.}
   \item{digits}{number of decimals to display when rounding object
     size.}
   \item{dim}{whether object dimensions should be returned.}
@@ -35,7 +35,8 @@ ll(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
 \author{Arni Magnusson, with a contribution by Jim Rogers}
 \seealso{
   \code{ll} is a verbose alternative to \code{\link{ls}} (objects in an
-  environment) and \code{\link{names}} (elements in a list-like object).
+  environment), \code{\link{names}} (elements in a list-like object),
+  and \code{\link{slotNames}} (S4 object).
 
   \code{\link{str}} and \code{\link{summary}} also describe elements in
   a list-like objects.
@@ -49,7 +50,6 @@ ll(all=TRUE)
 ll("package:base")
 ll("package:base", class="function", invert=TRUE)
 
-data(infert)
 ll(infert)
 model <- glm(case~spontaneous+induced, family=binomial, data=infert)
 ll(model, dim=TRUE)

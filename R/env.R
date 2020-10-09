@@ -6,7 +6,7 @@ env <- function(unit="KB", digits=0)
     size <- try(unclass(object.size(object)), silent=TRUE)
     if(class(size) == "try-error")
       size <- 0
-    return(size)
+    size
   }
 
   get.environment.size <- function(pos)
@@ -15,13 +15,12 @@ env <- function(unit="KB", digits=0)
       size <- 0
     else
       size <- sum(sapply(ls(pos,all.names=TRUE), get.object.size, pos=pos))
-    return(size)
+    size
   }
 
   get.environment.nobjects <- function(pos)
   {
-    nobjects <- length(ls(pos,all.names=TRUE))
-    return(nobjects)
+    length(ls(pos, all.names=TRUE))
   }
 
   unit <- match.arg(unit, c("bytes","KB","MB"))

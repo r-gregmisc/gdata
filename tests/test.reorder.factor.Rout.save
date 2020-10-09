@@ -7,8 +7,6 @@ R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
 Type 'license()' or 'licence()' for distribution details.
 
-  Natural language support but running in an English locale
-
 R is a collaborative project with many contributors.
 Type 'contributors()' for more information and
 'citation()' on how to cite R or R packages in publications.
@@ -30,20 +28,19 @@ Levels: c b a
 > 
 > library(gdata)
 gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
-
 gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
 
-Attaching package: ‘gdata’
+Attaching package: 'gdata'
 
-The following object is masked from ‘package:stats’:
+The following object is masked from 'package:stats':
 
     nobs
 
-The following object is masked from ‘package:utils’:
+The following object is masked from 'package:utils':
 
     object.size
 
-The following object is masked from ‘package:base’:
+The following object is masked from 'package:base':
 
     startsWith
 
@@ -59,4 +56,4 @@ Levels: c b a
 > 
 > proc.time()
    user  system elapsed 
-  0.394   0.125   0.569 
+  0.357   0.104   0.504 

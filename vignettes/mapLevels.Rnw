@@ -12,6 +12,7 @@
 \SweaveOpts{concordance=TRUE}
 
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 
 \begin{article}
 

@@ -1,6 +1,6 @@
 # This function replace rows in 'object' by corresponding rows in 'new' the have 
 # the same value for 'by'
-update.data.frame <- function(object, new, by, by.x=by, by.y=by, append=TRUE, verbose=TRUE, ...)
+update.data.frame <- function(object, new, by, by.x=by, by.y=by, append=TRUE, verbose=FALSE, ...)
 {
   x <- object
   y <- new

@@ -12,14 +12,14 @@
  }
 \usage{
 \method{update}{list}(object, new, unnamed=FALSE, ...)
-\method{update}{data.frame}(object, new, by, by.x=by, by.y=by, append=TRUE, verbose=TRUE, ...)
+\method{update}{data.frame}(object, new, by, by.x=by, by.y=by, append=TRUE, verbose=FALSE, ...)
 }
 \arguments{
   \item{object}{List or data frame to be updated.}
   \item{new}{List or data frame containing new elements/rows.}
   \item{unnamed}{Logical. If \code{TRUE}, unnamed list elements of \code{new}
     will be appended to \code{object}}.
-  \item{by, by.x, by.y}{Charactre. Name of column to use for matching
+  \item{by, by.x, by.y}{Character. Name of column to use for matching
     dataframe rows.}
   \item{append}{Logical.  If \code{TRUE}, items in \code{new} with no match
     in \code{object} will be appended to the dataframe.}
@@ -27,7 +27,7 @@
   \item{...}{optional method arguments (ignored)}
 }
 \note{
-  These methods can be called directly, or as via the S3 base method for \code{update}.
+  These methods can be called directly or as via the S3 base method for \code{update}.
 }
 \value{
 \item{update.list}{a list a constructed from the elements of \code{object}, 

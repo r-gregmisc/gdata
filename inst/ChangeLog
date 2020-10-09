@@ -1,3 +1,71 @@
+2017-06-05  warnes
+
+	* [r2154] DESCRIPTION: Fix type in DESCRIPTION date field.
+	* [r2153] .Rbuildignore: Specify which file patterns to ignore when
+	  building R package file.
+	* [r2152] DESCRIPTION, tests/test.humanReadable.Rout.save,
+	  tests/test.read.xls.Rout.save,
+	  tests/test.reorder.factor.Rout.save,
+	  tests/tests.write.fwf.Rout.save, vignettes/mapLevels.Rnw: Update
+	  package version and stored test output.
+	* [r2151] inst/doc/Rnews.sty: Remove obsolete Rnews.sty file from
+	  inst/doc.
+	* [r2150] R/startsWith.R: gdata::startsWith() now uses
+	  base::startsWith() to do the actual comparison, after hanlding
+	  ignore.case and trim arguments.
+	* [r2149] man/trim.Rd: Add reference to 'new' base function
+	  'trimws'.
+	* [r2148] NAMESPACE, R/update.data.frame.R, R/update.list.R,
+	  man/update.list.Rd: Drop 'update.data.frame' until there is time
+	  to work on it.
+
+2016-08-12  warnes
+
+	* [r2130] NAMESPACE: Add mv to exported namespace
+
+2016-05-31  warnes
+
+	* [r2128] R/humanReadable.R: Fix typo that forced users of
+	  humanReadable() to provide two elements to the 'justify'
+	  argument. The correction allows a single value to be provided
+	  which will be expanded to two internally.
+
+2016-02-05  warnes
+
+	* [r2077] man/update.list.Rd: Add documentation for update()
+	  data.frame method.
+	* [r2076] R/mv.R, man/mv.Rd: Add mv() function to rename an object.
+
+2016-02-03  warnes
+
+	* [r2075] NAMESPACE: - Add update() methods list and data.frame -
+	  Add 'first<-' and 'last<-' assignment methods
+	* [r2074] R/update.data.frame.R, R/update.list.R,
+	  man/update.list.Rd: Add update() methods for lists and data
+	  frames
+	* [r2073] R/first.R, man/first.Rd: Add assignment versions of
+	  first() and last()
+	* [r2072] R/rename.vars.R: Improve logging and error reporting for
+	  remove.vars()
+
+2015-10-15  warnes
+
+	* [r2068] R/installXLSXsupport.R: Remove unused call to tempdir().
+
+2015-07-22  warnes
+
+	* [r2062] DESCRIPTION, NAMESPACE,
+	  tests/test.humanReadable.Rout.save, tests/test.read.xls.R,
+	  tests/test.read.xls.Rout.save,
+	  tests/test.reorder.factor.Rout.save,
+	  tests/tests.write.fwf.Rout.save: Renamed 'test' directory to
+	  'tests', commented out tests for lme4 which has a changed API
+
+2015-07-03  warnes
+
+	* [r2056] DESCRIPTION, inst/ChangeLog, inst/NEWS: Update for gdata
+	  2.17.0
+
 2015-06-29  warnes
 
 	* [r2055] inst/ChangeLog: Update ChangeLog
@@ -44,14 +112,11 @@
 	* [r1979] Update version requirement for R (>= 2.3.0) and perl
 	  (5.10.0).
 	* [r1978] - first() and last() are now simply wrappers to
-	  utils::head() and
-	  utils::tail() with a default 'n=1' instead of 'n=6'.
-	  - Move code for left() and right() into a separate file.
+	  utils::head() and utils::tail() with a default 'n=1' instead of
+	  'n=6'. - Move code for left() and right() into a separate file.
 	* [r1977] If arguments 'X' or 'FUN' is supplied to
-	  reorder.factor(), mimic the
-	  behavior of stats::reorder.default() rather than trying to call
-	  it via
-	  NextMethod.
+	  reorder.factor(), mimic the behavior of stats::reorder.default()
+	  rather than trying to call it via NextMethod.
 
 2015-04-25  warnes
 
@@ -87,8 +152,8 @@
 
 	* [r1953] Update NEWS and ChangeLog
 	* [r1952] - write.fwf() now properly supports matrix objects,
-	  including matrix
-	  objects wihtout column names. (Reported by Carl Witthoft.)
+	  including matrix objects wihtout column names. (Reported by Carl
+	  Witthoft.)
 	* [r1951] Remove 'use POSIX' from xls2csv.pl since it is no longer
 	  needed
 	* [r1939] Update NEWS and ChangeLog
@@ -138,9 +203,8 @@
 	* [r1880] Complete transition from Spreadsheet::XLSX to
 	  Spreadsheet::ParseXLSX
 	* [r1879] Handle Excel files created on the Mac, where by default
-	  Excel uses
-	  1904-01-01 as the baseline for dates, rather than the usual
-	  1900-01-01.
+	  Excel uses 1904-01-01 as the baseline for dates, rather than the
+	  usual 1900-01-01.
 	* [r1878] Remove dotfiles
 	* [r1877] Update for release
 	* [r1876] Add test for handling fo very wide xls and xlsx files.
@@ -154,8 +218,7 @@
 2014-04-05  warnes
 
 	* [r1801] Apply same changes to NAToUnknown that were previously
-	  applied to
-	  unknownToNA for POSIXlt.
+	  applied to unknownToNA for POSIXlt.
 	* [r1800] Update NEWS with latest changes
 	* [r1799] Call stats::nobs instead of stats:::nobs.default within
 	  gdata::nobs.default. This avoids R CMD check warning.
@@ -181,8 +244,7 @@
 	* [r1784] Move unit test files back to inst/unitTests. Fix up
 	  runRUnitTests.R to work properly in the new location
 	* [r1783] - For unit tests, don't check for equality of optional
-	  POSIXlt
-	  components. (Bug reported by Brian Ripley).
+	  POSIXlt components. (Bug reported by Brian Ripley).
 	* [r1782] Move unit test code into the (now) standard location
 
 2014-03-19  arnima
@@ -197,8 +259,7 @@
 2013-12-16  warnes
 
 	* [r1757] Trim will now remove all types of leading/trailing
-	  whitespace by using
-	  the [:blank:] character class.
+	  whitespace by using the [:blank:] character class.
 
 2013-06-29  warnes
 
@@ -241,24 +302,20 @@
 	* [r1617] Correct column names. Unit columns were reversed and
 	  misspelled.
 	* [r1616] Add ignore.stderr to system command in sheetCmd() to
-	  prevent stderr
-	  messages from being included in the captured output from the perl
-	  script.
+	  prevent stderr messages from being included in the captured
+	  output from the perl script.
 
 2012-09-12  warnes
 
 	* [r1606] Update for gdata 2.12.0
 	* [r1605] 'stats::aggregate' was made into a generic on
-	  27-Jan-2010, so that
-	  attempting to call 'aggregate' on a 'table' object will now
-	  incorrectly call 'aggregate.table'. Since 'aggregate.table' can
-	  be
-	  replaced by a call to tapply using two index vectors, e.g.
-	  aggregate.table(x, by1=a, by2=b, mean)
-	  can be replaced by
-	  tapply(x, INDEX=list(a, b), FUN=mean),
-	  the 'aggregate.table' function will now display a warning that it
-	  is depreciated and recommending the equivalent call to tapply. It
+	  27-Jan-2010, so that attempting to call 'aggregate' on a 'table'
+	  object will now incorrectly call 'aggregate.table'. Since
+	  'aggregate.table' can be replaced by a call to tapply using two
+	  index vectors, e.g. aggregate.table(x, by1=a, by2=b, mean) can be
+	  replaced by tapply(x, INDEX=list(a, b), FUN=mean), the
+	  'aggregate.table' function will now display a warning that it is
+	  depreciated and recommending the equivalent call to tapply. It
 	  will be removed entirely in a future version of gdata.
 	* [r1604] Don't ignore .Rnw files, but do ignore .svn files.
 
@@ -272,23 +329,17 @@
 
 	* [r1601] Update DESCRIPTION and NEWS for gdate 2.11.1.
 	* [r1600] Add example for read.xls() that shows how to use the
-	  fileEncoding
-	  argument to read in latin-1 encoded data.
+	  fileEncoding argument to read in latin-1 encoded data.
 	* [r1599] Add XLSX test for latin-1 characters, and look for them
-	  in their new
-	  location in inst/xls/.
+	  in their new location in inst/xls/.
 	* [r1598] add XLSX version of latin-1.xls
 	* [r1597] Add test file and code to ensure that read.xls() can
-	  properly handle
-	  files with alternative encodings. latin-1.xls contains each of
-	  the
-	  non-ascii latin-1 special characters in both the column headings
-	  and
-	  the body of the file.
+	  properly handle files with alternative encodings. latin-1.xls
+	  contains each of the non-ascii latin-1 special characters in both
+	  the column headings and the body of the file.
 	* [r1596] Change code to have R read the csv/tab data from the file
-	  rather than
-	  from the connetion we made, so that file encodings can be
-	  properly handled.
+	  rather than from the connetion we made, so that file encodings
+	  can be properly handled.
 	* [r1595] Always close the connection.
 
 2012-08-13  warnes
@@ -300,8 +351,7 @@
 	* [r1567] Update NEWS for 2.11.0 release.
 	* [r1566] Bump version number and add SystemRequirements for perl.
 	* [r1565] read.xls() and supporting functions now allow blank lines
-	  to be
-	  preserved, rather than skipped, by supplying the argument
+	  to be preserved, rather than skipped, by supplying the argument
 	  "blank.lines.skip=FALSE". The underlying perl function has been
 	  extended to suppor this via an optional "-s" argument which, when
 	  present, *preserves* blank lines during the conversion.
@@ -309,9 +359,8 @@
 2012-06-13  warnes
 
 	* [r1564] - nobs.default needs to handle logical vectors in
-	  addition to numeric
-	  vectors.
-	  - update DESCRIPTION and NEWS for 2.10.6.
+	  addition to numeric vectors. - update DESCRIPTION and NEWS for
+	  2.10.6.
 	* [r1563] nobs.default needs to handle logical as well as numeric
 	  vectors.
 
@@ -332,15 +381,13 @@
 	  'stats::nobs'.
 	* [r1549] Remove stray non-ASCII characters.
 	* [r1548] The nobs() dispatch method must be defined in the gdata
-	  namespace to
-	  pick up the definition of gdata::nobs.default.
+	  namespace to pick up the definition of gdata::nobs.default.
 	* [r1547] Update DESCRIPTION and NEWS for 2.10.1 release.
 	* [r1546] Define aliases for 'nobs' and 'nobs.lm' to support
-	  backward
-	  compatibility for packages depending on gdata.
+	  backward compatibility for packages depending on gdata.
 	* [r1545] Update DESCRIPTION and NEWS for 2.10.0 release
-	* [r1544] - Add manual page and NAMESPACE entry for startsWith().
-	  - Add 'ignore.case' argument to startsWith().
+	* [r1544] - Add manual page and NAMESPACE entry for startsWith(). -
+	  Add 'ignore.case' argument to startsWith().
 	* [r1543] Update to match new code.
 	* [r1542] Replace non-ASCII characters.
 	* [r1541] Add na.strings to read.xls call to convert "#DIV/0!" to
@@ -355,11 +402,9 @@
 	* [r1538] Add .Rinstignore file to omit latex style and source
 	  files from distributed inst/doc directory.
 	* [r1537] - Add NULL definition of MedUnits to avoid R CMD check
-	  warning.
-	  - Specify local environment when calling data() so that MedUnits
-	  gets
-	  defined in the function's environment rather than the global
-	  environment.
+	  warning. - Specify local environment when calling data() so that
+	  MedUnits gets defined in the function's environment rather than
+	  the global environment.
 	* [r1536] Fix error in ls.funs() that occurs when there are no
 	  objects in the environment.
 	* [r1535] Avoid warning by calling utils::object.size rather than
@@ -368,8 +413,7 @@
 2012-05-31  warnes
 
 	* [r1534] - Remove dispatch function 'nobs' and method 'nobs.lm'
-	  since these are
-	  now provided by the R 'stats' package.
+	  since these are now provided by the R 'stats' package.
 
 2012-05-04  warnes
 
@@ -427,8 +471,8 @@
 	* [r1461] Update DEScription file for 2.8.1 release
 	* [r1460] Update test output to match latest code
 	* [r1459] Modify write.fwf() to capture and pass on additional
-	  arguments for
-	  write.table(). This resolves a bug reported by Jan Wijffels.
+	  arguments for write.table(). This resolves a bug reported by Jan
+	  Wijffels.
 
 2010-11-01  arnima
 
@@ -550,16 +594,12 @@
 	* [r1380] If only one sheet is present in the file, don't insert
 	  the sheet name into the filename
 	* [r1379] Add additional test/example Excel files
-	* [r1378] Modify xls2csv.pl script to:
-	  - Use tab-delimiter and .tsv or .tab extension if called with the
-	  name
-	  xls2tsv.pl or xls2tab.pl, respectively. This allows a single
-	  source
-	  file and two symlinks to be used intstead of maintaining several
-	  almost-identical files.
-	  - Allow selection of sheets by name
-	  - Provide better error checking
-	  - Other code improvements
+	* [r1378] Modify xls2csv.pl script to: - Use tab-delimiter and .tsv
+	  or .tab extension if called with the name xls2tsv.pl or
+	  xls2tab.pl, respectively. This allows a single source file and
+	  two symlinks to be used intstead of maintaining several
+	  almost-identical files. - Allow selection of sheets by name -
+	  Provide better error checking - Other code improvements
 	* [r1377] Add perl scripts to extract worksheet names and sheet
 	  count from Excel files
 
@@ -581,12 +621,10 @@
 	  - Move qQuote.ascii to a separate file
 	  
 	  - Bug Fix: xls2csv(), xls2tab() failed to pass the provided
-	  'perl'
-	  parameter to xls2sep()
+	  'perl' parameter to xls2sep()
 	  
 	  - New Feature: xls2sep() (and hence xls2csv, xls2tab, and
-	  read.xls)
-	  now supports ftp URLs.
+	  read.xls) now supports ftp URLs.
 
 2009-12-06  arnima
 
@@ -668,9 +706,8 @@
 	  of rows.
 	  
 	  - write.fwf gains width argument. Unknown values can increase or
-	  decrease
-	  the width of the columns. Additional tests and documentation
-	  fixes.
+	  decrease the width of the columns. Additional tests and
+	  documentation fixes.
 
 2008-06-30  arnima
 
@@ -685,21 +722,18 @@
 	* [r1268] Modifed read.xls() failed to return the converted data...
 	  fixed.
 	* [r1267] Correct broken patch for open-office support
-	* [r1266] For read.xls() and xls2csv():
-	  - Implement more informative log messages when verbose=TRUE
-	  - Quote temporary file name to avoid errors when calling perl to
-	  do the work.
-	  - Add better error messages, particularly when perl fails to
-	  generate an
-	  output .csv file.
+	* [r1266] For read.xls() and xls2csv(): - Implement more
+	  informative log messages when verbose=TRUE - Quote temporary file
+	  name to avoid errors when calling perl to do the work. - Add
+	  better error messages, particularly when perl fails to generate
+	  an output .csv file.
 	  
 	  Update version number in DESCRIPTION.
 
 2008-05-12  warnes
 
 	* [r1265] Patch to correct issue with OpenOffice-created XLS files.
-	  Thanks to
-	  Robert Burns for pointing out the patch at
+	  Thanks to Robert Burns for pointing out the patch at
 	  http://rt.cpan.org/Public/Bug/Display.html?id=7206
 
 2008-03-25  warnes
@@ -759,17 +793,14 @@
 2007-07-22  arnima
 
 	* [r1103] Reverted back to as.character(substitute(x)), so user can
-	  run keep(x),
-	  keep("x"), Args(x), and Args("x").
+	  run keep(x), keep("x"), Args(x), and Args("x").
 
 2007-07-21  arnima
 
 	* [r1102] Changed as.character(substitute()) to
-	  deparse(substitute()), following
-	  help(substitute) recommendation.
+	  deparse(substitute()), following help(substitute) recommendation.
 	* [r1101] Changed as.character(substitute()) to
-	  deparse(substitute()), following
-	  help(substitute) recommendation.
+	  deparse(substitute()), following help(substitute) recommendation.
 
 2007-07-10  warnes
 
@@ -791,8 +822,8 @@
 
 	* [r1041] Meaningful error message is given when requested object
 	  does not exist
-	* [r1040] is.* tests that return NA are not reported
-	  is.what recursion is avoided
+	* [r1040] is.* tests that return NA are not reported is.what
+	  recursion is avoided
 
 2006-11-30  ggorjan
 
@@ -891,9 +922,8 @@
 2006-01-03  warnes
 
 	* [r839] Add resample() function, which generates a random sample
-	  or
-	  permutation from the elements of the supplied vector, even if the
-	  vector has length 1. This avoide the problems caused by
+	  or permutation from the elements of the supplied vector, even if
+	  the vector has length 1. This avoide the problems caused by
 	  base::sample()'s special case for vectors of length 1, where it
 	  attempts to sample from 1:x.
 
@@ -908,22 +938,18 @@
 2005-12-08  warnes
 
 	* [r789] Andrew Burgess reported that interleave() converts
-	  1-column matrixes
-	  to vectors and provided a patch. A slight modification of his
-	  patch
-	  has been applied. There is now a 'drop' argument, which controls
-	  whether 'unnecessary' dimensions are dropped. The default is
-	  FALSE.
+	  1-column matrixes to vectors and provided a patch. A slight
+	  modification of his patch has been applied. There is now a 'drop'
+	  argument, which controls whether 'unnecessary' dimensions are
+	  dropped. The default is FALSE.
 
 2005-12-04  warnes
 
 	* [r779] Andrew Burgess reported that interleave() converts
-	  1-column matrixes
-	  to vectors and provided a patch. A slight modification of his
-	  patch
-	  has been applied. There is now a 'drop' argument, which controls
-	  whether 'unnecessary' dimensions are dropped. The default is
-	  FALSE.
+	  1-column matrixes to vectors and provided a patch. A slight
+	  modification of his patch has been applied. There is now a 'drop'
+	  argument, which controls whether 'unnecessary' dimensions are
+	  dropped. The default is FALSE.
 
 2005-12-01  nj7w
 
@@ -939,14 +965,12 @@
 	* [r716] Bump version number again to show that I fixed a bug.
 	* [r715] Update version number
 	* [r714] Remove explicit loading of gtools in examples, so that
-	  failure to
-	  import functions from gtools gets properly caught by running the
-	  examples.
+	  failure to import functions from gtools gets properly caught by
+	  running the examples.
 	* [r713] Add missing close-bracket
 	* [r712] Add upperTriangle and friends
 	* [r711] Add functions for extracting, modifying upper and lower
-	  trianglular
-	  components of matrices.
+	  trianglular components of matrices.
 
 2005-10-19  arnima
 
@@ -980,20 +1004,12 @@
 
 	* [r631] updated documentation
 	* [r630] ## Args() was using a different search path from args(),
-	  e.g.
-	  rep <- function(local) return(NULL)
-	  args()
-	  Args()
-	  ## Fixed
+	  e.g. rep <- function(local) return(NULL) args() Args() ## Fixed
 	* [r629] ## is.what() was giving needless warnings for functions,
-	  e.g.
-	  is.what(plot)
-	  ## Fixed
+	  e.g. is.what(plot) ## Fixed
 	* [r628] ## ll() was crashing if argument was a list of length
-	  zero, e.g.
-	  x <- list()
-	  ll(x)
-	  ## Fixed, and added sort.elements (see new help page)
+	  zero, e.g. x <- list() ll(x) ## Fixed, and added sort.elements
+	  (see new help page)
 
 2005-06-09  nj7w
 
@@ -1004,17 +1020,16 @@
 2005-06-07  nj7w
 
 	* [r622] Reverting to the previous version of drop.levels.R by
-	  replacing
-	  sapply(...) with as.data.frame(lapply(...)) because sapply has
-	  the undesirable effect of converting the object to a matrix,
-	  which in turn coerces the factors to numeric.
+	  replacing sapply(...) with as.data.frame(lapply(...)) because
+	  sapply has the undesirable effect of converting the object to a
+	  matrix, which in turn coerces the factors to numeric.
 
 2005-05-13  nj7w
 
 	* [r621] 1) Using dQuote.ascii function in read.xls as the new
-	  version of dQuote doesn't work proprly with UTF-8 locale.
-	  2) Modified CrossTable.Rd usage in gmodels
-	  3) Modified heatmap.2 usage in gplots.
+	  version of dQuote doesn't work proprly with UTF-8 locale. 2)
+	  Modified CrossTable.Rd usage in gmodels 3) Modified heatmap.2
+	  usage in gplots.
 
 2005-04-02  warnes
 
@@ -1034,20 +1049,18 @@
 
 2005-03-09  warnes
 
-	* [r573] - Add ConvertMedUnits() plus documentation
-	  - Add documentation for MedUnits data set.
+	* [r573] - Add ConvertMedUnits() plus documentation - Add
+	  documentation for MedUnits data set.
 	* [r572] Update MedUnits data file.
 	* [r571] Don't need both .Rda and .tab forms of the data.
 	* [r570] Add MedUnits data set, which provides conversions between
-	  American
-	  'Conventional' and Standard Intertional (SI) medical units.
+	  American 'Conventional' and Standard Intertional (SI) medical
+	  units.
 
 2005-03-01  warnes
 
-	* [r566] - Remove 'elem' call from ll example.
-	  - Add note to 'elem' man page that it is depreciated and 'll'
-	  should
-	  be used instead.
+	* [r566] - Remove 'elem' call from ll example. - Add note to 'elem'
+	  man page that it is depreciated and 'll' should be used instead.
 
 2005-02-26  nj7w
 
@@ -1070,8 +1083,7 @@
 2005-01-12  warnes
 
 	* [r515] Add dependency on R 1.9.0+ to prevent poeple from
-	  installing on old
-	  versions of R which don't support namespaces.
+	  installing on old versions of R which don't support namespaces.
 
 2004-12-27  warnes
 
@@ -1129,8 +1141,7 @@
 
 	* [r371] Moved from gregmisc/src/.
 	* [r370] Remove the files in src, instead provide "pre-installed"
-	  perl packages
-	  in inst/perl.
+	  perl packages in inst/perl.
 
 2004-06-05  warnes
 
@@ -1139,20 +1150,16 @@
 	* [r363] Fixes for Windows
 	* [r362] Minor enhancment to read.xls example.
 	* [r361] - Merge Makefile.win into Makefile. Makefile.win now just
-	  redirects
-	  to Makefile.
-	  - Update xls2csv.bat and xls2csv shell script to correctly obtain
-	  thier installion path and infer the location of the perl code and
-	  libraries.
-	  - The xls2csv.pl script now assumes that the libraries it needs
-	  are
-	  installed into the same directory where it is.
+	  redirects to Makefile. - Update xls2csv.bat and xls2csv shell
+	  script to correctly obtain thier installion path and infer the
+	  location of the perl code and libraries. - The xls2csv.pl script
+	  now assumes that the libraries it needs are installed into the
+	  same directory where it is.
 
 2004-06-04  warnes
 
 	* [r360] More changes, indended to improve installation reliabilty
-	  and to make
-	  Makefile and Makefile.win as similar as possible.
+	  and to make Makefile and Makefile.win as similar as possible.
 
 2004-05-27  warnes
 
@@ -1174,31 +1181,24 @@
 	* [r337] Add Args() function contributed by Arni Magnusson
 	  <arnima@u.washington.edu>.
 	* [r335] - Change to call perl directly rather than depending on
-	  the installed
-	  shell script. This should make the code more portable to
-	  MS-Windows
-	  systes.
+	  the installed shell script. This should make the code more
+	  portable to MS-Windows systes.
 	  
 	  - Add additional commants..
 	* [r332] Makefile now modifies xls2csv.bat xls2csv.pl and xls2csv
-	  to contain an
-	  explicit path to the perl script/libraries.
+	  to contain an explicit path to the perl script/libraries.
 	* [r330] R CMD build calls the clean target to purge build files
-	  from the
-	  source tree when packaging. To get use this behavior correctly,
-	  I've
-	  renamed the clean target to cleanup and distclean target to
-	  clean.
+	  from the source tree when packaging. To get use this behavior
+	  correctly, I've renamed the clean target to cleanup and distclean
+	  target to clean.
 	* [r329] Add read.xls(), a function to read Microsoft Excel files
-	  by
-	  translating them to csv files via the xls2csv.pl script.
+	  by translating them to csv files via the xls2csv.pl script.
 	* [r326] More fixes. Seems to work now.
 
 2004-05-24  warnes
 
 	* [r325] Add files to enable inclusion and installation of
-	  xls2csv.pl as part
-	  of the package.
+	  xls2csv.pl as part of the package.
 
 2004-04-01  warnes
 
@@ -1207,8 +1207,8 @@
 2004-03-26  warnes
 
 	* [r307] Contents of package 'mva' moveed to 'stats'.
-	* [r298] - Fix is.what() for use under R 1.9.0
-	  - is.what() now uses is.* functions found in any attached frame
+	* [r298] - Fix is.what() for use under R 1.9.0 - is.what() now uses
+	  is.* functions found in any attached frame
 
 2004-01-21  warnes
 
@@ -1217,14 +1217,12 @@
 2004-01-19  warnes
 
 	* [r275] - Integrated (partial) patch submitted by Arni Magnusson
-	  to clarify help text.
-	  - Modifed code to use match.arg().
+	  to clarify help text. - Modifed code to use match.arg().
 
 2003-12-15  warnes
 
 	* [r271] - Applied patch from Arni that fixed a bug that caused
-	  env() to crash
-	  if any environment was completely empty
+	  env() to crash if any environment was completely empty
 
 2003-12-03  warnes
 
@@ -1244,8 +1242,8 @@
 
 2003-11-18  warnes
 
-	* [r224] - Convert from MS-Dos to Unix line endings.
-	  - Reformat to 80 columns.
+	* [r224] - Convert from MS-Dos to Unix line endings. - Reformat to
+	  80 columns.
 
 2003-11-17  warnes
 
@@ -1260,21 +1258,18 @@
 2003-06-07  warnes
 
 	* [r198] - Fixed error in examples. Had sqrt(var(x)/(n-1)) for the
-	  standard
-	  error of the mean instead of sqrt(var(x)/n).
+	  standard error of the mean instead of sqrt(var(x)/n).
 
 2003-05-23  warnes
 
 	* [r197] - Fixed typos
 	* [r196] - library() backported from 1.7-devel. This version of the
-	  function
-	  adds the "pos=" argument to specify where in the search path the
-	  library should be placed.
+	  function adds the "pos=" argument to specify where in the search
+	  path the library should be placed.
 	  
 	  - updated .First.lib to use library(...pos=3) for MASS to avoid
-	  the
-	  'genotype' data set in MASS from masking the genotype funciton in
-	  genetics when it loads gregmisc
+	  the 'genotype' data set in MASS from masking the genotype
+	  funciton in genetics when it loads gregmisc
 	  
 	  - Added logit() inv.logit() matchcols() function and
 	  corresponding docs
@@ -1287,17 +1282,15 @@
 2003-04-22  warnes
 
 	* [r188] - The mva package (which is part of recommended) now
-	  provides a
-	  generic 'reorder' function. Consequently, the 'reorder' function
-	  here has been renamed to 'reorder.factor'.
+	  provides a generic 'reorder' function. Consequently, the
+	  'reorder' function here has been renamed to 'reorder.factor'.
 	  
 	  - Removed check of whether the argument is a factor object.
 
 2003-03-03  warnes
 
 	* [r165] - Updated to match reorder.Rd which was exetended to
-	  handle factor
-	  label names in addition to numeric indices.
+	  handle factor label names in addition to numeric indices.
 	* [r164] - Added handling of factor level names in addition to
 	  numeric indexes.
 
@@ -1319,8 +1312,8 @@
 
 2002-03-26  warneg
 
-	* [r104] - Changed methods to include '...' to match the generic.
-	  - Updated for version 0.5.1
+	* [r104] - Changed methods to include '...' to match the generic. -
+	  Updated for version 0.5.1
 	* [r102] Added ... to methods.
 	* [r101] Updated to add ... parameter to function calls.
 	* [r98] Initial checkin.
@@ -1329,10 +1322,9 @@
 2002-02-21  warneg
 
 	* [r87] - Fixed bug where row and column labels didn't always
-	  correspond to the
-	  contents. This only occured when a factor was used for by1 or by2
-	  and
-	  the factors levels weren't in the default sort order.
+	  correspond to the contents. This only occured when a factor was
+	  used for by1 or by2 and the factors levels weren't in the default
+	  sort order.
 
 2002-02-20  warneg
 
@@ -1348,9 +1340,8 @@
 2001-12-12  warneg
 
 	* [r53] Added omitted documentaton for 'info' parameter. Changed
-	  example code
-	  not to use 'Orthodont' data set so that the nlme package is not
-	  required.
+	  example code not to use 'Orthodont' data set so that the nlme
+	  package is not required.
 
 2001-12-08  warneg
 
@@ -1363,16 +1354,14 @@
 	* [r44] Added attribution.
 	* [r43] Added proper attribution to Don MacQueen.
 	* [r39] Initial checkin. Unfortunately, I've lost the email of the
-	  person who
-	  sent this to me. I'll credit him/her when I find out who it was!
+	  person who sent this to me. I'll credit him/her when I find out
+	  who it was!
 	* [r38] Initial checkin
 
 2001-12-05  warneg
 
 	* [r34] - Renamed 'concat' function to 'combine' to avoid name
-	  conflict with
-	  an existing S-Plus function.
+	  conflict with an existing S-Plus function.
 	* [r32] - Changed function name 'concat' to 'combine' and renamed
-	  concat.Rd to
-	  combine.Rd
+	  concat.Rd to combine.Rd
 
