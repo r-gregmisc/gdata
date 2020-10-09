@@ -10,6 +10,7 @@
 
 \usepackage{Sweave}
 \SweaveOpts{strip.white=all, keep.source=TRUE}
+\SweaveOpts{concordance=TRUE}
 
 \begin{document}
 

@@ -1,49 +1,44 @@
 \name{update.list}
-%%\alias{update}
 \alias{update.list}
-%%\alias{update.data.frame}
+\alias{update.data.frame}
 \title{
-  Update the elements of a list
+  Update the elements of a list, or rows of a dataframe
 }
 \description{
- Function to update the elements of a list to contain all of the named elements
- of a new list, overwriting elements with the same name, and (optionally) copying
- unnamed elements.
+ For a list, update the elements of a list to contain all of the named elements
+ of a new list, overwriting elements with the same name, and (optionally) copying unnamed
+ elements.  For a data frame, replace the rows of a data frame by corresponding rows in 'new' with  
+ the same value for 'by'.
  }
 \usage{
-%%update(object,
-%%       ...)
-\method{update}{list}(object,
-       new,
-       unnamed=FALSE,
-       ...)
-%%\method{update}{data.frame}(object,
-%%       new,
-%%       by,
-%%       by.object=by,
-%%       by.new=by,
-%%       append=TRUE,
-%%       verbose=TRUE,
-%%       unnamed=FALSE,
-%%       ...)
+\method{update}{list}(object, new, unnamed=FALSE, ...)
+\method{update}{data.frame}(object, new, by, by.x=by, by.y=by, append=TRUE, verbose=FALSE, ...)
 }
 \arguments{
-  \item{object}{Object to be updated.}
-  \item{new}{List or dataframe containing new elements.}
-  \item{unnamed}{Logical. If \code{TRUE}, unnamed elements
-        of \code{new} will be appended to \code{object}.}
-%%   \item{by, by.object, by,new}{For dataframe objects, rows of \code{object}
-%%        will be replaced by rows of \code{new} that have the same value
-%%        for this \em{one} column.  (See examples below for an example.) }
-%%  \item{verbose}{Display details of changes performed.}
+  \item{object}{List or data frame to be updated.}
+  \item{new}{List or data frame containing new elements/rows.}
+  \item{unnamed}{Logical. If \code{TRUE}, unnamed list elements of \code{new}
+    will be appended to \code{object}}.
+  \item{by, by.x, by.y}{Character. Name of column to use for matching
+    dataframe rows.}
+  \item{append}{Logical.  If \code{TRUE}, items in \code{new} with no match
+    in \code{object} will be appended to the dataframe.}
+  \item{verbose}{Logical.  If \code{TRUE} progress messages will be displayed.}
   \item{...}{optional method arguments (ignored)}
 }
 \note{
-  This method can be called directly, or as via the S3 base method for \code{update}.
+  These methods can be called directly or as via the S3 base method for \code{update}.
 }
-\value{A new list constructed from the elements of \code{object} by merging the elements of \code{old} and \code{new} with named items of \code{new} replacing the corresponding elements of \code{old}.  Unnamed elements of \code{new} will be appened unless \code{unnamed=FALSE}.
-
-%%For dataframe objects, entire columns are replaced unless \code{by}, \code{by.object}, or \code{by.new} are supplied, in which case replacement only occures for rows with matching values for the columns listed by these parameters.  The single argument \code{by} can by used to provides column names for that are common to both \code{old} and \code{new} objects, while \code{by.old} and \cody{by.new} specify column names specific to each object.
+\value{
+\item{update.list}{a list a constructed from the elements of \code{object}, 
+  with named elements of \code{new} replacing corresponding named elements from 
+  \code{object}, and non-corresponding elements of \code{new} appended.   If
+  \code{unnamed=TRUE}, unnamed elements of \code{new} will be appended.
+  }
+\item{update.data.frame}{a dataframe constructed from the rows of \code{object} with rows where
+  values in \code{by.x} equal the values in \code{by.y} replaced by the corresponding row in
+  \code{new}.  If \code{append=TRUE}, any elements of \code{new} without no matching rows
+  in \code{object} will be appended.}
 }
 \author{
 Gregory R. Warnes \email{greg@warnes.net}
@@ -52,6 +47,9 @@ Gregory R. Warnes \email{greg@warnes.net}
 \code{\link[stats]{update}}, \code{\link[base]{merge}}
 }
 \examples{
+#----
+# Examples for update.list()
+#----
 old <- list(a=1,b="red",c=1.37)
 new <- list(b="green",c=2.4)
 
@@ -63,15 +61,15 @@ newer <- list(b="purple", 7, 8, 9)
 update(older, newer)               # ignores unnamed elements of newer
 update(older, newer, unnamed=TRUE) # appends unnamed elements of newer
 
-%%data(iris)
-%%iris$Species <- as.character(iris$Species)
-%%df.old <- cbind(iris[1:5,], letters=1:5)
-%%df.new <- df.old[3:5,]
-%%df.new$Petal.Width <- df.new$Petal.Width + 0.1
-%%
-%%df.old
-%%df.new
-%%update(df.old, df.new, by=c(letters))
+#----
+# Examples for update.data.frame
+#----
+old <- data.frame(letter=letters[1:5], number=1:5)
+new <- data.frame(letter=letters[c(5, 1, 7)], number=c(-5, -1, -7))
+
+update(old, new, by="letter") # default is append=TRUE
+update(old, new, by="letter", append=FALSE)
+update(old, new, by="letter", verbose=FALSE)
 }
 \keyword{data}
 \keyword{manip}

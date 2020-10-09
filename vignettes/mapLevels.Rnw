@@ -1,4 +1,3 @@
-
 %\VignetteIndexEntry{Mapping levels of a factor}
 %\VignettePackage{gdata}
 %\VignetteKeywords{levels, factor, manip}
@@ -10,6 +9,7 @@
 
 \usepackage{Sweave}
 \SweaveOpts{strip.white=all, keep.source=TRUE}
+\SweaveOpts{concordance=TRUE}
 
 \begin{document}
 \SweaveOpts{concordance=TRUE}
