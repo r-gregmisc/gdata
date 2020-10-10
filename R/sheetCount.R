@@ -24,6 +24,7 @@ sheetCmd <- function(xls, cmd="sheetCount.pl", verbose=FALSE, perl="perl")
   ## Handle URLs 
   tf <- NULL
   if ( 
+    startsWith(xls, "https://") ||
     startsWith(xls, "http://") ||
     startsWith(xls, "ftp://")
   )

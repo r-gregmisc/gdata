@@ -46,7 +46,7 @@
 
 }
 \source{
-  \url{http://www.globalrph.com/conv_si.htm}
+  \url{https://globalrph.com/medical/conventional-units-international-units/}
 }
 \seealso{
   The function \code{\link{ConvertMedUnits}} automates the

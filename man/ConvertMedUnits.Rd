@@ -44,7 +44,7 @@ ConvertMedUnits(x, measurement, abbreviation,
   factors.
 }
 \references{
-  \url{http://www.globalrph.com/conv_si.htm}
+  \url{https://globalrph.com/medical/conventional-units-international-units/}
   }
 \author{ Gregory R. Warnes \email{greg@warnes.net} }
 \examples{
