@@ -7,6 +7,7 @@
 
 ### {{{ --- Test setup ---
 
+# For debugging convenience
 if(FALSE) {
   library("RUnit")
   library("gdata")

@@ -27,7 +27,7 @@ Version: 2.19.0
 Date: 2020-10-09
 Authors@R: c(
    person(
-      c("Gregory", "R"), "Warnes",
+      c("Gregory", "R."), "Warnes",
       email = c("greg@warnes.net"),
       role = c("aut", "cre")
       ),
