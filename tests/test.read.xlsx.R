@@ -25,8 +25,8 @@ if ( ! 'XLS' %in% xlsFormats() )
 
 packageFile <- function(...) system.file(..., package="gdata")
 
-# iris.xls is included in the gregmisc package for use as an example
-xlsfile <- packageFile('xls','iris.xls')
+# iris.xlsx is included in the gregmisc package for use as an example
+xlsfile <- packageFile('xls','iris.xlsx')
 
 iris.1 <- read.xls(xlsfile) # defaults to csv format
 iris.1
@@ -40,7 +40,7 @@ iris.3
 stopifnot(all.equal(iris.1, iris.2))
 stopifnot(all.equal(iris.1, iris.3))
 
-exampleFile <- packageFile('xls', 'ExampleExcelFile.xls')
+exampleFile <- packageFile('xls', 'ExampleExcelFile.xlsx')
 
 # see the number and names of sheets:
 sheetCount(exampleFile)
@@ -66,7 +66,7 @@ example.skip
 
 ## Check handing of fileEncoding for latin-1 characters
 
-latin1File  <- packageFile('xls', 'latin-1.xls' )
+latin1File  <- packageFile('xls', 'latin-1.xlsx' )
 
 if(.Platform$OS.type=="unix")
   {
@@ -83,17 +83,17 @@ if(.Platform$OS.type=="unix")
 
 ## Check handling of very wide file
 
-wideFile  <- packageFile('xls', 'wide.xls' )
+wideFile  <- packageFile('xls', 'wide.xlsx' )
 wideFileX <- packageFile('xls', 'wide.xlsx')
 
 example.wide <- read.xls(wideFile)
-stopifnot(dim(example.wide)==c(0,256))
+stopifnot(dim(example.wide)==c(0,16384))
 
 ## Check handling of files with dates calculated relative to
 ## 1900-01-01 and 1904-01-01
 
-file.1900  <- packageFile('xls', 'ExampleExcelFile_1900.xls' )
-file.1904  <- packageFile('xls', 'ExampleExcelFile_1904.xls' )
+file.1900  <- packageFile('xls', 'ExampleExcelFile_1900.xlsx' )
+file.1904  <- packageFile('xls', 'ExampleExcelFile_1904.xlsx' )
 
 example.1900 <- read.xls(file.1900, sheet=3, header=FALSE)
 example.1900
