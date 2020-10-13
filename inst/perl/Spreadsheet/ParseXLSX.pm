@@ -1,10 +1,9 @@
 package Spreadsheet::ParseXLSX;
-BEGIN {
-  $Spreadsheet::ParseXLSX::AUTHORITY = 'cpan:DOY';
-}
-$Spreadsheet::ParseXLSX::VERSION = '0.16';
+our $AUTHORITY = 'cpan:DOY';
+$Spreadsheet::ParseXLSX::VERSION = '0.27';
 use strict;
 use warnings;
+use 5.010;
 # ABSTRACT: parse XLSX files
 
 use Archive::Zip;
@@ -13,10 +12,18 @@ use Scalar::Util 'openhandle';
 use Spreadsheet::ParseExcel 0.61;
 use XML::Twig;
 
+use Spreadsheet::ParseXLSX::Decryptor;
+
 
 
 sub new {
-    bless {}, shift;
+    my $class = shift;
+    my (%args) = @_;
+
+    my $self = bless {}, $class;
+    $self->{Password} = $args{Password} if defined $args{Password};
+
+    return $self;
 }
 
 
@@ -26,10 +33,30 @@ sub parse {
 
     my $zip = Archive::Zip->new;
     my $workbook = Spreadsheet::ParseExcel::Workbook->new;
+
+    if ($self->_check_signature($file)) {
+        my $decrypted_file = Spreadsheet::ParseXLSX::Decryptor->open(
+            $file,
+            $self->{Password}
+        );
+        $file = $decrypted_file if $decrypted_file;
+    }
+
     if (openhandle($file)) {
         bless $file, 'IO::File' if ref($file) eq 'GLOB'; # sigh
-        $zip->readFromFileHandle($file) == Archive::Zip::AZ_OK
+        my $fh = ref($file) eq 'File::Temp'
+            ? IO::File->new("<&=" . fileno($file))
+            : $file;
+        $zip->readFromFileHandle($fh) == Archive::Zip::AZ_OK
             or die "Can't open filehandle as a zip file";
+        $workbook->{File} = undef;
+        $workbook->{__tempfile} = $file;
+    }
+    elsif (ref($file) eq 'SCALAR') {
+        open my $fh, '+<', $file
+            or die "Can't create filehandle from memory data";
+        $zip->readFromFileHandle($fh) == Archive::Zip::AZ_OK
+            or die "Can't open scalar ref as a zip file";
         $workbook->{File} = undef;
     }
     elsif (!ref($file)) {
@@ -38,10 +65,32 @@ sub parse {
         $workbook->{File} = $file;
     }
     else {
-        die "Argument to 'new' must be a filename or open filehandle";
+        die "Argument to 'new' must be a filename, open filehandle, or scalar ref";
     }
 
     return $self->_parse_workbook($zip, $workbook, $formatter);
+}
+
+sub _check_signature {
+    my $self = shift;
+    my ($file) = @_;
+
+    my $signature = '';
+    if (openhandle($file)) {
+        bless $file, 'IO::File' if ref($file) eq 'GLOB'; # sigh
+        $file->read($signature, 2);
+        $file->seek(-2, IO::File::SEEK_CUR);
+    }
+    elsif (ref($file) eq 'SCALAR') {
+        $signature = substr($$file, 0, 2);
+    }
+    elsif (!ref($file)) {
+        my $fh = IO::File->new($file, 'r');
+        $fh->read($signature, 2);
+        $fh->close;
+    }
+
+    return $signature eq "\xd0\xcf";
 }
 
 sub _parse_workbook {
@@ -50,8 +99,8 @@ sub _parse_workbook {
 
     my $files = $self->_extract_files($zip);
 
-    my ($version)    = $files->{workbook}->find_nodes('//fileVersion');
-    my ($properties) = $files->{workbook}->find_nodes('//workbookPr');
+    my ($version)    = $files->{workbook}->find_nodes('//s:fileVersion');
+    my ($properties) = $files->{workbook}->find_nodes('//s:workbookPr');
 
     if ($version) {
         $workbook->{Version} = $version->att('appName')
@@ -60,7 +109,8 @@ sub _parse_workbook {
                                  : (""));
     }
 
-    $workbook->{Flag1904} = $properties && $properties->att('date1904') ? 1 : 0;
+    $workbook->{Flg1904} = $self->_xml_boolean($properties->att('date1904'))
+        if $properties;
 
     $workbook->{FmtClass} = $formatter || Spreadsheet::ParseExcel::FmtDefault->new;
 
@@ -74,8 +124,14 @@ sub _parse_workbook {
     $workbook->{FormatStr} = $styles->{FormatStr};
     $workbook->{Font}      = $styles->{Font};
 
-    $workbook->{PkgStr} = $self->_parse_shared_strings($files->{strings})
-        if $files->{strings};
+    if ($files->{strings}) {
+        my %string_parse_data = $self->_parse_shared_strings(
+            $files->{strings},
+            $themes->{Color}
+        );
+        $workbook->{PkgStr} = $string_parse_data{PkgStr};
+        $workbook->{Rich}   = $string_parse_data{Rich};
+    }
 
     # $workbook->{StandardWidth} = ...;
 
@@ -85,21 +141,26 @@ sub _parse_workbook {
     # $workbook->{PrintTitle} = ...;
 
     my @sheets = map {
-        my $idx = $_->att('r:id');
-        my $sheet = Spreadsheet::ParseExcel::Worksheet->new(
-            Name     => $_->att('name'),
-            _Book    => $workbook,
-            _SheetNo => $idx,
-        );
-        $self->_parse_sheet($sheet, $files->{sheets}{$idx});
-        $sheet
-    } $files->{workbook}->find_nodes('//sheets/sheet');
+        my $idx = $_->att('rels:id');
+        if ($files->{sheets}{$idx}) {
+          my $sheet = Spreadsheet::ParseExcel::Worksheet->new(
+              Name     => $_->att('name'),
+              _Book    => $workbook,
+              _SheetNo => $idx,
+          );
+          $sheet->{SheetHidden} = 1 if defined $_->att('state') and $_->att('state') eq 'hidden';
+          $self->_parse_sheet($sheet, $files->{sheets}{$idx});
+          ($sheet)
+        } else {
+          ()
+        }
+    } $files->{workbook}->find_nodes('//s:sheets/s:sheet');
 
     $workbook->{Worksheet}  = \@sheets;
     $workbook->{SheetCount} = scalar(@sheets);
 
-    my ($node) = $files->{workbook}->find_nodes('//workbookView');
-    my $selected = $node->att('activeTab');
+    my ($node) = $files->{workbook}->find_nodes('//s:workbookView');
+    my $selected = $node ? $node->att('activeTab') : undef;
     $workbook->{SelectedSheet} = defined($selected) ? 0+$selected : 0;
 
     return $workbook;
@@ -115,19 +176,24 @@ sub _parse_sheet {
     $sheet->{MaxCol} = -1;
     $sheet->{Selection} = [ 0, 0 ];
 
-    my @merged_cells;
+    my %merged_cells;
 
     my @column_formats;
     my @column_widths;
+    my @columns_hidden;
     my @row_heights;
+    my @rows_hidden;
 
     my $default_row_height   = 15;
     my $default_column_width = 10;
 
-    my $sheet_xml = XML::Twig->new(
+    my %cells;
+    my $row_idx = 0;
+
+    my $sheet_xml = $self->_new_twig(
         twig_roots => {
             #XXX need a fallback here, the dimension tag is optional
-            'dimension' => sub {
+            's:dimension' => sub {
                 my ($twig, $dimension) = @_;
 
                 my ($rmin, $cmin, $rmax, $cmax) = $self->_dimensions(
@@ -136,13 +202,55 @@ sub _parse_sheet {
 
                 $sheet->{MinRow} = $rmin;
                 $sheet->{MinCol} = $cmin;
-                $sheet->{MaxRow} = $rmax;
-                $sheet->{MaxCol} = $cmax;
+                $sheet->{MaxRow} = $rmax ? $rmax : -1;
+                $sheet->{MaxCol} = $cmax ? $cmax : -1;
 
                 $twig->purge;
             },
 
-            'mergeCells/mergeCell' => sub {
+            's:headerFooter' => sub {
+                my ($twig, $hf) = @_;
+
+                my ($helem, $felem) = map {
+                    $hf->first_child("s:$_")
+                } qw(oddHeader oddFooter);
+                $sheet->{Header} = $helem->text
+                    if $helem;
+                $sheet->{Footer} = $felem->text
+                    if $felem;
+
+                $twig->purge;
+            },
+
+            's:pageMargins' => sub {
+                my ($twig, $margin) = @_;
+                map {
+                    my $key = "\u${_}Margin";
+                    $sheet->{$key} = defined $margin->att($_)
+                                    ? $margin->att($_) : 0
+                } qw(left right top bottom header footer);
+
+                $twig->purge;
+            },
+
+            's:pageSetup' => sub {
+                my ($twig, $setup) = @_;
+                $sheet->{Scale} = defined $setup->att('scale')
+                                ? $setup->att('scale')
+                                : 100;
+                $sheet->{Landscape} = ($setup->att('orientation') || '') ne 'landscape';
+                $sheet->{PaperSize} = defined $setup->att('paperSize')
+                                    ? $setup->att('paperSize')
+                                    : 1;
+                $sheet->{PageStart} = $setup->att('firstPageNumber');
+                $sheet->{UsePage} = $self->_xml_boolean($setup->att('useFirstPageNumber'));
+                $sheet->{HorizontalDPI} = $setup->att('horizontalDpi');
+                $sheet->{VerticalDPI} = $setup->att('verticalDpi');
+
+                $twig->purge;
+            },
+
+            's:mergeCells/s:mergeCell' => sub {
                 my ( $twig, $merge_area ) = @_;
 
                 if (my $ref = $merge_area->att('ref')) {
@@ -157,7 +265,7 @@ sub _parse_sheet {
                     ];
                     for my $row ($toprow .. $bottomrow) {
                         for my $col ($leftcol .. $rightcol) {
-                            push(@merged_cells, [$row, $col]);
+                            $merged_cells{"$row;$col"} = 1;
                         }
                     }
                 }
@@ -165,35 +273,30 @@ sub _parse_sheet {
                 $twig->purge;
             },
 
-            'sheetFormatPr' => sub {
+            's:sheetFormatPr' => sub {
                 my ( $twig, $format ) = @_;
 
-                $default_row_height   //= $format->att('defaultRowHeight');
-                $default_column_width //= $format->att('baseColWidth');
+                $default_row_height   = $format->att('defaultRowHeight')
+                  unless defined $default_row_height;
+                $default_column_width = $format->att('baseColWidth')
+                  unless defined $default_column_width;
 
                 $twig->purge;
             },
 
-            'col' => sub {
+            's:col' => sub {
                 my ( $twig, $col ) = @_;
 
                 for my $colnum ($col->att('min')..$col->att('max')) {
                     $column_widths[$colnum - 1] = $col->att('width');
                     $column_formats[$colnum - 1] = $col->att('style');
+                    $columns_hidden[$colnum - 1] = $self->_xml_boolean($col->att('hidden'));
                 }
 
                 $twig->purge;
             },
 
-            'row' => sub {
-                my ( $twig, $row ) = @_;
-
-                $row_heights[ $row->att('r') - 1 ] = $row->att('ht');
-
-                $twig->purge;
-            },
-
-            'selection' => sub {
+            's:selection' => sub {
                 my ( $twig, $selection ) = @_;
 
                 if (my $cell = $selection->att('activeCell')) {
@@ -210,7 +313,7 @@ sub _parse_sheet {
                 $twig->purge;
             },
 
-            'sheetPr/tabColor' => sub {
+            's:sheetPr/s:tabColor' => sub {
                 my ( $twig, $tab_color ) = @_;
 
                 $sheet->{TabColor} = $self->_color($sheet->{_Book}{Color}, $tab_color);
@@ -218,35 +321,52 @@ sub _parse_sheet {
                 $twig->purge;
             },
 
-        }
-    );
-
-    $sheet_xml->parse( $sheet_file );
-
-    # 2nd pass: cell/row building is dependent on having parsed the merge definitions
-    # beforehand.
-
-    $sheet_xml = XML::Twig->new(
-        twig_roots => {
-            'sheetData/row' => sub {
+            's:sheetData/s:row' => sub {
                 my ( $twig, $row_elt ) = @_;
+                my $explicit_row_idx = $row_elt->att('r');
+                $row_idx = $explicit_row_idx - 1 if defined $explicit_row_idx;
 
-                for my $cell ( $row_elt->children('c') ){
-                    my ($row, $col) = $self->_cell_to_row_col($cell->att('r'));
+                $row_heights[$row_idx] = $row_elt->att('ht');
+                $rows_hidden[$row_idx] = $self->_xml_boolean($row_elt->att('hidden'));
+
+                my $col_idx = 0;
+                for my $cell ( $row_elt->children('s:c') ){
+                    my $loc = $cell->att('r');
+                    my ($row, $col);
+                    if ($loc) {
+                        ($row, $col) = $self->_cell_to_row_col($loc);
+                        if ($row != $row_idx) {
+                            warn "mismatched coords: got $loc for cell in row $row_idx";
+                        }
+                        $col_idx = $col - 1;
+                    }
+                    else {
+                        ($row, $col) = ($row_idx, $col_idx);
+                    }
+                    $sheet->{MaxRow} = $row
+                        if $sheet->{MaxRow} < $row;
+                    $sheet->{MaxCol} = $col
+                        if $sheet->{MaxCol} < $col;
                     my $type = $cell->att('t') || 'n';
-                    my $val_xml = $type eq 'inlineStr'
-                        ? $cell->first_child('is')->first_child('t')
-                        : $cell->first_child('v');
+                    my $val_xml;
+                    if ($type ne 'inlineStr') {
+                        $val_xml = $cell->first_child('s:v');
+                    }
+                    elsif (defined $cell->first_child('s:is')) {
+                        $val_xml = ($cell->find_nodes('.//s:t'))[0];
+                    }
                     my $val = $val_xml ? $val_xml->text : undef;
 
                     my $long_type;
+                    my $Rich;
                     if (!defined($val)) {
                         $long_type = 'Text';
                         $val = '';
                     }
                     elsif ($type eq 's') {
                         $long_type = 'Text';
-                        $val = $sheet->{_Book}{PkgStr}[$val];
+                        $Rich = $sheet->{_Book}{Rich}->{$val};
+                        $val  = $sheet->{_Book}{PkgStr}[$val];
                     }
                     elsif ($type eq 'n') {
                         $long_type = 'Numeric';
@@ -271,9 +391,7 @@ sub _parse_sheet {
 
                     my $format_idx = $cell->att('s') || 0;
                     my $format = $sheet->{_Book}{Format}[$format_idx];
-                    $format->{Merged} = !!grep {
-                        $row == $_->[0] && $col == $_->[1]
-                    } @merged_cells;
+                    die "unknown format $format_idx" unless $format;
 
                     # see the list of built-in formats below in _parse_styles
                     # XXX probably should figure this out from the actual format string,
@@ -282,29 +400,37 @@ sub _parse_sheet {
                         $long_type = 'Date';
                     }
 
+                    my $formula = $cell->first_child('s:f');
                     my $cell = Spreadsheet::ParseExcel::Cell->new(
                         Val      => $val,
                         Type     => $long_type,
-                        Merged   => $format->{Merged},
+                        Merged   => undef, # fix up later
                         Format   => $format,
                         FormatNo => $format_idx,
-                        ($cell->first_child('f')
-                            ? (Formula => $cell->first_child('f')->text)
+                        ($formula
+                            ? (Formula => $formula->text)
                             : ()),
+                        Rich     => $Rich,
                     );
                     $cell->{_Value} = $sheet->{_Book}{FmtClass}->ValFmt(
                         $cell, $sheet->{_Book}
                     );
+                    $cells{"$row;$col"} = $cell;
                     $sheet->{Cells}[$row][$col] = $cell;
+                    $col_idx++;
                 }
 
                 $twig->purge;
+                $row_idx++;
             },
-
         }
     );
 
     $sheet_xml->parse( $sheet_file );
+
+    for my $key (keys %merged_cells) {
+        $cells{$key}{Merged} = 1 if $cells{$key};
+    }
 
     if ( ! $sheet->{Cells} ){
         $sheet->{MaxRow} = $sheet->{MaxCol} = -1;
@@ -315,36 +441,134 @@ sub _parse_sheet {
     $sheet->{RowHeight} = [
         map { defined $_ ? 0+$_ : 0+$default_row_height } @row_heights
     ];
+    $sheet->{RowHidden} = \@rows_hidden;
     $sheet->{ColWidth} = [
         map { defined $_ ? 0+$_ : 0+$default_column_width } @column_widths
     ];
     $sheet->{ColFmtNo} = \@column_formats;
+    $sheet->{ColHidden} = \@columns_hidden;
 
+}
+
+sub _get_text_and_rich_font_by_cell {
+    my $self = shift;
+    my ($si, $theme_colors) = @_;
+
+    # XXX
+    my %default_font_opts = (
+        Height         => 12,
+        Color          => '#000000',
+        Name           => '',
+        Bold           => 0,
+        Italic         => 0,
+        Underline      => 0,
+        UnderlineStyle => 0,
+        Strikeout      => 0,
+        Super          => 0,
+    );
+
+    my $string_text = '';
+    my @rich_font_by_cell;
+    my @nodes_r = $si->find_nodes('.//s:r');
+    if (@nodes_r > 0) {
+        for my $chunk (map { $_->children } @nodes_r) {
+            my $string_length = length($string_text);
+            if ($chunk->name eq 's:t') {
+                if (!@rich_font_by_cell) {
+                    push @rich_font_by_cell, [
+                        $string_length,
+                        Spreadsheet::ParseExcel::Font->new(%default_font_opts)
+                    ];
+                }
+                $string_text .= $chunk->text;
+            }
+            elsif ($chunk->name eq 's:rPr') {
+                my %format_text = %default_font_opts;
+                for my $node_format ($chunk->children) {
+                    if ($node_format->name eq 's:sz') {
+                        $format_text{Height} = $node_format->att('val');
+                    }
+                    elsif ($node_format->name eq 's:color') {
+                        $format_text{Color} = $self->_color(
+                            $theme_colors,
+                            $node_format
+                        );
+                    }
+                    elsif ($node_format->name eq 's:rFont') {
+                        $format_text{Name} = $node_format->att('val');
+                    }
+                    elsif ($node_format->name eq 's:b') {
+                        $format_text{Bold} = 1;
+                    }
+                    elsif ($node_format->name eq 's:i') {
+                        $format_text{Italic} = 1;
+                    }
+                    elsif ($node_format->name eq 's:u') {
+                        $format_text{Underline} = 1;
+                        if (defined $node_format->att('val')) {
+                            $format_text{UnderlineStyle} = 2;
+                        } else {
+                            $format_text{UnderlineStyle} = 1;
+                        }
+                    }
+                    elsif ($node_format->name eq 's:strike') {
+                        $format_text{Strikeout} = 1;
+                    }
+                    elsif ($node_format->name eq 's:vertAlign') {
+                        if ($node_format->att('val') eq 'superscript') {
+                            $format_text{Super} = 1;
+                        }
+                        elsif ($node_format->att('val') eq 'subscript') {
+                            $format_text{Super} = 2;
+                        }
+                    }
+                }
+                push @rich_font_by_cell, [
+                    $string_length,
+                    Spreadsheet::ParseExcel::Font->new(%format_text)
+                ];
+            }
+        }
+    }
+    else {
+        $string_text = join '', map { $_->text } $si->find_nodes('.//s:t');
+    }
+
+    return (
+        String => $string_text,
+        Rich => \@rich_font_by_cell,
+    );
 }
 
 sub _parse_shared_strings {
     my $self = shift;
-    my ($strings) = @_;
+    my ($strings, $theme_colors) = @_;
 
     my $PkgStr = [];
 
+    my %richfonts;
     if ($strings) {
-        my $xml = XML::Twig->new(
+        my $xml = $self->_new_twig(
             twig_handlers => {
-                'si' => sub {
+                's:si' => sub {
                     my ( $twig, $si ) = @_;
 
-                    # XXX this discards information about formatting within cells
-                    # not sure how to represent that
-                    push @$PkgStr,
-                      join( '', map { $_->text } $si->find_nodes('.//t') );
+                    my %text_rich = $self->_get_text_and_rich_font_by_cell(
+                        $si,
+                        $theme_colors
+                    );
+                    $richfonts{scalar @$PkgStr} = $text_rich{Rich};
+                    push @$PkgStr, $text_rich{String};
                     $twig->purge;
                 },
             }
         );
         $xml->parse( $strings );
     }
-    return $PkgStr;
+    return (
+        Rich   => \%richfonts,
+        PkgStr => $PkgStr,
+    );
 }
 
 sub _parse_themes {
@@ -354,8 +578,8 @@ sub _parse_themes {
     return {} unless $themes;
 
     my @color = map {
-        $_->name eq 'a:sysClr' ? $_->att('lastClr') : $_->att('val')
-    } $themes->find_nodes('//a:clrScheme/*/*');
+        $_->name eq 'drawmain:sysClr' ? $_->att('lastClr') : $_->att('val')
+    } $themes->find_nodes('//drawmain:clrScheme/*/*');
 
     # this shouldn't be necessary, but the documentation is wrong here
     # see http://stackoverflow.com/questions/2760976/theme-confusion-in-spreadsheetml
@@ -370,6 +594,85 @@ sub _parse_themes {
 sub _parse_styles {
     my $self = shift;
     my ($workbook, $styles) = @_;
+
+    # these defaults are from
+    # http://social.msdn.microsoft.com/Forums/en-US/oxmlsdk/thread/e27aaf16-b900-4654-8210-83c5774a179c
+    my %default_format_str = (
+        0  => 'GENERAL',
+        1  => '0',
+        2  => '0.00',
+        3  => '#,##0',
+        4  => '#,##0.00',
+        5  => '$#,##0_);($#,##0)',
+        6  => '$#,##0_);[Red]($#,##0)',
+        7  => '$#,##0.00_);($#,##0.00)',
+        8  => '$#,##0.00_);[Red]($#,##0.00)',
+        9  => '0%',
+        10 => '0.00%',
+        11 => '0.00E+00',
+        12 => '# ?/?',
+        13 => '# ??/??',
+        14 => 'm/d/yyyy',
+        15 => 'd-mmm-yy',
+        16 => 'd-mmm',
+        17 => 'mmm-yy',
+        18 => 'h:mm AM/PM',
+        19 => 'h:mm:ss AM/PM',
+        20 => 'h:mm',
+        21 => 'h:mm:ss',
+        22 => 'm/d/yyyy h:mm',
+        37 => '#,##0_);(#,##0)',
+        38 => '#,##0_);[Red](#,##0)',
+        39 => '#,##0.00_);(#,##0.00)',
+        40 => '#,##0.00_);[Red](#,##0.00)',
+        45 => 'mm:ss',
+        46 => '[h]:mm:ss',
+        47 => 'mm:ss.0',
+        48 => '##0.0E+0',
+        49 => '@',
+    );
+
+    my %default_format_opts = (
+        IgnoreFont         => 1,
+        IgnoreFill         => 1,
+        IgnoreBorder       => 1,
+        IgnoreAlignment    => 1,
+        IgnoreNumberFormat => 1,
+        IgnoreProtection   => 1,
+        FontNo             => 0,
+        FmtIdx             => 0,
+        Lock               => 1,
+        Hidden             => 0,
+        AlignH             => 0,
+        Wrap               => 0,
+        AlignV             => 2,
+        Rotate             => 0,
+        Indent             => 0,
+        Shrink             => 0,
+        BdrStyle           => [0, 0, 0, 0],
+        BdrColor           => [undef, undef, undef, undef],
+        BdrDiag            => [0, 0, undef],
+        Fill               => [0, undef, undef],
+    );
+
+    if (!$styles) {
+        # XXX i guess?
+        my $font = Spreadsheet::ParseExcel::Font->new(
+            Height         => 12,
+            Color          => '#000000',
+            Name           => '',
+        );
+        my $format = Spreadsheet::ParseExcel::Format->new(
+            %default_format_opts,
+            Font => $font,
+        );
+
+        return {
+            FormatStr => \%default_format_str,
+            Font      => [ $font ],
+            Format    => [ $format ],
+        };
+    }
 
     my %halign = (
         center           => 2,
@@ -430,96 +733,77 @@ sub _parse_styles {
     );
 
     my @fills = map {
+        my $pattern_type = $_->att('patternType');
         [
-            $fill{$_->att('patternType')},
-            $self->_color($workbook->{Color}, $_->first_child('fgColor'), 1),
-            $self->_color($workbook->{Color}, $_->first_child('bgColor'), 1),
+            ($pattern_type ? $fill{$pattern_type} : 0),
+            $self->_color($workbook->{Color}, $_->first_child('s:fgColor'), 1),
+            $self->_color($workbook->{Color}, $_->first_child('s:bgColor'), 1),
         ]
-    } $styles->find_nodes('//fills/fill/patternFill');
+    } $styles->find_nodes('//s:fills/s:fill/s:patternFill');
 
     my @borders = map {
         my $border = $_;
+        my ($ddiag, $udiag) = map {
+            $self->_xml_boolean($border->att($_))
+        } qw(diagonalDown diagonalUp);
+        my %borderstyles = map {
+            my $e = $border->first_child("s:$_");
+            $_ => ($e ? $e->att('style') || 'none' : 'none')
+        } qw(left right top bottom diagonal);
+        my %bordercolors = map {
+            my $e = $border->first_child("s:$_");
+            $_ => ($e ? $e->first_child('s:color') : undef)
+        } qw(left right top bottom diagonal);
         # XXX specs say "begin" and "end" rather than "left" and "right",
         # but... that's not what seems to be in the file itself (sigh)
         {
             colors => [
                 map {
-                    $self->_color(
-                        $workbook->{Color},
-                        $border->first_child($_)->first_child('color')
-                    )
+                    $self->_color($workbook->{Color}, $bordercolors{$_})
                 } qw(left right top bottom)
             ],
             styles => [
                 map {
-                    $border{$border->first_child($_)->att('style') || 'none'}
+                    $border{$borderstyles{$_}}
                 } qw(left right top bottom)
             ],
             diagonal => [
-                0, # XXX ->att('diagonalDown') and ->att('diagonalUp')
-                0, # XXX ->att('style')
-                $self->_color(
-                    $workbook->{Color},
-                    $border->first_child('diagonal')->first_child('color')
-                ),
+                ( $ddiag &&  $udiag ? 3
+               :  $ddiag && !$udiag ? 2
+               : !$ddiag &&  $udiag ? 1
+               :                      0),
+                $border{$borderstyles{diagonal}},
+                $self->_color($workbook->{Color}, $bordercolors{diagonal}),
             ],
         }
-    } $styles->find_nodes('//borders/border');
+    } $styles->find_nodes('//s:borders/s:border');
 
-    # these defaults are from
-    # http://social.msdn.microsoft.com/Forums/en-US/oxmlsdk/thread/e27aaf16-b900-4654-8210-83c5774a179c
     my %format_str = (
-        0  => 'GENERAL',
-        1  => '0',
-        2  => '0.00',
-        3  => '#,##0',
-        4  => '#,##0.00',
-        5  => '$#,##0_);($#,##0)',
-        6  => '$#,##0_);[Red]($#,##0)',
-        7  => '$#,##0.00_);($#,##0.00)',
-        8  => '$#,##0.00_);[Red]($#,##0.00)',
-        9  => '0%',
-        10 => '0.00%',
-        11 => '0.00E+00',
-        12 => '# ?/?',
-        13 => '# ??/??',
-        14 => 'm/d/yyyy',
-        15 => 'd-mmm-yy',
-        16 => 'd-mmm',
-        17 => 'mmm-yy',
-        18 => 'h:mm AM/PM',
-        19 => 'h:mm:ss AM/PM',
-        20 => 'h:mm',
-        21 => 'h:mm:ss',
-        22 => 'm/d/yyyy h:mm',
-        37 => '#,##0_);(#,##0)',
-        38 => '#,##0_);[Red](#,##0)',
-        39 => '#,##0.00_);(#,##0.00)',
-        40 => '#,##0.00_);[Red](#,##0.00)',
-        45 => 'mm:ss',
-        46 => '[h]:mm:ss',
-        47 => 'mm:ss.0',
-        48 => '##0.0E+0',
-        49 => '@',
+        %default_format_str,
         (map {
             $_->att('numFmtId') => $_->att('formatCode')
-        } $styles->find_nodes('//numFmts/numFmt')),
+        } $styles->find_nodes('//s:numFmts/s:numFmt')),
     );
 
     my @font = map {
-        my $vert = $_->first_child('vertAlign');
-        my $under = $_->first_child('u');
+        my $vert = $_->first_child('s:vertAlign');
+        my $under = $_->first_child('s:u');
+        my $heightelem = $_->first_child('s:sz');
+        # XXX i guess 12 is okay?
+        my $height = 0+($heightelem ? $heightelem->att('val') : 12);
+        my $nameelem = $_->first_child('s:name');
+        my $name = $nameelem ? $nameelem->att('val') : '';
         Spreadsheet::ParseExcel::Font->new(
-            Height         => 0+$_->first_child('sz')->att('val'),
+            Height         => $height,
             # Attr           => $iAttr,
             # XXX not sure if there's a better way to keep the indexing stuff
             # intact rather than just going straight to #xxxxxx
             # XXX also not sure what it means for the color tag to be missing,
             # just assuming black for now
-            Color          => ($_->first_child('color')
+            Color          => ($_->first_child('s:color')
                 ? $self->_color(
                     $workbook->{Color},
-                    $_->first_child('color')
+                    $_->first_child('s:color')
                 )
                 : '#000000'
             ),
@@ -542,61 +826,58 @@ sub _parse_styles {
                  :                                  0)
                 : 0
             ),
-            Name           => $_->first_child('name')->att('val'),
+            Name           => $name,
 
-            Bold      => $_->has_child('b') ? 1 : 0,
-            Italic    => $_->has_child('i') ? 1 : 0,
-            Underline => $_->has_child('u') ? 1 : 0,
-            Strikeout => $_->has_child('strike') ? 1 : 0,
+            Bold      => $_->has_child('s:b') ? 1 : 0,
+            Italic    => $_->has_child('s:i') ? 1 : 0,
+            Underline => $_->has_child('s:u') ? 1 : 0,
+            Strikeout => $_->has_child('s:strike') ? 1 : 0,
         )
-    } $styles->find_nodes('//fonts/font');
+    } $styles->find_nodes('//s:fonts/s:font');
 
     my @format = map {
-        my $alignment  = $_->first_child('alignment');
-        my $protection = $_->first_child('protection');
-        Spreadsheet::ParseExcel::Format->new(
-            IgnoreFont         => !$_->att('applyFont'),
-            IgnoreFill         => !$_->att('applyFill'),
-            IgnoreBorder       => !$_->att('applyBorder'),
-            IgnoreAlignment    => !$_->att('applyAlignment'),
-            IgnoreNumberFormat => !$_->att('applyNumberFormat'),
-            IgnoreProtection   => !$_->att('applyProtection'),
+        my $xml_fmt = $_;
+        my $alignment  = $xml_fmt->first_child('s:alignment');
+        my $protection = $xml_fmt->first_child('s:protection');
+        my %ignore = map {
+            ("Ignore$_" => !$self->_xml_boolean($xml_fmt->att("apply$_")))
+        } qw(Font Fill Border Alignment NumberFormat Protection);
+        my %opts = (
+            %default_format_opts,
+            %ignore,
+        );
 
-            FontNo => 0+$_->att('fontId'),
-            Font   => $font[$_->att('fontId')],
-            FmtIdx => 0+$_->att('numFmtId'),
+        $opts{FmtIdx}   = 0+($xml_fmt->att('numFmtId')||0);
+        $opts{FontNo}   = 0+($xml_fmt->att('fontId')||0);
+        $opts{Font}     = $font[$opts{FontNo}];
+        $opts{Fill}     = $fills[$xml_fmt->att('fillId')||0];
+        $opts{BdrStyle} = $borders[$xml_fmt->att('borderId')||0]{styles};
+        $opts{BdrColor} = $borders[$xml_fmt->att('borderId')||0]{colors};
+        $opts{BdrDiag}  = $borders[$xml_fmt->att('borderId')||0]{diagonal};
 
-            Lock => $protection && defined $protection->att('locked')
-                ? $protection->att('locked')
-                : 1,
-            Hidden => $protection
-                ? $protection->att('hidden')
-                : 0,
-            # Style    => $iStyle,
-            # Key123   => $i123,
-            AlignH => $alignment
-                ? $halign{$alignment->att('horizontal') || 'general'}
-                : 0,
-            Wrap => $alignment
-                ? $alignment->att('wrapText')
-                : 0,
-            AlignV => $alignment
-                ? $valign{$alignment->att('vertical') || 'bottom'}
-                : 2,
+        if ($alignment) {
+            $opts{AlignH} = $halign{$alignment->att('horizontal') || 'general'};
+            $opts{Wrap}   = $self->_xml_boolean($alignment->att('wrapText'));
+            $opts{AlignV} = $valign{$alignment->att('vertical') || 'bottom'};
+            $opts{Rotate} = $alignment->att('textRotation');
+            $opts{Indent} = $alignment->att('indent');
+            $opts{Shrink} = $self->_xml_boolean($alignment->att('shrinkToFit'));
             # JustLast => $iJustL,
-            # Rotate   => $iRotate,
+        }
 
-            # Indent  => $iInd,
-            # Shrink  => $iShrink,
-            # Merge   => $iMerge,
-            # ReadDir => $iReadDir,
+        if ($protection) {
+            $opts{Lock} = defined $protection->att('locked')
+                ? $self->_xml_boolean($protection->att('locked'))
+                : 1;
+            $opts{Hidden} = $self->_xml_boolean($protection->att('hidden'));
+        }
 
-            BdrStyle => $borders[$_->att('borderId')]{styles},
-            BdrColor => $borders[$_->att('borderId')]{colors},
-            BdrDiag  => $borders[$_->att('borderId')]{diagonal},
-            Fill     => $fills[$_->att('fillId')],
-        )
-    } $styles->find_nodes('//cellXfs/xf');
+        # Style    => $iStyle,
+        # Key123   => $i123,
+        # Merge   => $iMerge,
+        # ReadDir => $iReadDir,
+        Spreadsheet::ParseExcel::Format->new(%opts)
+    } $styles->find_nodes('//s:cellXfs/s:xf');
 
     return {
         FormatStr => \%format_str,
@@ -614,45 +895,54 @@ sub _extract_files {
 
     my $rels = $self->_parse_xml(
         $zip,
-        $self->_rels_for('')
+        $self->_rels_for(''),
     );
     my $wb_name = ($rels->find_nodes(
-        qq<//Relationship[\@Type="$type_base/officeDocument"]>
+        qq<//packagerels:Relationship[\@Type="$type_base/officeDocument"]>
     ))[0]->att('Target');
+    $wb_name =~ s{^/}{};
     my $wb_xml = $self->_parse_xml($zip, $wb_name);
 
     my $path_base = $self->_base_path_for($wb_name);
     my $wb_rels = $self->_parse_xml(
         $zip,
-        $self->_rels_for($wb_name)
+        $self->_rels_for($wb_name),
     );
+
+    my $get_path = sub {
+        my ($p) = @_;
+
+        return $p =~ s{^/}{}
+            ? $p
+            : $path_base . $p;
+    };
 
     my ($strings_xml) = map {
-        $zip->memberNamed($path_base . $_->att('Target'))->contents
-    } $wb_rels->find_nodes(qq<//Relationship[\@Type="$type_base/sharedStrings"]>);
+        $self->_zip_file_member($zip, $get_path->($_->att('Target')))
+    } $wb_rels->find_nodes(qq<//packagerels:Relationship[\@Type="$type_base/sharedStrings"]>);
 
-    my $styles_xml = $self->_parse_xml(
-        $zip,
-        $path_base . ($wb_rels->find_nodes(
-            qq<//Relationship[\@Type="$type_base/styles"]>
-        ))[0]->att('Target')
-    );
+    my ($styles_xml) = map {
+        $self->_parse_xml(
+            $zip,
+            $get_path->($_->att('Target'))
+        )
+    } $wb_rels->find_nodes(qq<//packagerels:Relationship[\@Type="$type_base/styles"]>);
 
     my %worksheet_xml = map {
-        if ( my $sheetfile = $zip->memberNamed($path_base . $_->att('Target'))->contents ) {
-            ( $_->att('Id') => $sheetfile );
-        }
-    } $wb_rels->find_nodes(qq<//Relationship[\@Type="$type_base/worksheet"]>);
+        ($_->att('Id') => $self->_zip_file_member($zip, $get_path->($_->att('Target'))))
+    } $wb_rels->find_nodes(qq<//packagerels:Relationship[\@Type="$type_base/worksheet"]>);
 
     my %themes_xml = map {
-        $_->att('Id') => $self->_parse_xml($zip, $path_base . $_->att('Target'))
-    } $wb_rels->find_nodes(qq<//Relationship[\@Type="$type_base/theme"]>);
+        $_->att('Id') => $self->_parse_xml($zip, $get_path->($_->att('Target')))
+    } $wb_rels->find_nodes(qq<//packagerels:Relationship[\@Type="$type_base/theme"]>);
 
     return {
         workbook => $wb_xml,
-        styles   => $styles_xml,
         sheets   => \%worksheet_xml,
         themes   => \%themes_xml,
+        ($styles_xml
+            ? (styles  => $styles_xml)
+            : ()),
         ($strings_xml
             ? (strings => $strings_xml)
             : ()),
@@ -661,15 +951,22 @@ sub _extract_files {
 
 sub _parse_xml {
     my $self = shift;
-    my ($zip, $subfile) = @_;
+    my ($zip, $subfile, $map_xmlns) = @_;
 
-    my $member = $zip->memberNamed($subfile);
-    die "no subfile named $subfile" unless $member;
-
-    my $xml = XML::Twig->new;
-    $xml->parse(scalar $member->contents);
+    my $xml = $self->_new_twig;
+    $xml->parse($self->_zip_file_member($zip, $subfile));
 
     return $xml;
+}
+
+sub _zip_file_member {
+    my $self = shift;
+    my ($zip, $name) = @_;
+
+    my @members = $zip->membersMatching(qr/^$name$/i);
+    die "no subfile named $name" unless @members;
+
+    return scalar $members[0]->contents;
 }
 
 sub _rels_for {
@@ -726,12 +1023,18 @@ sub _cell_to_row_col {
     return ($nrow, $ncol);
 }
 
+sub _xml_boolean {
+    my $self = shift;
+    my ($bool) = @_;
+    return defined($bool) && ($bool eq 'true' || $bool eq '1');
+}
+
 sub _color {
     my $self = shift;
     my ($colors, $color_node, $fill) = @_;
 
     my $color;
-    if ($color_node && !$color_node->att('auto')) {
+    if ($color_node && !$self->_xml_boolean($color_node->att('auto'))) {
         if (defined $color_node->att('indexed')) {
             # see https://rt.cpan.org/Public/Bug/Display.html?id=93065
             if ($fill && $color_node->att('indexed') == 64) {
@@ -747,7 +1050,13 @@ sub _color {
             $color = '#' . substr($color_node->att('rgb'), 2, 6);
         }
         elsif (defined $color_node->att('theme')) {
-            $color = '#' . $colors->[$color_node->att('theme')];
+            my $theme = $colors->[$color_node->att('theme')];
+            if (defined $theme) {
+                $color = "#$theme";
+            }
+            else {
+                return undef;
+            }
         }
 
         $color = $self->_apply_tint($color, $color_node->att('tint'))
@@ -774,6 +1083,22 @@ sub _apply_tint {
     return scalar hls2rgb($h, $l, $s);
 }
 
+sub _new_twig {
+    my $self = shift;
+    my %opts = @_;
+
+    return XML::Twig->new(
+        map_xmlns => {
+            'http://schemas.openxmlformats.org/spreadsheetml/2006/main' => 's',
+            'http://schemas.openxmlformats.org/package/2006/relationships' => 'packagerels',
+            'http://schemas.openxmlformats.org/officeDocument/2006/relationships' => 'rels',
+            'http://schemas.openxmlformats.org/drawingml/2006/main' => 'drawmain',
+        },
+        keep_original_prefix => 1,
+        %opts,
+    );
+}
+
 
 1;
 
@@ -789,7 +1114,7 @@ Spreadsheet::ParseXLSX - parse XLSX files
 
 =head1 VERSION
 
-version 0.16
+version 0.27
 
 =head1 SYNOPSIS
 
@@ -802,12 +1127,24 @@ version 0.16
 =head1 DESCRIPTION
 
 This module is an adaptor for L<Spreadsheet::ParseExcel> that reads XLSX files.
+For documentation about the various data that you can retrieve from these
+classes, please see L<Spreadsheet::ParseExcel>,
+L<Spreadsheet::ParseExcel::Workbook>, L<Spreadsheet::ParseExcel::Worksheet>,
+and L<Spreadsheet::ParseExcel::Cell>.
 
 =head1 METHODS
 
-=head2 new
+=head2 new(%opts)
 
-Returns a new parser instance. Takes no parameters.
+Returns a new parser instance. Takes a hash of parameters:
+
+=over 4
+
+=item Password
+
+Password to use for decrypting encrypted files.
+
+=back
 
 =head2 parse($file, $formatter)
 
@@ -867,7 +1204,13 @@ although this may have other consequences such as memory leaks.
 
 =item Intra-cell formatting is discarded
 
-=item Diagonal border styles are ignored
+=item Shared formulas are not supported
+
+Shared formula support will require an actual formula parser and quite a bit of
+custom logic, since the only thing stored in the document is the formula for
+the base cell - updating the cell references in the formulas in the rest of the
+cells is handled by the application. Values for these cells are still handled
+properly.
 
 =back
 
@@ -928,7 +1271,7 @@ Jesse Luehrs <doy@tozt.net>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is Copyright (c) 2014 by Jesse Luehrs.
+This software is Copyright (c) 2016 by Jesse Luehrs.
 
 This is free software, licensed under:
 

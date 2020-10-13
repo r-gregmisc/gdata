@@ -25,7 +25,7 @@ sub check_modules(;$)
     eval
       {
         require Spreadsheet::ParseExcel;
-	use Spreadsheet::ParseExcel::Utility qw(ExcelFmt);
+	      use Spreadsheet::ParseExcel::Utility qw(ExcelFmt);
         $HAS_Spreadsheet_ParseExcel=1;
         print "Loaded Spreadsheet::ParseExcel\n" if $VERBOSE;
       };
@@ -63,7 +63,7 @@ sub check_modules_and_notify()
        $HAS_Spreadsheet_ParseXLSX) = check_modules(0);
 
     $HAS_Spreadsheet_ParseExcel or
-      die("ERROR: Perl module Spreadsheet::ParseExcel cannot be loaded. Exiting.\n");
+      warn("WARNING: Perl module Spreadsheet::ParseExcel cannot be loaded.\n");
 
     $HAS_Compress_Raw_Zlib or
       warn("WARNING: Perl module Compress::Raw::Zlib cannot be loaded.\n");
@@ -76,10 +76,11 @@ sub check_modules_and_notify()
     return $HAS_Spreadsheet_ParseExcel, $HAS_Compress_Raw_Zlib, $HAS_Spreadsheet_ParseXLSX;
   }
 
-sub install_modules()
+sub install_modules(;$)
   {
-    my($mod, $obj, $here);
-
+    my($VERBOSE, $mod, $obj, $here);
+    
+    $VERBOSE=$_[0];
     $here = dirname($0);
 
     # load the module
@@ -97,12 +98,17 @@ sub install_modules()
 		   "PREFIX=$here LIB=$here --prefix $here --install-base $here");
     CPAN::Shell->install("Compress::Raw::Zlib");
 
-    #return 0;
-
     # install the libraries we want
-    for $mod (qw( Compress::Raw::Zlib Spreadsheet::ParseXLSX )){
+    for $mod (qw( 
+      Spreadsheet::ParseExcel
+      Compress::Raw::Zlib 
+      Spreadsheet::ParseXLSX
+      )){
         my $obj = CPAN::Shell->expand('Module',$mod);
+        print "Installing module '$mod' into '$here'.." if $VERBOSE;
         $obj->install;
+        print "Done." if $VERBOSE;
+        
     }
 
   }

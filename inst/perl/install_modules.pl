@@ -14,6 +14,13 @@ my( $HAS_Spreadsheet_ParseExcel, $HAS_Compress_Raw_Zlib, $HAS_Spreadsheet_ParseX
 
 ($HAS_Spreadsheet_ParseExcel, 
  $HAS_Compress_Raw_Zlib, 
- $HAS_Spreadsheet_ParseXLSX) = check_modules(0);
+ $HAS_Spreadsheet_ParseXLSX) = check_modules(1);
 
-install_modules() unless $HAS_Compress_Raw_Zlib;
+# ParseExcel and ParseXLSX should already be available
+# in this directory, so don't do any installs
+# unless Zlib isn't available
+install_modules() unless 
+  $HAS_Spreadsheet_ParseExcel &&
+  $HAS_Compress_Raw_Zlib &&
+  $HAS_Spreadsheet_ParseXLSX
+  ;
