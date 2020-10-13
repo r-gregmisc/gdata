@@ -106,11 +106,15 @@ example.1904
 # All columns should be identical *except* column 8, but the perl
 # module Spreadsheet::ParseXLSX doesn't handle 1904-based dates
 # properly.
-stopifnot( na.omit(example.1900 [,1:6] == example.1904 [,1:6]) )
+compCols <- c(1, 3:5, 6)
+
+stopifnot(
+  RUnit::checkEquals(example.1900[,compCols], example.1904 [,compCols]) 
+)
 
 message("Issue #8: XLSX dates relative to 1904 improperly converted ")
 RUnit::checkException(
-  stopifnot( na.omit(example.1900 [,-8] == example.1904 [,-8]) )
+  RUnit::checkEquals(example.1900[,-8],example.1904 [,-8]) 
   )
 
 # Column 8 will differ by 1462 due to different date baselines (1900 vs 1904)
