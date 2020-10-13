@@ -104,7 +104,10 @@ xls2sep(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, ...,
 
    \dontrun{
    ## read example xls file from github
-   xls.url <- "https://github.com/r-gregmisc/gdata/blob/master/inst/xls/ExampleExcelFile.xls?raw=true"
+   xls.url <- paste0(
+      "https://github.com/r-gregmisc/gdata/blob/master/",
+      "inst/xls/ExampleExcelFile.xls?raw=true"
+      )
    xls <- read.xls(xls.url)
    }
 
