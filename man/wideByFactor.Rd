@@ -48,7 +48,7 @@ divided for each level of a factor. Number of rows stays the same!
 
 \seealso{ 
   \code{\link[stats]{reshape}} in the \pkg{stats} package,
-  \code{\link[reshape2]{melt}} and \code{\link[reshape]{cast}} in 
+  \code{\link[reshape2]{melt}} and \code{\link[reshape2]{cast}} in 
   the \pkg{reshape2} package
 }
 
