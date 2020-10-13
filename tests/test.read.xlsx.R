@@ -12,7 +12,9 @@ if(is(fp, "try-error"))
   quit(save="no")
 }
 
-if ( ! 'XLS' %in% xlsFormats() )
+installXLSXsupport()
+
+if ( ! 'XLSX' %in% xlsFormats() )
 {
   message(
     "****************************************************\n",
@@ -101,8 +103,15 @@ example.1900
 example.1904 <- read.xls(file.1904, sheet=3, header=FALSE)
 example.1904
 
-# All columns should be identical *except* column 8
-stopifnot( na.omit(example.1900 [,-8] == example.1904 [,-8]) )
+# All columns should be identical *except* column 8, but the perl
+# module Spreadsheet::ParseXLSX doesn't handle 1904-based dates
+# properly.
+stopifnot( na.omit(example.1900 [,1:6] == example.1904 [,1:6]) )
+
+message("Issue #8: XLSX dates relative to 1904 improperly converted ")
+RUnit::checkException(
+  stopifnot( na.omit(example.1900 [,-8] == example.1904 [,-8]) )
+  )
 
 # Column 8 will differ by 1462 due to different date baselines (1900 vs 1904)
 stopifnot( na.omit(example.1900 [,8] - example.1904 [,8]) == 1462 )
