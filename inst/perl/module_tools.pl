@@ -1,9 +1,9 @@
 #!/usr/bin/perl
 
 BEGIN {
-  use File::Basename;
   # Add current path to perl library search path
-  use lib dirname($0);
+  use FindBin qw($Bin); # where was script installed? 
+  use lib $Bin; # use that dir for libs, too docstore.mik.ua/orelly/perl2/prog/ch31_13.htm
 }
 
 use strict;
@@ -44,11 +44,11 @@ sub check_modules(;$)
 
     if($VERBOSE)
       {
-        print "ERROR: Unable to load Spreadsheet::ParseExcel perl module! \n"
+        print "WARNING: Unable to load Spreadsheet::ParseExcel perl module! \n"
 	  if !$HAS_Spreadsheet_ParseExcel;
-        print "ERROR: Unable to load Compress::Raw::Zlib perl module! \n"
+        print "WARNING: Unable to load Compress::Raw::Zlib perl module! \n"
 	  if ! $HAS_Compress_Raw_Zlib;
-        print "ERROR: Unable to load Spreadsheet::ParseXLSX perl module! \n"
+        print "WARNING: Unable to load Spreadsheet::ParseXLSX perl module! \n"
 	  if ! $HAS_Spreadsheet_ParseXLSX;
       }
 
@@ -73,6 +73,7 @@ sub check_modules_and_notify()
 
     ($HAS_Compress_Raw_Zlib && $HAS_Spreadsheet_ParseXLSX ) or
       warn("WARNING: Microsoft Excel 2007 'XLSX' formatted files will not be processed.\n");
+      
     return $HAS_Spreadsheet_ParseExcel, $HAS_Compress_Raw_Zlib, $HAS_Spreadsheet_ParseXLSX;
   }
 
@@ -84,31 +85,17 @@ sub install_modules(;$)
     $here = dirname($0);
 
     # load the module
-    require CPAN;
-
-    # initialize CPAN components
-    CPAN::HandleConfig->load();
-    CPAN::Shell::setup_output();
-    CPAN::Index->reload();
-
-    # set the target install path
-    CPAN::Shell->o("conf", "mbuildpl_arg", 
-		   "PREFIX=$here LIB=$here --prefix $here --install-base $here");
-    CPAN::Shell->o("conf", "makepl_arg", 
-		   "PREFIX=$here LIB=$here --prefix $here --install-base $here");
-    CPAN::Shell->install("Compress::Raw::Zlib");
-
+    require CPANPLUS;
+    
     # install the libraries we want
+    #  Spreadsheet::ParseExcel
+    #  Spreadsheet::ParseXLSX
     for $mod (qw( 
-      Spreadsheet::ParseExcel
       Compress::Raw::Zlib 
-      Spreadsheet::ParseXLSX
       )){
-        my $obj = CPAN::Shell->expand('Module',$mod);
         print "Installing module '$mod' into '$here'.." if $VERBOSE;
-        $obj->install;
+        CPANPLUS::install("$mod");
         print "Done." if $VERBOSE;
-        
     }
 
   }
