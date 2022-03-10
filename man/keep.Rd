@@ -22,19 +22,19 @@ keep(..., list=character(), all=FALSE, sure=FALSE)
   \code{sure=TRUE} is required to remove anything.
 }
 \value{
-  A character vector containing object names that will be deleted if
-  \code{sure=FALSE}.
+  A character vector containing object names that are deleted if
+  \code{sure=TRUE}.
 }
 \author{Arni Magnusson}
 \seealso{
-  \code{keep} is a convenient interface to \code{\link{rm}} when
-  removing most objects from the user workspace.
+  \code{keep} is a convenient interface to \code{\link{rm}} for removing
+  most objects from the user workspace.
 }
 \examples{
 data(trees, CO2)
 keep(trees)
-## To remove all objects except trees, run:
-## keep(trees, sure=TRUE)
+# To remove all objects except trees, run:
+# keep(trees, sure=TRUE)
 }
 % Programming
 \keyword{data}
