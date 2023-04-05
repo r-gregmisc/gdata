@@ -1,0 +1,59 @@
+
+R version 4.0.2 (2020-06-22) -- "Taking Off Again"
+Copyright (C) 2020 The R Foundation for Statistical Computing
+Platform: x86_64-apple-darwin17.0 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> ## Test results before and after loading gdata
+> 
+> m <- factor(c('a','b','c'))
+> 
+> ( m1 <- reorder(m, X=c(3, 2, 1)) )
+[1] a b c
+attr(,"scores")
+a b c 
+3 2 1 
+Levels: c b a
+> 
+> library(gdata)
+gdata: read.xls support for 'XLS' (Excel 97-2004) files ENABLED.
+gdata: read.xls support for 'XLSX' (Excel 2007+) files ENABLED.
+
+Attaching package: 'gdata'
+
+The following object is masked from 'package:stats':
+
+    nobs
+
+The following object is masked from 'package:utils':
+
+    object.size
+
+The following object is masked from 'package:base':
+
+    startsWith
+
+> 
+> ( m2 <- reorder(m, X=c(3, 2, 1)) )
+[1] a b c
+attr(,"scores")
+a b c 
+3 2 1 
+Levels: c b a
+> 
+> stopifnot(identical(m1,m2))
+> 
+> proc.time()
+   user  system elapsed 
+  0.357   0.104   0.504 
