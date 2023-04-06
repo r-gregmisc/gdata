@@ -11,13 +11,19 @@ keep <- function(..., list=character(), all=FALSE, sure=FALSE)
   keep.elements <- match(list, ls(1,all.names=all))
   if(any(is.na(keep.elements)))
   {
-    warning("you tried to keep \"", list[which(is.na(keep.elements))[1]],
-            "\" which doesn't exist in workspace - nothing was removed", sep="")
+    warning("you tried to keep '", list[which(is.na(keep.elements))[1]],
+            "' which doesn't exist in workspace - nothing was removed")
     return(invisible(NULL))
   }
 
   obj <- ls(1, all.names=all)[-keep.elements]
   if(sure)
+  {
     rm(list=obj, pos=1)
-  obj
+    invisible(obj)
+  }
+  else
+  {
+    obj
+  }
 }
