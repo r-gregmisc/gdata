@@ -3,9 +3,9 @@ is.what <- function(object, verbose=FALSE)
   do.test <- function(test, object)
   {
     result <- try(get(test)(object), silent=TRUE)
-    if(!is.logical(result) || length(result)!=1 || is.na(result))
+    if(length(result)!=1 || !is.logical(result) || is.na(result))
       result <- NULL
-    return(result)
+    result
   }
 
   ## Get all names starting with "is."
@@ -22,5 +22,5 @@ is.what <- function(object, verbose=FALSE)
   else
     output <- names(results)[results]
 
-  return(output)
+  output
 }

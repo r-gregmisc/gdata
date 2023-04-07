@@ -1,38 +1,39 @@
-left  <- function(x, n=6L) UseMethod("left")
-right <- function(x, n=6L) UseMethod("left")
+left  <- function(x, n=6L, ...) UseMethod("left")
+right <- function(x, n=6L, ...) UseMethod("right")
 
-left.data.frame <- function(x, n=6)
+.leftright <- function(
+    x, 
+    n=6L, 
+    add.col.nums = TRUE, 
+    direction = c("left", "right"), # center?
+    ...
+)
 {
     stopifnot(length(n) == 1L)
-    n <- if (n < 0L)
-        max(ncol(x) + n, 0L)
-    else min(n, ncol(x))
-    x[, seq_len(n), drop = FALSE]
+    
+    ncx <- ncol(x)
+    
+    if (add.col.nums && is.null(colnames(x)))
+        colnames(x) <- paste0("[", 1:ncx, ",]")
+    
+    if (n < 0L)
+        n <- max(ncx + n, 0L)
+    else 
+        n <- min(n, ncx)
+    
+    if(direction=="left")
+        sel <- seq.int(from=1, length.out = n)
+    else # direction="right"
+        sel <- seq.int(to = ncx, length.out = n)
+    
+    x[, sel, drop = FALSE]
 }
+
+left.data.frame <- function(x, n=6L, add.col.nums=TRUE, ...)
+    .leftright(x, n=n, add.col.nums=add.col.nums, direction="left")
+
+right.data.frame <- function(x, n=6L, add.col.nums=TRUE, ...)
+    .leftright(x, n=n, add.col.nums=add.col.nums, direction="right")
+    
 left.matrix <- left.data.frame
-
-
-right.data.frame <- function (x, n = 6L, ...)
-{
-    stopifnot(length(n) == 1L)
-    ncx <- ncol(x)
-    n <- if (n < 0L)
-        max(ncx + n, 0L)
-    else min(n, ncx)
-    x[, seq.int(to = ncx, length.out = n), drop = FALSE]
-}
-
-right.matrix <- function (x, n = 6L, addcolnums = TRUE, ...)
-{
-    stopifnot(length(n) == 1L)
-    ncx <- ncol(x)
-    n <- if (n < 0L)
-        max(ncx + n, 0L)
-    else min(n, ncx)
-    sel <- seq.int(to = ncx, length.out = n)
-    ans <- x[, sel, drop = FALSE]
-    if (addcolnums && is.null(colnames(x)))
-        colnames(ans) <- paste0("[", sel, ",]")
-    ans
-}
-
+right.matrix <- right.data.frame

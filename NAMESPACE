@@ -11,7 +11,6 @@ export(
        ConvertMedUnits,
        drop.levels,
        duplicated2,
-       elem,
        env,
        first,
        'first<-',
@@ -37,6 +36,7 @@ export(
        reorder.factor,
        resample,
        right,
+       # runPerlScript,
        sheetCount,
        sheetNames,
        startsWith,
@@ -44,7 +44,7 @@ export(
        trimSum,
        unmatrix,
        update.list,
-       #update.data.frame,
+       update.data.frame,
        upperTriangle,
        "upperTriangle<-",
        wideByFactor,
@@ -71,7 +71,7 @@ export(
 importFrom(stats, reorder)
 importFrom(stats, nobs)
 importFrom(gtools, mixedsort)
-importFrom(methods, is)
+importFrom(methods, is, slot, slotNames)
 importFrom(utils, data, download.file, head, read.csv, read.delim, read.table, tail, write.table)
 
 S3method(reorder, factor)
@@ -171,4 +171,4 @@ S3method(right, matrix)
 
 # update methods for list, data.frame
 S3method(update, list)
-#S3method(update, data.frame)
+S3method(update, data.frame)

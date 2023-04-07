@@ -59,7 +59,7 @@ xls2sep(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, ...,
   Caution: If you call \code{"xls2csv"} directly, is your responsibility 
   to close and delete the file after using it.
 }
-\references{http://www.analytics.washington.edu/statcomp/downloads/xls2csv}
+%\references{http://www.analytics.washington.edu/statcomp/downloads/xls2csv}
 \note{ Either a working version of Perl must be present in the executable
   search path, or the exact path of the perl executable must be provided
   via the \code{perl} argument.  See the examples below for an illustration.}
@@ -103,13 +103,17 @@ xls2sep(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, ...,
    }
 
    \dontrun{
-   ## read xls file from net
-   nba.url <- "http://mgtclass.mgt.unm.edu/Bose/Excel/Tutorial.05/Cases/NBA.xls"
-   nba <- read.xls(nba.url)
+   ## read example xls file from github
+   xls.url <- paste0(
+      "https://github.com/r-gregmisc/gdata/blob/master/",
+      "inst/xls/ExampleExcelFile.xls?raw=true"
+      )
+   xls <- read.xls(xls.url)
    }
 
    \dontrun{
    ## read xls file ignoring all lines prior to first containing State
+   ## (This URL is no longer valid.)
    crime.url <- "http://www.jrsainfo.org/jabg/state_data2/Tribal_Data00.xls"
    crime <- read.xls(crime.url, pattern = "State")
 

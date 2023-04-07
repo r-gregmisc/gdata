@@ -33,7 +33,7 @@ my($row, $col, $sheet, $cell, $usage,
 );
 
 ##
-## Figure out whether I'm called as xls2csv.pl or xls2tab.pl
+## Use how I've been called to determine what separator to use 
 ##
 ($volume,$directories,$whoami) = File::Spec->splitpath( $0 );
 
