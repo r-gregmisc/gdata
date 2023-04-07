@@ -1,10 +1,11 @@
 ll <- function(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
-               invert=FALSE, standard="SI", ...)
+               invert=FALSE, ...)
 {
   get.object.class <- function(object.name, pos)
   {
     object <- get(object.name, pos=pos)
-    class(object)[1]
+    class <- class(object)[1]
+    return(class)
   }
 
   get.object.dim <- function(object.name, pos)
@@ -16,26 +17,26 @@ ll <- function(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
       dim <- paste(dim(object), collapse=" x ")
     else
       dim <- length(object)
-    dim
+    return(dim)
   }
 
   get.object.size <- function(object.name, pos)
   {
     object <- get(object.name, pos=pos)
     size <- try(unclass(object.size(object)), silent=TRUE)
-    if(class(size) == "try-error")
+    if(inherits(size,"try-error"))
       size <- 0
-    size
+    return(size)
   }
 
-  ## 1  Set original.rank
+  ## 1  Set unit, denominator, original.rank
+  unit <- match.arg(unit, c("bytes","KB","MB"))
+  denominator <- switch(unit, "KB"=1024, "MB"=1024^2, 1)
   original.rank <- NULL
 
   ## 2  Detect what 'pos' is like, then get class, size, dim
   if(is.character(pos))  # pos is an environment name
     pos <- match(pos, search())
-  if(isS4(pos))  # pos is an S4 object
-    pos <- sapply(slotNames(pos), slot, object=pos, simplify=FALSE)
   if(is.list(pos))  # pos is a list-like object
   {
     if(is.null(names(pos)))
@@ -62,27 +63,13 @@ ll <- function(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
   }
   else
   {
-    class.vector <- sapply(ls(pos,...),
-                           get.object.class, 
-                           pos=pos)
-    
-    size.vector <- sapply(ls(pos,...), 
-                          get.object.size, 
-                          pos=pos)
-    
-    row.names <- names(size.vector)
-    
-    size.vector <- humanReadable(size.vector, 
-                                 units=unit, 
-                                 standard=standard, 
-                                 digits=digits)
-    
+    class.vector <- sapply(ls(pos,...), get.object.class, pos=pos)
+    size.vector <- sapply(ls(pos,...), get.object.size, pos=pos)
+    size.vector <- round(size.vector/denominator, digits)
     object.frame <- data.frame(class.vector=class.vector,
                                size.vector=size.vector,
-                               row.names=row.names)
-    
+                               row.names=names(size.vector))
     names(object.frame) <- c("Class", unit)
-    
     if(dim)
       object.frame <- cbind(object.frame,
                             Dim=sapply(ls(pos,...),get.object.dim,pos=pos))
@@ -101,5 +88,5 @@ ll <- function(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
     object.frame <- object.frame[include,]
   }
 
-  object.frame
+  return(object.frame)
 }

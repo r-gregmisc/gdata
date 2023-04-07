@@ -1,9 +1,10 @@
 TOP=../..
 PKG=${shell cd ${TOP};pwd}
 SUITE=runRUnitTests.R
+R=R
 
 test: # Run unit tests
-	Rscript ${SUITE}
+	${R} --vanilla --slave < ${SUITE}
 
 all: inst test
 

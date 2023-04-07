@@ -32,17 +32,18 @@ sheetNames(xls, verbose = FALSE, perl = "perl")
    xlsfile
 
    sheetCount(xlsfile)
-   sheetNames(xlsfile) # no names, so numbers returned
 
-   exampleFile <- system.file('xls', 'ExampleExcelFile.xls', package="gdata")
+
+   exampleFile <- file.path(path.package('gdata'),'xls',
+                            'ExampleExcelFile.xls')
+   exampleFile2007 <- file.path(path.package('gdata'),'xls',
+                            'ExampleExcelFile.xlsx')
+
    sheetCount(exampleFile)
-   sheetNames(exampleFile)
 
    if( 'XLSX' \%in\% xlsFormats() )  # if XLSX is supported..
-   {
-     exampleFile2007 <- system.file('xls','ExampleExcelFile.xlsx', package="gdata")
-     print( sheetCount(exampleFile2007) )
-     print( sheetNames(exampleFile2007) )
-   }
+     sheetNames(exampleFile2007)
+
+
 }
 \keyword{ misc }

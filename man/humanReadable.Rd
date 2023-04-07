@@ -100,7 +100,7 @@ Wikipedia:
 \url{https://en.wikipedia.org/wiki/Binary_prefix}
 
 GNU manual for coreutils:
-\url{https://www.gnu.org/software/coreutils/manual/html_node/Block-size.html#Block-size}
+\url{http://www.gnu.org/software/coreutils/manual/html_node/Block-size.html#Block-size}
 
 }
 

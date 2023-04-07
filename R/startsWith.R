@@ -1,13 +1,14 @@
-startsWith <- function(x, prefix, trim=FALSE, ignore.case=FALSE)
+startsWith <- function(str, pattern, trim=FALSE, ignore.case=FALSE)
   {
-    if(trim) x <- trim(x)
+    if(trim) str <- trim(str)
 
     if(ignore.case)
-
       {
-        x <- toupper(x)
-        prefix <- toupper(prefix)
-      }
+        str <- toupper(str)
+        pattern <- toupper(pattern)
+    }
 
-    base::startsWith(x, prefix)
+    #substr(str,start=1,stop=nchar(pattern))==pattern
+
+    base::startsWith(str, pattern)
   }

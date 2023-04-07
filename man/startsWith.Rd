@@ -7,31 +7,31 @@
   Determine if a character string "starts with" with the specified characters.
 }
 \usage{
-startsWith(x, prefix, trim=FALSE, ignore.case=FALSE)
+startsWith(str, pattern, trim=FALSE, ignore.case=FALSE)
 }
 \arguments{
-  \item{x}{character vector to test}
-  \item{prefix}{characters to check for}
+  \item{str}{character vector to test}
+  \item{pattern}{characters to check for}
   \item{trim}{Logical flag indicating whether leading whitespace should
     be removed from \code{str} before testing for a match.}
   \item{ignore.case}{Logical flag indicating whether case should be
     ignored when testing for a match.}
 }
 \details{
-  This function returns TRUE for each element of the character vector \code{x}
-  where \code{prefix} occurs at the beginning of the string.  If
+  This function returns TRUE for each element of the vector \code{str}
+  where \code{pattern} occurs at the beginning of the string.  If
   \code{trim} is TRUE, leading whitespace is removed from the elements
-  of \code{x} before the test is performed. If \code{ignore.case} is
+  of \code{str} before the test is performed. If \code{ignore.case} is
   TRUE, character case is ignored.
 }
 \value{
-  Boolean vector of the same length as \code{x}.
+  Boolean vector of the same length as \code{str}.
 }
 \author{
   Gregory R. Warnes \email{greg@warnes.net}
 }
 \seealso{
-  \code{\link[base]{substr}}, \code{\link{trim}}, \code{\link[base]{startsWith}} 
+  \code{\link[base]{substr}},  \code{\link{trim}} 
 }
 \examples{
 ## simplest example:
