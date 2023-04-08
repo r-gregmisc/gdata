@@ -1,15 +1,1 @@
-^renv$
-^renv\.lock$
-^.*\.Rproj$
-clea^\.Rproj\.user$
-^README\.Rmd$
-^cran-comments\.md$
-^NEWS\.md$
-^\.travis\.yml$
-\.aux$
-\.tex$
-\.bbl$
-\.rds$
-^\.Rprofile$
-^\.RData$
-^revdep$
+README.md
