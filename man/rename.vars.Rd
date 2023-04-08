@@ -47,7 +47,7 @@ remove.vars(data, names="", info=TRUE)
   The updated data frame with variables listed in \code{from} renamed to
   the corresponding element of \code{to}.
 }
-\author{Code by Don MacQueen \email{macq\@llnl.gov}.
+\author{Code by Don MacQueen \email{macq@llnl.gov}.
   Documentation by Gregory R. Warnes
   \email{greg@warnes.net} }
 \seealso{ \code{\link{names}},

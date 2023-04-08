@@ -4,7 +4,7 @@ env <- function(unit="KB", digits=0)
   {
     object <- get(object.name, pos=pos)
     size <- try(unclass(object.size(object)), silent=TRUE)
-    if(class(size) == "try-error")
+    if(inherits(size, "try-error"))
       size <- 0
     size
   }
