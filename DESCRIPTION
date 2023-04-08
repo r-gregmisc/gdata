@@ -3,16 +3,18 @@ Version: 2.19.0
 Date: 2023-04-09
 Title: Various R Programming Tools for Data Manipulation
 Authors@R: c(person(c("Gregory", "R."), "Warnes", role="aut", email="greg@warnes.net"),
+             person("Gregor", "Gorjanc", role="aut"),
              person("Arni", "Magnusson", role=c("aut","cre"), email="thisisarni@gmail.com"),
-   person("Ben", "Bolker", role="ctb"),
-   person("Michael", "Chirico", role="ctb"),
-   person("Gregor", "Gorjanc", role="ctb"),
-   person("Gabor", "Grothendieck", role="ctb"),
-   person("Ales", "Korosec", role="ctb"),
-   person("Thomas", "Lumley", rol="ctb"),
-   person("Don", "MacQueen", role="ctb"),
-   person("Jim", "Rogers", role="ctb"),
-   person("inoui llc", role="fnd"))
+             person("Liviu", "Andronic", role="aut"),
+             person("Jim", "Rogers", role="aut"),
+             person("Don", "MacQueen", role="aut"),
+             person("Ales", "Korosec"),
+             person("Ben", "Bolker", role="ctb"),
+             person("Michael", "Chirico", role="ctb"),
+             person("Gabor", "Grothendieck", role="ctb"),
+             person("Ales", "Korosec", role="ctb"),
+             person("Thomas", "Lumley", rol="ctb"),
+             person("inoui llc", role="fnd"))
 Depends: R (>= 2.3.0)
 Imports: gtools, methods, stats, utils
 Suggests: RUnit
@@ -23,10 +25,10 @@ Description: Various R programming tools for data manipulation, including:
    - character vector operations ('centerText', 'startsWith', 'trim'),
    - factor manipulation ('levels', 'reorder.factor', 'mapLevels'),
    - obtaining information about R objects ('object.size', 'env',
-     'humanReadable', 'is.what', 'll', 'keep', 'ls.funs',
-     'Args','nPairs', 'nobs'),
-   - manipulating MS-Excel formatted files ('read.xls',
-     'installXLSXsupport', 'sheetCount', 'xlsFormats'),
+     'humanReadable', 'is.what', 'll', 'keep', 'ls.funs', 'Args', 'nPairs',
+     'nobs'),
+   - manipulating MS-Excel formatted files ('read.xls', 'installXLSXsupport',
+     'sheetCount', 'xlsFormats'),
    - generating fixed-width format files ('write.fwf'),
    - extricating components of date & time objects ('getYear', 'getMonth',
      'getDay', 'getHour', 'getMin', 'getSec'),
@@ -35,8 +37,8 @@ Description: Various R programming tools for data manipulation, including:
    - operations on vectors ('case', 'unknownToNA', 'duplicated2', 'trimSum'),
    - operations on data frames ('frameApply', 'wideByFactor'),
    - value of last evaluated expression ('ans'), and
-   - wrapper for 'sample' that ensures consistent behavior for both
-     scalar and vector arguments ('resample').
+   - wrapper for 'sample' that ensures consistent behavior for both scalar and
+     vector arguments ('resample').
 License: GPL-2
 URL: https://github.com/arni-magnusson/gdata
 BugReports: https://github.com/arni-magnusson/gdata/issues

@@ -40,7 +40,7 @@
   A data frame.
 }
 
-\author{Gregor Grojanc}
+\author{Gregor Gorjanc}
 
 \seealso{
   \code{\link[base]{merge}},
