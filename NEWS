@@ -21,7 +21,11 @@ Other changes:
 
 - Removed elem() - was deprecated in gregmisc/gdata 2.0.3 (2005-02-25).
 
-- Arni Magnusson takes over maintenance.
+- Deprecated installXLSXsupport(), read.xls(), sheetCount(), sheetNames(),
+  xls2csv(), xls2sep(), xls2tab(), xls2tsv(), and xlsFormats() - to be removed
+  in the near future.
+
+- Package maintainer is Arni Magnusson.
 
 Changes in 2.18.0.1 (2022-05-10)
 --------------------------------

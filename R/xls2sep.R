@@ -27,6 +27,8 @@ xls2sep <- function(xls,
                     perl = perl)
 {
   
+  .Deprecated(old="gdata support for Excel files",
+              new="other packages, such as openxlsx, readxl, XLConnect, or xlsx")
   method <- match.arg(method)
   
   perl <- if (missing(perl))

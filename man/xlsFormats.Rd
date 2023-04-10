@@ -23,6 +23,8 @@ xlsFormats(perl = "perl", verbose = FALSE)
 	\code{\link{read.xls}}, \code{\link{xls2csv}}.
 }
 \examples{
+   \dontrun{
    xlsFormats()
+   }
 }
 \keyword{ misc }

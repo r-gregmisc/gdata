@@ -1,6 +1,7 @@
 installXLSXsupport <- function(perl="perl", verbose=FALSE)
 {
-
+  .Deprecated(old="gdata support for Excel files",
+              new="other packages, such as openxlsx, readxl, XLConnect, or xlsx")
   if(verbose)
       message("Attempting to install Perl libraries to support XLSX (Excel 2007+) file format..")
 

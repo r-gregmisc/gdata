@@ -1,5 +1,7 @@
 xlsFormats <- function(perl="perl", verbose=FALSE)
 {
+  .Deprecated(old="gdata support for Excel files",
+              new="other packages, such as openxlsx, readxl, XLConnect, or xlsx")
   if(verbose)
     message("Determining supported formats..")
 

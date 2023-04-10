@@ -5,6 +5,7 @@ read.xls <- function(xls, sheet = 1, verbose=FALSE, pattern,
                      method=c("csv","tsv","tab"),
                      perl="perl")
 {
+  ## .Deprecated message will be shown from xls2sep() call below
   con <- tfn <- NULL
   on.exit({ 
 	err <- FALSE

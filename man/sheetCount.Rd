@@ -28,6 +28,7 @@ sheetNames(xls, verbose = FALSE, perl = "perl")
 	\code{\link{read.xls}}, \code{\link{xls2csv}}.
 }
 \examples{
+   \dontrun{
    xlsfile <- system.file("xls", "iris.xls", package = "gdata")
    xlsfile
 
@@ -43,6 +44,7 @@ sheetNames(xls, verbose = FALSE, perl = "perl")
      exampleFile2007 <- system.file('xls','ExampleExcelFile.xlsx', package="gdata")
      print( sheetCount(exampleFile2007) )
      print( sheetNames(exampleFile2007) )
+   }
    }
 }
 \keyword{ misc }

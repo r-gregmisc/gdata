@@ -1,5 +1,7 @@
 sheetCount <- function(xls, verbose = FALSE, perl = "perl") {
   
+  .Deprecated(old="gdata support for Excel files",
+              new="other packages, such as openxlsx, readxl, XLConnect, or xlsx")
   perl <- if (missing(perl)) 
     findPerl(verbose = verbose)
   else 
@@ -10,6 +12,8 @@ sheetCount <- function(xls, verbose = FALSE, perl = "perl") {
 
 sheetNames <- function(xls, verbose = FALSE, perl = "perl") {
   
+  .Deprecated(old="gdata support for Excel files",
+              new="other packages, such as openxlsx, readxl, XLConnect, or xlsx")
   perl <- if (missing(perl)) 
     findPerl(verbose = verbose)
   else
