@@ -144,7 +144,7 @@ test.cLevelsMap <- function()
   checkIdentical(c(mapCha, mapCha), mapChaTest3)
   checkIdentical(c(mapCha, recursive=TRUE), mapChaTest1)
 
-  checkException(c(mapLevels(f1))) # can not combine integer “levelsMaps”
+  checkException(c(mapLevels(f1))) # can not combine integer "levelsMaps"
 
   ## Example with maps of different length of components
   map1 <- list(A=c("a", "e", "i", "o", "u"), B="b", C="c", C="m",
