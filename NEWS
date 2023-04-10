@@ -1,12 +1,34 @@
-Changes in 2.18.1 (2020-03-27)
+Changes in 2.19.0 (2023-04-09)
 ------------------------------
+
+New functions:
+
+- Added update.data.frame() to replace rows of a data frame.
+
+New features:
+
+- Added argument 'add.col.nums' to left() and right().
 
 Other changes:
 
-- Removed elem() - was deprecated in 2005.
-
 - Improved ll() so it handles S4 objects. Also accepts unit="GB" (contributed by
   Michael Chirico) and unit="B", now case-insensitive.
+
+- Improved right() so it returns the rightmost columns of a matrix or data
+  frame.
+
+- Renamed first two arguments of startsWith() to 'x' and 'prefix'.
+
+- Removed elem() - was deprecated in gregmisc/gdata 2.0.3 (2005-02-25).
+
+- Arni Magnusson takes over maintenance.
+
+Changes in 2.18.0.1 (2022-05-10)
+--------------------------------
+
+Other changes:
+
+- Syntax improvements to pass CRAN checks, packaged by Brian Ripley.
 
 Changes in 2.18.0 (2017-06-05)
 ------------------------------
@@ -24,7 +46,7 @@ New features:
 
 - Add 'byrow' argument to lowerTriangle() and upperTriangle() functions.
 
-Other user-visible changes:
+Other changes:
 
 - humanReadable() now properly handles a single value for the argument 'justify'.
 
