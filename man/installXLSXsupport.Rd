@@ -59,6 +59,21 @@ installXLSXsupport(perl = "perl", verbose = FALSE)
   The function \code{xlsFormats} can be used to see whether XLS and XLSX
   formats are supported by the currently available perl modules.
   }
+\section{Warning}{
+  Excel file support is deprecated in \pkg{gdata} version 2.19.0, to be
+  removed in the near future. At the user level, the functions
+  \code{installXLSXsupport}, \code{read.xls}, \code{sheetCount},
+  \code{sheetNames}, \code{xls2csv}, \code{xls2sep}, \code{xls2tab},
+  \code{xls2tsv}, and \code{xlsFormats} now raise a warning about the
+  functionality being deprecated.
+
+  Excel file support was first introduced in \pkg{gregmisc/gdata} 1.11.0
+  back in 2004, but today we have packages such as \pkg{openxlsx},
+  \pkg{readxl}, \pkg{XLConnect}, and \pkg{xlsx} offering dedicated Excel
+  file support with more features. When Excel file support will be
+  removed from the \pkg{gdata} package, it will result in lighter
+  package maintenance and no more Perl warnings on the user side.
+}
 \seealso{
 	\code{\link{read.xls}}, \code{\link{xls2csv}}, \code{\link{xlsFormats}}
 }

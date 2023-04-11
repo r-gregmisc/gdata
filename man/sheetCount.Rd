@@ -23,7 +23,21 @@ sheetNames(xls, verbose = FALSE, perl = "perl")
   \code{sheetCount} returns the number of sheets in the spreadsheet.
   \code{sheetNames} returns the names of sheets  in the spreadsheet.
 }
+\section{Warning}{
+  Excel file support is deprecated in \pkg{gdata} version 2.19.0, to be
+  removed in the near future. At the user level, the functions
+  \code{installXLSXsupport}, \code{read.xls}, \code{sheetCount},
+  \code{sheetNames}, \code{xls2csv}, \code{xls2sep}, \code{xls2tab},
+  \code{xls2tsv}, and \code{xlsFormats} now raise a warning about the
+  functionality being deprecated.
 
+  Excel file support was first introduced in \pkg{gregmisc/gdata} 1.11.0
+  back in 2004, but today we have packages such as \pkg{openxlsx},
+  \pkg{readxl}, \pkg{XLConnect}, and \pkg{xlsx} offering dedicated Excel
+  file support with more features. When Excel file support will be
+  removed from the \pkg{gdata} package, it will result in lighter
+  package maintenance and no more Perl warnings on the user side.
+}
 \seealso{
 	\code{\link{read.xls}}, \code{\link{xls2csv}}.
 }
