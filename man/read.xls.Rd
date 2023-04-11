@@ -64,19 +64,19 @@ xls2sep(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, ...,
   search path, or the exact path of the perl executable must be provided
   via the \code{perl} argument.  See the examples below for an illustration.}
 \section{Warning}{
-  Excel file support is deprecated in \pkg{gdata} version 2.19.0, to be
+  Excel file support is deprecated in gdata version 2.19.0, to be
   removed in the near future. At the user level, the functions
   \code{installXLSXsupport}, \code{read.xls}, \code{sheetCount},
   \code{sheetNames}, \code{xls2csv}, \code{xls2sep}, \code{xls2tab},
   \code{xls2tsv}, and \code{xlsFormats} now raise a warning about the
   functionality being deprecated.
 
-  Excel file support was first introduced in \pkg{gregmisc/gdata} 1.11.0
-  back in 2004, but today we have packages such as \pkg{openxlsx},
-  \pkg{readxl}, \pkg{XLConnect}, and \pkg{xlsx} offering dedicated Excel
-  file support with more features. When Excel file support will be
-  removed from the \pkg{gdata} package, it will result in lighter
-  package maintenance and no more Perl warnings on the user side.
+  Excel file support was first introduced in gregmisc/gdata 1.11.0 back
+  in 2004, but today we have packages such as openxlsx, readxl,
+  XLConnect, and xlsx offering dedicated Excel file support with more
+  features. When Excel file support will be removed from the gdata
+  package, it will result in lighter package maintenance and no more
+  Perl warnings on the user side.
 }
 \seealso{ \code{\link[utils]{read.csv}} }
 \examples{
