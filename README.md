@@ -48,29 +48,14 @@ Development
 -----------
 
 The package is developed openly on
-[GitHub](https://github.com/arni-magnusson/gdata).
+[GitHub](https://github.com/r-gregmisc/gdata).
 
-Feel free to open an [issue](https://github.com/arni-magnusson/gdata/issues)
-there if you encounter problems or have suggestions for future versions.
+Feel free to open an [issue](https://github.com/r-gregmisc/gdata/issues) there
+if you encounter problems or have suggestions for future versions.
 
 The current development version can be installed using:
 
 ```R
 library(remotes)
-install_github("arni-magnusson/gdata")
+install_github("r-gregmisc/gdata")
 ```
-
-Authors
--------
-
-Gregory R. Warnes,
-Gregor Gorjanc,
-Arni Magnusson,
-Liviu Andronic,
-Jim Rogers,
-Don MacQueen, and
-Ales Korosec, with contributions by
-Ben Bolker,
-Michael Chirico,
-Gabor Grothendieck, and
-Thomas Lumley.

@@ -38,5 +38,5 @@ Description: Various R programming tools for data manipulation, including:
    - wrapper for sample that ensures consistent behavior for both scalar and
      vector arguments (resample).
 License: GPL-2
-URL: https://github.com/arni-magnusson/gdata
-BugReports: https://github.com/arni-magnusson/gdata/issues
+URL: https://github.com/r-gregmisc/gdata
+BugReports: https://github.com/r-gregmisc/gdata/issues
