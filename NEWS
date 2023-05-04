@@ -294,8 +294,8 @@ Bug fixes:
 - gdata::nobs.default() needs to handle logical vectors in addition to
   numeric vectors.
 
-Changes in 2.10.{3,4,5} (2012-06-08)
-------------------------------------
+Changes in 2.10.5 (2012-06-08)
+------------------------------
 
 Bug fixes:
 
@@ -310,7 +310,7 @@ Other Changes:
 
 
 Changes in 2.10.2 (2012-06-06)
----------------------------------------
+------------------------------
 
 Bug fixes:
 
@@ -370,7 +370,7 @@ Enhancements:
 
 - Minor improvements to xls2csv() man page.
 
-CHANGES IN 2.8.1 (2011-04-15)
+Changes in 2.8.1 (2011-04-15)
 -----------------------------
 
 Enhancements:
@@ -383,7 +383,7 @@ Bug fixes:
 - Fix errors on windows when R or Perl install path includes spaces by properly quoting the path.
 
 
-CHANGES IN 2.8.1 (2010-11-12)
+Changes in 2.8.1 (2010-11-12)
 -----------------------------
 
 Enhancements:
@@ -399,7 +399,7 @@ Bug fixes:
   on Windows network shares.
 
 
-CHANGES IN 2.8.0 (2010-04-03)
+Changes in 2.8.0 (2010-04-03)
 -----------------------------
 
 Enhancements:
@@ -421,7 +421,7 @@ Enhancements:
   'XLSX' files.
 
 
-CHANGES IN 2.7.3 (2010-04-02)
+Changes in 2.7.3 (2010-04-02)
 -----------------------------
 
 Enhancements:
@@ -440,7 +440,7 @@ Bug Fixes:
 
 - Also update Greg's email address.
 
-CHANGES IN 2.7.1 (2010-02-19)
+Changes in 2.7.1 (2010-02-19)
 -----------------------------
 
 Enhancements:
@@ -449,7 +449,7 @@ Enhancements:
   Rtools perl would have otherwise been used in read.xls and other perl
   dependent functions.
 
-CHANGES IN 2.7.0 (2010-01-25)
+Changes in 2.7.0 (2010-01-25)
 -----------------------------
 
 Bug Fixes:
@@ -457,7 +457,7 @@ Bug Fixes:
 - Fix building of Perl libraries on Win32
 
 
-CHANGES IN 2.7.0 (2010-01-25)
+Changes in 2.7.0 (2010-01-25)
 -----------------------------
 
 Enhancements:
@@ -483,7 +483,7 @@ Bug Fixes:
 
 - Resolve crash of "ll(.GlobalEnv)"
 
-CHANGES IN 2.6.1 (2009-07-15)
+Changes in 2.6.1 (2009-07-15)
 -----------------------------
 
 Bug Fixes
@@ -491,7 +491,7 @@ Bug Fixes
 - Modify unit tests to avoid issues related to time zones.
 
 
-CHANGES IN 2.6.0 (2009-07-15)
+Changes in 2.6.0 (2009-07-15)
 -----------------------------
 
 Bug Fixes
@@ -532,8 +532,8 @@ Other Changes
 - Correct Greg's email address
 
 
-CHANGES IN 2.5.0
-----------------
+Changes in 2.5.0 (2008-12-31)
+-----------------------------
 
 - New function .runRUnitTestsGdata that enables run of all RUnit tests during
   the R CMD check as well as directly from within R.
@@ -561,7 +561,7 @@ CHANGES IN 2.5.0
 - write.fwf gains the width argument. The value for unknown can increase or
   decrease the width of the columns. Additional tests and documentation fixes.
 
-CHANGES IN 2.4.2 (2008-05-11)
+Changes in 2.4.2 (2008-05-11)
 -----------------------------
 
 - Enhancements and bug fixes for read.xls() and xls2csv():
@@ -581,7 +581,7 @@ CHANGES IN 2.4.2 (2008-05-11)
        Robert Burns for pointing out the patch
        (http://rt.cpan.org/Public/Bug/Display.html?id=7206)
 
-CHANGES IN 2.4.1 (2008-03-24)
+Changes in 2.4.1 (2008-03-24)
 -----------------------------
 
 - Update perl libraries needed by xls2csv() and read.xls()
@@ -594,7 +594,7 @@ CHANGES IN 2.4.1 (2008-03-24)
 
 - Fix typo in win32 example for read.xls()
 
-CHANGES IN 2.4.0 (2008-01-30)
+Changes in 2.4.0 (2008-01-30)
 -----------------------------
 
 - The keep() function now includes an 'all' argument to specify how
@@ -629,7 +629,7 @@ CHANGES IN 2.4.0 (2008-01-30)
 
 - Implementation of unit tests for most functions.
 
-CHANGES IN 2.3.1 (2006-10-29)
+Changes in 2.3.1 (2006-10-29)
 -----------------------------
 
 - Arguments as well as their position of reorder.factor have been changed
@@ -647,8 +647,8 @@ CHANGES IN 2.3.1 (2006-10-29)
 
 - Added write.fwf, which writes file in *F*ixed *W*idth *F*ormat.
 
-CHANGES FROM 2.1.X to 2.3.0 (2006-09-19)
----------------------------------------
+Changes in 2.3.0 (2006-09-19)
+-----------------------------
 
 - Added mapLevels(), which produces a map with information on levels and/or
   internal integer codes.  Contributed by Gregor Gorjanc.
@@ -669,8 +669,8 @@ CHANGES FROM 2.1.X to 2.3.0 (2006-09-19)
 
 - Updated my email address.
 
-CHANGES IN GDATA 2.1.2
------------------------
+Changes in 2.1.2 (2012-10-29)
+-----------------------------
 
  - Fixed bug in interleave.R - option to covert 1-column matrices to
    vector (based on Andrew Burgess's suggestion)
@@ -696,8 +696,8 @@ CHANGES IN GDATA 2.1.2
 -  Updated the example in frameApply
 
 
-CHANGES IN GDATA 2.0.8
------------------------
+Changes in 2.0.8 (2005-06-02)
+-----------------------------
 
  - Added DESCRIPTION and removed DESCRIPTION.in
 
