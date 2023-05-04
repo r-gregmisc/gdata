@@ -33,12 +33,18 @@ Other changes:
 
 - Package maintainer is Arni Magnusson.
 
+
+
+
 Changes in 2.18.0.1 (2022-05-10)
 --------------------------------
 
 Other changes:
 
 - Syntax improvements to pass CRAN checks, packaged by Brian Ripley.
+
+
+
 
 Changes in 2.18.0 (2017-06-05)
 ------------------------------
@@ -58,13 +64,17 @@ New features:
 
 Other changes:
 
-- humanReadable() now properly handles a single value for the argument 'justify'.
+- humanReadable() now properly handles a single value for the argument
+  'justify'.
 
 - Improve logging and error reporting for remove.vars().
 
 - read.xls() now handles latin-1 files properly on MS Windows.
 
 - write.fwf() now properly handles matrix arguments.
+
+
+
 
 Changes in 2.17.0 (2015-07-02)
 ------------------------------
@@ -84,6 +94,8 @@ Other changes:
   formatted files.
 
 
+
+
 Changes in 2.16.1 (2015-04-28)
 -----------------------------
 
@@ -98,6 +110,8 @@ Other changes:
 
 - first() and last() are now simply wrappers for calls to 'head(x, n=1)' and
   'tail(x, n=1)', respectively.
+
+
 
 
 Changes in 2.16.0 (2015-04-25)
@@ -158,6 +172,8 @@ Other changes:
   has now been completely removed.
 
 
+
+
 Changes in 2.14.0 (2014-08-27)
 ------------------------------
 
@@ -177,6 +193,8 @@ Other changes:
   Spreadsheet::ParseXLSX.
 
 
+
+
 Changes in 2.13.3 (2014-04-04)
 ------------------------------
 
@@ -193,6 +211,9 @@ Other Changes:
 
 - Minor changes to clean up R CMD check warnings.
 
+
+
+
 Changes in 2.13.2 (2013-06-28)
 ------------------------------
 
@@ -203,6 +224,9 @@ Enhancements:
 
 - Working of deprecation warning message in aggregate.table clarified.
 
+
+
+
 Changes in 2.13.1 (2013-03-24)
 ------------------------------
 
@@ -210,6 +234,8 @@ Enhancements:
 
 - Replaced calls to depreciated function ".path.package" with the new
   public function "path.package".
+
+
 
 
 Changes in 2.13.0 (2012-09-20)
@@ -237,6 +263,8 @@ Bug Fixes:
   reversed and misspelled.
 
 
+
+
 Changes in 2.12.0 (2012-09-12)
 ------------------------------
 
@@ -253,6 +281,9 @@ Other Changes:
    is depreciated and recommending the equivalent call to tapply. It
    will be removed entirely in a future version of gdata.
 
+
+
+
 Changes in 2.11.1 (2012-08-22)
 ------------------------------
 
@@ -266,6 +297,8 @@ Bug Fixes:
 - The perl script utilized by read.xls() was incorrectly appending a
   space character at the end of each line, causing problems with
   character and NA entries in the final column.
+
+
 
 
 Changes in 2.11.0 (2012-06-18)
@@ -286,6 +319,8 @@ Other Changes:
   gdata to function fully.
 
 
+
+
 Changes in 2.10.6 (2012-06-12)
 ------------------------------
 
@@ -293,6 +328,9 @@ Bug fixes:
 
 - gdata::nobs.default() needs to handle logical vectors in addition to
   numeric vectors.
+
+
+
 
 Changes in 2.10.5 (2012-06-08)
 ------------------------------
@@ -309,12 +347,16 @@ Other Changes:
 - Add dependency on R 2.13.0, since that is when stats::nobs appeared.
 
 
+
+
 Changes in 2.10.2 (2012-06-06)
 ------------------------------
 
 Bug fixes:
 
 - Fix issues in nobs.default identified in testing with the gmodels package.
+
+
 
 
 Changes in 2.10.1 (2012-06-06)
@@ -325,6 +367,8 @@ Bug fixes:
 - Undo removal of 'nobs' and 'nobs.lm'.  Instead define aliases for
   'nobs' and 'nobs.lm' to support backward compatibility for packages
   depending on gdata.
+
+
 
 
 Changes in 2.10.0 (2012-06-05)
@@ -338,21 +382,20 @@ New features:
 - New startsWith() function to determine if a string "starts with" the
   specified characters.
 
-
 Enhancements:
 
 - Add 'na.strings' argument to read.xls() to convert Excel's '#DIV/0!' to NA.
-
 
 Bug fixes:
 
 - Correct various R CMD check warnings
 
-
 Other changes:
 
 - Base S3 method for nobs() and nobs.lm() method removed since these
   are now provided in the stats package.
+
+
 
 
 Changes in 2.9.0 (2011-09-30)
@@ -370,6 +413,9 @@ Enhancements:
 
 - Minor improvements to xls2csv() man page.
 
+
+
+
 Changes in 2.8.1 (2011-04-15)
 -----------------------------
 
@@ -380,7 +426,10 @@ Enhancements:
 
 Bug fixes:
 
-- Fix errors on windows when R or Perl install path includes spaces by properly quoting the path.
+- Fix errors on windows when R or Perl install path includes spaces by properly
+  quoting the path.
+
+
 
 
 Changes in 2.8.1 (2010-11-12)
@@ -397,6 +446,8 @@ Bug fixes:
 
 - Modify xls2sep.R to avoid use of file.access() which is unreliable
   on Windows network shares.
+
+
 
 
 Changes in 2.8.0 (2010-04-03)
@@ -421,6 +472,8 @@ Enhancements:
   'XLSX' files.
 
 
+
+
 Changes in 2.7.3 (2010-04-02)
 -----------------------------
 
@@ -435,10 +488,13 @@ Bug Fixes:
   Spreadsheet::XLSX at build/compile time.  This should resolve recent
   build issues, particularly on Windows.
 
-- All perl code can now operate (but generate warnings) when perl modules Compress::Raw::Zlib and
-  Spreadsheet::XLSX when are not installed.
+- All perl code can now operate (but generate warnings) when perl modules
+  Compress::Raw::Zlib and Spreadsheet::XLSX when are not installed.
 
 - Also update Greg's email address.
+
+
+
 
 Changes in 2.7.1 (2010-02-19)
 -----------------------------
@@ -449,12 +505,17 @@ Enhancements:
   Rtools perl would have otherwise been used in read.xls and other perl
   dependent functions.
 
+
+
+
 Changes in 2.7.0 (2010-01-25)
 -----------------------------
 
 Bug Fixes:
 
 - Fix building of Perl libraries on Win32
+
+
 
 
 Changes in 2.7.0 (2010-01-25)
@@ -470,8 +531,6 @@ Enhancements:
 
 - Improved ll() so user can limit output to specified classes
 
-
-
 New Functions:
 
 - sheetCount() and sheetNames() to determine the number and names of
@@ -483,12 +542,17 @@ Bug Fixes:
 
 - Resolve crash of "ll(.GlobalEnv)"
 
+
+
+
 Changes in 2.6.1 (2009-07-15)
 -----------------------------
 
 Bug Fixes
 
 - Modify unit tests to avoid issues related to time zones.
+
+
 
 
 Changes in 2.6.0 (2009-07-15)
@@ -532,18 +596,21 @@ Other Changes
 - Correct Greg's email address
 
 
+
+
 Changes in 2.5.0 (2008-12-31)
 -----------------------------
 
 - New function .runRUnitTestsGdata that enables run of all RUnit tests during
   the R CMD check as well as directly from within R.
 
-- Enhanced function object.size that returns the size of multiple objects. There
-  is also a handy print method that can print size of an object in "human readable"
-  format when options(humanReadable=TRUE) or print(x, humanReadable=TRUE).
+- Enhanced function object.size that returns the size of multiple objects.
+  There is also a handy print method that can print size of an object in
+  "human readable" format when options(humanReadable=TRUE) or
+  print(x, humanReadable=TRUE).
 
-- New function bindData that binds two data frames into a multivariate data frame
-  in a different way than merge.
+- New function bindData that binds two data frames into a multivariate data
+  frame in a different way than merge.
 
 - New function wideByFactor that reshapes given dataset by a given factor -
   it creates a "multivariate" data.frame.
@@ -560,6 +627,9 @@ Changes in 2.5.0 (2008-12-31)
 
 - write.fwf gains the width argument. The value for unknown can increase or
   decrease the width of the columns. Additional tests and documentation fixes.
+
+
+
 
 Changes in 2.4.2 (2008-05-11)
 -----------------------------
@@ -581,6 +651,9 @@ Changes in 2.4.2 (2008-05-11)
        Robert Burns for pointing out the patch
        (http://rt.cpan.org/Public/Bug/Display.html?id=7206)
 
+
+
+
 Changes in 2.4.1 (2008-03-24)
 -----------------------------
 
@@ -593,6 +666,9 @@ Changes in 2.4.1 (2008-03-24)
   & properly formatted iris data set. Fixed.
 
 - Fix typo in win32 example for read.xls()
+
+
+
 
 Changes in 2.4.0 (2008-01-30)
 -----------------------------
@@ -629,6 +705,9 @@ Changes in 2.4.0 (2008-01-30)
 
 - Implementation of unit tests for most functions.
 
+
+
+
 Changes in 2.3.1 (2006-10-29)
 -----------------------------
 
@@ -646,6 +725,9 @@ Changes in 2.3.1 (2006-10-29)
 - Added c() method for factors based on mapLevels() functions.
 
 - Added write.fwf, which writes file in *F*ixed *W*idth *F*ormat.
+
+
+
 
 Changes in 2.3.0 (2006-09-19)
 -----------------------------
@@ -668,6 +750,9 @@ Changes in 2.3.0 (2006-09-19)
   differently in this case.
 
 - Updated my email address.
+
+
+
 
 Changes in 2.1.2 (2012-10-29)
 -----------------------------
@@ -694,6 +779,8 @@ Changes in 2.1.2 (2012-10-29)
 -  DESCRIPTION: Added Suggests field
 
 -  Updated the example in frameApply
+
+
 
 
 Changes in 2.0.8 (2005-06-02)
