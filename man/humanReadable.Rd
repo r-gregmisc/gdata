@@ -99,8 +99,9 @@ Wikipedia:
 \url{https://en.wikipedia.org/wiki/SI_prefix}
 \url{https://en.wikipedia.org/wiki/Binary_prefix}
 
-GNU manual for coreutils:
-\url{https://www.gnu.org/software/coreutils/manual/html_node/Block-size.html#Block-size}
+% [Great reference, but as of 6 May 2023 the link is dead]
+% GNU manual for coreutils:
+% \url{https://www.gnu.org/software/coreutils/manual/html_node/Block-size.html#Block-size}
 
 }
 
