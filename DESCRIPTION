@@ -12,31 +12,21 @@ Authors@R: c(person(c("Gregory", "R."), "Warnes", role="aut", email="greg@warnes
              person("Ben", "Bolker", role="ctb"),
              person("Michael", "Chirico", role="ctb"),
              person("Gabor", "Grothendieck", role="ctb"),
-             person("Thomas", "Lumley", rol="ctb"),
+             person("Thomas", "Lumley", role="ctb"),
+             person("Brian", "Ripley", role="ctb"),
              person("inoui llc", role="fnd"))
 Depends: R (>= 2.3.0)
 Imports: gtools, methods, stats, utils
 Suggests: RUnit
 SystemRequirements: perl (>= 5.10.0)
-Description: Various R programming tools for data manipulation, including:
-   - medical unit conversions (ConvertMedUnits, MedUnits),
-   - combining objects (bindData, cbindX, combine, interleave),
-   - character vector operations (centerText, startsWith, trim),
-   - factor manipulation (levels, reorder.factor, mapLevels),
-   - obtaining information about R objects (object.size, env, humanReadable,
-     is.what, ll, keep, ls.funs, Args, nPairs, nobs),
-   - manipulating MS-Excel formatted files (read.xls, installXLSXsupport,
-     sheetCount, xlsFormats),
-   - generating fixed-width format files (write.fwf),
-   - extricating components of date & time objects (getYear, getMonth, getDay,
-     getHour, getMin, getSec),
-   - operations on columns of data frames  (matchcols, rename.vars),
-   - matrix operations (unmatrix, upperTriangle, lowerTriangle),
-   - operations on vectors (case, unknownToNA, duplicated2, trimSum),
-   - operations on data frames (frameApply, wideByFactor),
-   - value of last evaluated expression (ans), and
-   - wrapper for sample that ensures consistent behavior for both scalar and
-     vector arguments (resample).
+Description: Various R programming tools for data manipulation, including
+  medical unit conversions, combining objects, character vector operations,
+  factor manipulation, obtaining information about R objects, manipulating
+  MS-Excel formatted files, generating fixed-width format files, extracting
+  components of date & time objects, operations on columns of data frames,
+  matrix operations, operations on vectors, operations on data frames, value of
+  last evaluated expression, and a resample() wrapper for sample() that ensures
+  consistent behavior for both scalar and vector arguments.
 License: GPL-2
 URL: https://github.com/r-gregmisc/gdata
 BugReports: https://github.com/r-gregmisc/gdata/issues
