@@ -1,6 +1,6 @@
 Package: gdata
 Version: 2.19.0
-Date: 2023-05-05
+Date: 2023-05-06
 Title: Various R Programming Tools for Data Manipulation
 Authors@R: c(person(c("Gregory", "R."), "Warnes", role="aut", email="greg@warnes.net"),
              person("Gregor", "Gorjanc", role="aut"),
