@@ -2,10 +2,11 @@
 \alias{reorder.factor}
 \title{Reorder the Levels of a Factor}
 \description{
-  Reorder the levels of a factor
+  Reorder the levels of a factor.
 }
 \usage{
-\method{reorder}{factor}(x, X, FUN, ..., order=is.ordered(x), new.order, sort=mixedsort)
+\method{reorder}{factor}(x, X, FUN, ..., order=is.ordered(x), new.order,
+        sort=mixedsort)
 }
 \arguments{
   \item{x}{factor}
@@ -46,44 +47,39 @@
   rules for the numeric sections. See \code{\link[gtools]{mixedsort}}
   for details.
 }
-\value{ A new factor with reordered levels }
-
+\value{A new factor with reordered levels}
 \author{Gregory R. Warnes \email{greg@warnes.net}}
-
 \seealso{
   \code{\link{factor}}
   and
   \code{\link[stats]{reorder}}
 }
-
 \examples{
-
 \dontshow{
     set.seed(123456)
 }
+# Create a 4 level example factor
+trt <- factor(sample( c("PLACEBO", "300 MG", "600 MG", "1200 MG"),
+              100, replace=TRUE))
+summary(trt)
+# Note that the levels are not in a meaningful order.
 
-   # Create a 4 level example factor
-   trt <- factor( sample( c("PLACEBO", "300 MG", "600 MG", "1200 MG"),
-                  100, replace=TRUE ) )
-   summary(trt)
-   # Note that the levels are not in a meaningful order.
+# Change the order to something useful..
+# - default "mixedsort" ordering
+trt2 <- reorder(trt)
+summary(trt2)
+# - using indexes:
+trt3 <- reorder(trt, new.order=c(4, 2, 3, 1))
+summary(trt3)
+# - using label names:
+trt4 <- reorder(trt, new.order=c("PLACEBO", "300 MG", "600 MG", "1200 MG"))
+summary(trt4)
+# - using frequency
+trt5 <- reorder(trt, X=rnorm(100), FUN=mean)
+summary(trt5)
 
-   # Change the order to something useful..
-   # - default "mixedsort" ordering
-   trt2 <- reorder(trt)
-   summary(trt2)
-   # - using indexes:
-   trt3 <- reorder(trt, new.order=c(4, 2, 3, 1))
-   summary(trt3)
-   # - using label names:
-   trt4 <- reorder(trt, new.order=c("PLACEBO", "300 MG", "600 MG", "1200 MG"))
-   summary(trt4)
-   # - using frequency
-   trt5 <- reorder(trt, X=rnorm(100), FUN=mean)
-   summary(trt5)
-
-   # Drop out the '300 MG' level
-   trt6 <- reorder(trt, new.order=c("PLACEBO", "600 MG", "1200 MG"))
-   summary(trt6)
+# Drop out the '300 MG' level
+trt6 <- reorder(trt, new.order=c("PLACEBO", "600 MG", "1200 MG"))
+summary(trt6)
 }
 \keyword{ manip }

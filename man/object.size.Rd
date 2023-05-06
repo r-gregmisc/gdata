@@ -1,4 +1,4 @@
-% Come material taken from src/library/utils/man/object.size.Rd
+% Some material taken from src/library/utils/man/object.size.Rd
 % Part of the R package, http://www.R-project.org
 % Copyright 1995-2007 R Core Development Team
 % Distributed under GPL 2 or later
@@ -10,7 +10,6 @@
 \alias{is.object_sizes}
 \alias{format.object_sizes}
 \alias{print.object_sizes}
-
 \title{Report the Space Allocated for Objects}
 \description{
   Provides an estimate of the memory that is being used to store \R objects.
@@ -24,14 +23,13 @@ object.size(\dots)
 
 \method{c}{object_sizes}(\dots, recursive=FALSE)
 
-\method{format}{object_sizes}(x, humanReadable=getOption("humanReadable"), standard="IEC", units,
-       digits=1, width=NULL, sep=" ", justify = c("right", "left"),
-\dots)
+\method{format}{object_sizes}(x, humanReadable=getOption("humanReadable"),
+       standard="IEC", units, digits=1, width=NULL, sep=" ",
+       justify = c("right", "left"), \dots)
 
-\method{print}{object_sizes}(x, quote=FALSE, humanReadable=getOption("humanReadable"),
-      standard="IEC", units, digits=1, width=NULL, sep=" ",
-      justify = c("right", "left"), \dots)
-
+\method{print}{object_sizes}(x, quote=FALSE,
+      humanReadable=getOption("humanReadable"), standard="IEC", units, digits=1,
+      width=NULL, sep=" ", justify = c("right", "left"), \dots)
 }
 \arguments{
   \item{\dots}{\code{object.size}: \R objects;
@@ -44,13 +42,13 @@ object.size(\dots)
   \item{humanReadable}{logical, use the \dQuote{human readable} format.}
   \item{standard,units,digits,width,sep,justify}{See the man page for
     \code{\link{humanReadable}}.
-   }
-   \item{recursive}{See the man page for \code{\link[base]{c}}. }
+  }
+  \item{recursive}{See the man page for \code{\link[base]{c}}. }
 }
 \details{
 
   \emph{This is a modified copy of the man page for utils::object.size in R
-     2.2.1.}
+    2.2.1.}
 
   Exactly which parts of the memory allocation should be attributed
   to which object is not clear-cut.  This function merely provides a
@@ -71,7 +69,6 @@ object.size(\dots)
   will very likely be the same on different platforms with the same
   word length and pointer size.
 
-  % Modificitaion start
   \emph{Changes}
 
   Class of returned object is \code{c("object_sizes", "numeric")} with
@@ -82,9 +79,6 @@ object.size(\dots)
   commands can be displayed by calling \code{humanReadable} directly,
   calling \code{print} with the argument \code{humanReadable=TRUE}, or
   by setting \code{options(humanReadable=TRUE)}.
-
-  % Modificitaion end
-
 }
 \value{
   A numeric vector class \code{c("object_sizes", "numeric")} containing
@@ -100,29 +94,28 @@ object.size(\dots)
 \examples{
 object.size(letters)
 object.size(ls)
-## find the 10 largest objects in the base package
+# Find the 10 largest objects in the base package
 allObj <- sapply(ls("package:base"),
             function(x)
                 object.size(get(x, envir = baseenv()))
             )
 
-( bigObj <- as.object_sizes(rev(sort(allObj))[1:10] ) )
+(bigObj <- as.object_sizes(rev(sort(allObj))[1:10]))
 print(bigObj, humanReadable=TRUE)
-
 
 as.object_sizes(14567567)
 
 \dontshow{
-    optionsOrig <- options("humanReadable")
+  optionsOrig <- options("humanReadable")
 }
 
 options(humanReadable=TRUE)
 (
-    z <- object.size(letters,
-                     c(letters, letters),
-                     rep(letters, 100),
-                     rep(letters, 10000)
-                     )
+  z <- object.size(letters,
+                   c(letters, letters),
+                   rep(letters, 100),
+                   rep(letters, 10000)
+                   )
 )
 is.object_sizes(z)
 as.object_sizes(14567567)
@@ -130,6 +123,5 @@ as.object_sizes(14567567)
 \dontshow{
     options(optionsOrig)
 }
-
 }
 \keyword{utilities}

@@ -1,21 +1,14 @@
 \name{humanReadable}
-
 \alias{humanReadable}
-
 \title{Print Byte Size in Human Readable Format}
-
 \description{
-
-\code{humanReadable} converts integer byte sizes to a human readable units such as
-kB, MB, GB, etc.
-
+  Convert integer byte sizes to a human readable units such as
+  kB, MB, GB, etc.
 }
-
 \usage{
 humanReadable(x, units="auto", standard=c("IEC", "SI", "Unix"),
               digits=1, width=NULL, sep=" ", justify=c("right", "left") )
 }
-
 \arguments{
   \item{x}{integer, byte size}
   \item{standard}{character, "IEC" for powers of 1024 ('MiB'), "SI" for
@@ -31,17 +24,16 @@ humanReadable(x, units="auto", standard=c("IEC", "SI", "Unix"),
     and unit components of the size.  Each element should be one of
     "none", "left", "right", or "center"}
 }
-
 \details{
-
-The basic unit used to store information in computers is a bit. Bits are
-represented as zeroes and ones - binary number system. Although, the binary
-number system is not the same as the decimal number system, decimal prefixes
-for binary multiples such as kilo and mega are often used. In the decimal system
-kilo represent 1000, which is close to \eqn{1024 = 2^{10}} in the binary system.
-This sometimes causes problems as it is not clear which powers (2 or 10) are used
-in a notation like 1 kB. To overcome this problem International Electrotechnical
-Commission (IEC) has provided the following solution to this problem:
+  The basic unit used to store information in computers is a bit. Bits are
+  represented as zeroes and ones - binary number system. Although, the binary
+  number system is not the same as the decimal number system, decimal prefixes
+  for binary multiples such as kilo and mega are often used. In the decimal
+  system kilo represent 1000, which is close to \eqn{1024 = 2^{10}} in the
+  binary system. This sometimes causes problems as it is not clear which powers
+  (2 or 10) are used in a notation like 1 kB. To overcome this problem
+  International Electrotechnical Commission (IEC) has provided the following
+  solution to this problem:
 
 \tabular{lrcll}{
 Name      \tab System  \tab Symbol \tab Size             \tab Conversion    \cr
@@ -89,41 +81,28 @@ For printout both \code{digits} and \code{width} can be specified. If
 \code{width} is not \code{NULL}, output is rounded to a given width and
 formated similar to human readable format of the Unix \code{ls},
 \code{df} or \code{du} shell commands.
-
 }
-
 \references{
-
 Wikipedia:
 \url{https://en.wikipedia.org/wiki/Byte}
 \url{https://en.wikipedia.org/wiki/SI_prefix}
 \url{https://en.wikipedia.org/wiki/Binary_prefix}
 
-% [Great reference, but as of 6 May 2023 the link is dead]
-% GNU manual for coreutils:
-% \url{https://www.gnu.org/software/coreutils/manual/html_node/Block-size.html#Block-size}
-
+GNU manual for coreutils:
+\url{https://www.gnu.org/software/coreutils/manual/html_node/Block-size.html}
 }
-
 \value{
-
-Byte size in human readable format as character with proper unit symbols
-added at the end of the string.
-
+  Byte size in human readable format as character with proper unit symbols
+  added at the end of the string.
 }
-
 \author{Ales Korosec, Gregor Gorjanc, and Gregory R. Warnes
   \email{greg@warnes.net}}
-
-
 \seealso{
   \code{\link{object.size}} in package 'gdata',
   \code{\link[utils]{object.size}} in package 'utils',
   \code{\link[gdata]{ll}}
 }
-
 \examples{
-
 # Simple example: maximum addressible size of 32 bit pointer
 humanReadable(2^32-1)
 humanReadable(2^32-1, standard="IEC")
@@ -145,10 +124,5 @@ matrix(humanReadable(c(60810, 124141, 124, 13412513), width=NULL, digits=2))
 # Change the justification
 matrix(humanReadable(c(60810, 124141, 124, 13412513), width=NULL,
                     justify=c("right", "right") ))
-
 }
-
 \keyword{misc}
-
-%--------------------------------------------------------------------------
-% humanReadable.Rd ends here

@@ -5,9 +5,9 @@
 \alias{last<-}
 \title{Return first or last element of an object}
 \description{
-  Return first or last element of an object.  These functions are convenience
+  Return first or last element of an object. These functions are convenience
   wrappers for \code{head(x, n=1, ...)} and \code{tail(x, n=1, ...)}.
-  }
+}
 \usage{
 first(x, n=1, ...)
 last(x, n=1, ...)
@@ -17,11 +17,12 @@ last(x, n=1, ...) <- value
 \arguments{
   \item{x}{data object}
   \item{n}{a single integer. If positive, size for the resulting object:
-          number of elements for a vector (including lists), rows for a
-          matrix or data frame or lines for a function. If negative,
-          all but the 'n' last/first number of elements of 'x'.}
+    number of elements for a vector (including lists), rows for a
+    matrix or data frame or lines for a function. If negative,
+    all but the 'n' last/first number of elements of 'x'.}
    \item{...}{arguments to be passed to or from other methods.}
-   \item{value}{a vector of values to be assigned (should be of length \code{n})}
+   \item{value}{a vector of values to be assigned
+     (should be of length \code{n})}
 }
 \value{
   An object (usually) like 'x' but generally smaller.
@@ -36,7 +37,7 @@ last(x, n=1, ...) <- value
   \code{\link{right}}
 }
 \examples{
-## works for vectors..
+## Vector
 v <- 1:10
 first(v)
 last(v)
@@ -47,16 +48,16 @@ v
 last(v) <- 20
 v
 
-## and for lists
+## List
 l <- list(a=1, b=2, c=3)
 first(l)
 last(l)
 
 first(l) <- "apple"
-last(l)  <- "bannana"
+last(l)  <- "banana"
 l
 
-## and data.frames
+## Data frame
 df <- data.frame(a=1:2, b=3:4, c=5:6)
 first(df)
 last(df)
@@ -65,7 +66,7 @@ first(df) <- factor(c("red","green"))
 last(df) <- list(c(20,30)) # note the enclosing list!
 df
 
-## and matrixes
+## Matrix
 m <- as.matrix(df)
 first(m)
 last(m)
@@ -74,4 +75,4 @@ first(m) <- "z"
 last(m)  <- "q"
 m
 }
-\keyword{ manip }
+\keyword{manip}

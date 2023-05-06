@@ -14,9 +14,7 @@ trim(s, recode.factor=TRUE, \dots)
   \item{\dots}{arguments passed to other methods, currently only to
     \code{\link{reorder.factor}} for factors}
 }
-
 \details{
-
 \code{trim} is a generic function, where default method does nothing,
 while method for character \code{s} trims its elements and method for
 factor \code{s} trims \code{\link{levels}}. There are also methods for
@@ -27,16 +25,16 @@ For factors, this can affect the coding of levels. By default, factor
 levels are recoded to match the trimmed sort order, but this can be
 disabled by setting \code{recode.factor=FALSE}. Recoding is done with
 \code{\link{reorder.factor}}.
-
 }
 \value{
   \code{s} with all leading and trailing spaces removed in its elements.
 }
 \author{Gregory R. Warnes \email{greg@warnes.net}  with
-  contributions by Gregor Gorjanc}
-\seealso{ \code{\link[base]{trimws}}, \code{\link[base]{sub}},\code{\link[base]{gsub}}
-as well as argument \code{strip.white} in \code{\link{read.table}} and
-  \code{\link{reorder.factor}}
+  contributions by Gregor Gorjanc
+}
+\seealso{\code{\link[base]{trimws}}, \code{\link[base]{sub}},
+  \code{\link[base]{gsub}} as well as argument \code{strip.white} in
+  \code{\link{read.table}} and \code{\link{reorder.factor}}
 }
 \examples{
 s <- "    this is an example string    "

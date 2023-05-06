@@ -3,18 +3,18 @@
 \alias{sheetCount}
 \alias{sheetNames}
 \title{
-Count or list sheet names in Excel spreadsheet files.
+  Count or list sheet names in Excel spreadsheet files.
 }
 \description{
-Count or list sheet names in Excel spreadsheet files.
+  Count or list sheet names in Excel spreadsheet files.
 }
 \usage{
 sheetCount(xls, verbose = FALSE, perl = "perl")
 sheetNames(xls, verbose = FALSE, perl = "perl")
 }
 \arguments{
-  \item{xls}{File path to spreadsheet.  Supports "http://",
-    "https://", and "ftp://" URLS.}
+  \item{xls}{File path to spreadsheet. Supports "http://",
+    "https://", and "ftp://" URLs.}
   \item{verbose}{If \code{TRUE}, show additional messages during
     processing.}
   \item{perl}{Path to perl interpreter.}
@@ -39,26 +39,26 @@ sheetNames(xls, verbose = FALSE, perl = "perl")
   Perl warnings on the user side.
 }
 \seealso{
-	\code{\link{read.xls}}, \code{\link{xls2csv}}.
+  \code{\link{read.xls}}, \code{\link{xls2csv}}.
 }
 \examples{
-   \dontrun{
-   xlsfile <- system.file("xls", "iris.xls", package = "gdata")
-   xlsfile
+\dontrun{
+xlsfile <- system.file("xls", "iris.xls", package = "gdata")
+xlsfile
 
-   sheetCount(xlsfile)
-   sheetNames(xlsfile) # no names, so numbers returned
+sheetCount(xlsfile)
+sheetNames(xlsfile)  # no names, so numbers returned
 
-   exampleFile <- system.file('xls', 'ExampleExcelFile.xls', package="gdata")
-   sheetCount(exampleFile)
-   sheetNames(exampleFile)
+exampleFile <- system.file('xls', 'ExampleExcelFile.xls', package="gdata")
+sheetCount(exampleFile)
+sheetNames(exampleFile)
 
-   if( 'XLSX' \%in\% xlsFormats() )  # if XLSX is supported..
-   {
-     exampleFile2007 <- system.file('xls','ExampleExcelFile.xlsx', package="gdata")
-     print( sheetCount(exampleFile2007) )
-     print( sheetNames(exampleFile2007) )
-   }
-   }
+if('XLSX' \%in\% xlsFormats())  # if XLSX is supported..
+{
+  exampleFile2007 <- system.file('xls','ExampleExcelFile.xlsx', package="gdata")
+  print(sheetCount(exampleFile2007))
+  print(sheetNames(exampleFile2007))
+}
+}
 }
 \keyword{ misc }

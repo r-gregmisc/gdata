@@ -31,17 +31,17 @@ startsWith(x, prefix, trim=FALSE, ignore.case=FALSE)
   Gregory R. Warnes \email{greg@warnes.net}
 }
 \seealso{
-  \code{\link[base]{substr}}, \code{\link{trim}}, \code{\link[base]{startsWith}} 
+  \code{\link[base]{substr}}, \code{\link{trim}}, \code{\link[base]{startsWith}}
 }
 \examples{
-## simplest example:
-startsWith( 'Testing', 'Test')
+## Simple example
+startsWith('Testing', 'Test')
 
-## vector examples
+## Vector examples
 s <- c('Testing', ' Testing', 'testing', 'Texting')
 names(s) <- s
 
-startsWith(s, 'Test')                   # ' Testing', 'testing', and 'Texting' do not match
+startsWith(s, 'Test')        # ' Testing', 'testing', and 'Texting' do not match
 startsWith(s, 'Test', trim=TRUE)        # Now ' Testing' matches
 startsWith(s, 'Test', ignore.case=TRUE) # Now 'testing' matches
 }

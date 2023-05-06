@@ -1,42 +1,12 @@
-% $Id$
-%
-% $Log$
-% Revision 1.7  2005/09/12 15:42:45  nj7w
-% Updated Greg's email
-%
-% Revision 1.6  2005/06/09 14:20:25  nj7w
-% Updating the version number, and various help files to synchronize splitting of gregmisc bundle in 4 individual components.
-%
-% Revision 1.1.1.1  2005/05/25 22:07:33  nj7w
-% Initial entry for individual package gdata
-%
-% Revision 1.5  2002/09/23 13:59:30  warnes
-% - Modified all files to include CVS Id and Log tags.
-%
-% Revision 1.4  2002/03/26 19:29:15  warneg
-%
-% Updated to add ... parameter to function calls.
-%
-% Revision 1.3  2002/02/20 21:31:08  warneg
-%
-% Noted that specialized methods exist.
-%
-% Revision 1.2  2002/02/20 21:29:34  warneg
-%
-% Incorrectly had contents of nobs.R here instead of help text.  Corrected.
-%
-%
-
 \name{nobs}
-\alias{nobs} % Now provided by stats
+\alias{nobs}  % Now provided by stats
 \alias{nobs.data.frame}
-\alias{nobs.default} 
-\alias{nobs.lm} % Now provided by stats
-%- Also NEED an `\alias' for EACH other topic documented here.
-\title{ Compute the Number of Non-missing Observations }
+\alias{nobs.default}
+\alias{nobs.lm}  % Now provided by stats
+\title{Compute the Number of Non-missing Observations}
 \description{
- Compute the number of non-missing observations. Provides a 'default'
- method to handle vectors, and a method for data frames.
+  Compute the number of non-missing observations. Provides a 'default'
+  method to handle vectors, and a method for data frames.
 }
 \usage{
 nobs(object, ...)
@@ -45,17 +15,17 @@ nobs(object, ...)
 \method{nobs}{lm}(object, ...)
 }
 \arguments{
-  \item{object}{ Target Object }
-  \item{\dots}{ Optional parameters (currently ignored)}
+  \item{object}{Target Object}
+  \item{\dots}{Optional parameters (currently ignored)}
 }
 \details{
   Calculate the number of observations in \code{object}.
 
   \itemize{
-    \item{For numeric vectors, this is simply the number of non-NA elements, as computed by
-      \code{sum(!is.na(object))}. }
+    \item{For numeric vectors, this is simply the number of non-NA
+      elements, as computed by \code{sum(!is.na(object))}.}
     \item{For dataframe objects, the result is a vector containing the
-      number of non-NA elementes of each column. }
+      number of non-NA elementes of each column.}
   }
 
   The \code{nobs} and \code{nobs.lm} functions defined in gtools are
@@ -81,11 +51,8 @@ nobs(object, ...)
   vectors and hands any other data/object types to
   \code{stats:::nobs.default}.
 }
-
-\author{ Gregory R. Warnes \email{greg@warnes.net}  }
-
-\seealso{ \code{\link{is.na}}, \code{\link{length}} }
-
+\author{Gregory R. Warnes \email{greg@warnes.net}}
+\seealso{\code{\link{is.na}}, \code{\link{length}}}
 \examples{
 x <- c(1,2,3,5,NA,6,7,1,NA )
 length(x)
