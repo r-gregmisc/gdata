@@ -1,14 +1,8 @@
-### cbindX.R
-###------------------------------------------------------------------------
-### What: Column-bind objects with different number of rows - code
-### $Id$
-### Time-stamp: <2008-08-05 13:39:14 ggorjan>
-###------------------------------------------------------------------------
+## Column-bind objects with different number of rows
 
 cbindX <- function(...)
 {
-  ## --- Setup ---
-
+  ## Setup
   x <- list(...)
 
   ## Are all objects matrices or data.frames?
@@ -20,9 +14,8 @@ cbindX <- function(...)
   maxi <- which.max(tmp)
   test <- tmp < tmp[maxi]
 
-  ## --- Core ---
-
-  ## Adding additional "empty" rows so that all objects have the same number of rows
+  ## Core
+  ## Adding additional 'empty' rows so all objects have same number of rows
   for(i in 1:length(tmp)) {
     if(test[i]) {
       add <- matrix(nrow=tmp[maxi] - tmp[i], ncol=ncol(x[[i]]))
@@ -40,9 +33,6 @@ cbindX <- function(...)
     ret <- cbind(ret, x[[i]])
   }
 
-  ## --- Return ---
+  ## Return
   ret
 }
-
-###------------------------------------------------------------------------
-### cbindX.R ends here

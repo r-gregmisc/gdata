@@ -1,39 +1,19 @@
-### write.fwf.R
-###------------------------------------------------------------------------
-### What: Write fixed width format - code
-### $Id$
-### Time-stamp: <2008-08-05 12:11:27 ggorjan>
-###------------------------------------------------------------------------
-
-write.fwf <- function(x,
-                      file="",
-                      append=FALSE,
-                      quote=FALSE,
-                      sep=" ",
-                      na="",
-                      rownames=FALSE,
-                      colnames=TRUE,
-                      rowCol=NULL,
-                      justify="left",
-                      formatInfo=FALSE,
-                      quoteInfo=TRUE,
-                      width=NULL,
-                      eol="\n",
-                      qmethod=c("escape", "double"),
-                      scientific=TRUE,
-                      ...)
+write.fwf <- function(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
+                      rownames=FALSE, colnames=TRUE, rowCol=NULL,
+                      justify="left", formatInfo=FALSE, quoteInfo=TRUE,
+                      width=NULL, eol="\n", qmethod=c("escape", "double"),
+                      scientific=TRUE, ...)
 {
-  ## --- Setup ---
-
+  ## Setup
   dapply <- function(x, FUN, ..., simplify=TRUE)
-      {
-          if(is.data.frame(x))
-              return(sapply(x, FUN, ..., simplify=simplify))
-          else if(is.matrix(x))
-              return(apply(x, 2, FUN, ...))
-          else
-              stop("x must be a data.frame or a matrix")
-      }
+  {
+    if(is.data.frame(x))
+      return(sapply(x, FUN, ..., simplify=simplify))
+    else if(is.matrix(x))
+      return(apply(x, 2, FUN, ...))
+    else
+      stop("x must be a data.frame or a matrix")
+  }
 
   if(!(is.data.frame(x) || is.matrix(x)))
     stop("'x' must be a data.frame or matrix")
@@ -41,12 +21,11 @@ write.fwf <- function(x,
     stop("only single value can be defined for 'na'")
 
   if(!scientific)
-      {
-          option.scipen <- getOption("scipen")
-          on.exit( function() options("scipen"=option.scipen) )
-          options("scipen"=100)
-      }
-
+  {
+    option.scipen <- getOption("scipen")
+    on.exit( function() options("scipen"=option.scipen) )
+    options("scipen"=100)
+  }
 
   if(rownames) {
     x <- as.data.frame(x)
@@ -56,7 +35,7 @@ write.fwf <- function(x,
   }
   colnamesMy <- colnames(x)
   if(length(colnamesMy)==0)
-      colnamesMy <- paste( "V", 1:ncol(x), sep="")
+    colnamesMy <- paste("V", 1:ncol(x), sep="")
 
   nRow <- nrow(x)
   nCol <- length(colnamesMy)
@@ -69,8 +48,7 @@ write.fwf <- function(x,
     width[] <- widthOld
   }
 
-  ## --- Format info ---
-
+  ## Format info
   retFormat <- data.frame(colname=colnamesMy,
                           nlevels=0,
                           position=0,
@@ -85,16 +63,16 @@ write.fwf <- function(x,
   isNum <- isNum & !(dapply(x, inherits, what="Date") |
                      dapply(x, inherits, what="POSIXt"))
 
-  ## Which columns are factors --> convert them to character
+  ## Which columns are factors -> convert them to character
   isFac <- dapply(x, is.factor)
   if(any(isFac))
-      ## This conditional is necessary because if x is a matrix, even if
-      ## all(isFAC==FALSE), this assignment will coerce it to mode
-      ## character.  This isn't a problem for dataframes.
-      x[, isFac] <- sapply(x[, isFac, drop=FALSE], as.character)
+    ## This conditional is necessary because if x is a matrix, even if
+    ## all(isFAC==FALSE), this assignment will coerce it to mode
+    ## character.  This isn't a problem for dataframes.
+    x[, isFac] <- sapply(x[, isFac, drop=FALSE], as.character)
 
   ## Collect information about how format() will format columns.
-  ## We need to get this info now, since format will turn all columns to character
+  ## We need this info since format will turn all columns to character
   tmp <- dapply(x, format.info, ..., simplify=FALSE)
   if(is.matrix(x)) tmp <- as.data.frame(tmp)
   tmp1 <- sapply(tmp, length)
@@ -108,14 +86,13 @@ write.fwf <- function(x,
       retFormat[test, c("digits", "exp")] <- tmp[test, c(2, 3)]
       ## Numeric columns with scientific notation
       test2 <- tmp[test, 3] > 0
-      if(any(test2)) ## adding +1; see ?format.info
+      if(any(test2))  # adding +1; see ?format.info
         retFormat[test, ][test2, "exp"] <- retFormat[test, ][test2, "exp"] + 1
     }
   }
 
-  ## --- Format ---
-
-  ## store original object in 'y'
+  ## Format
+  ## Store original object in 'y'
   y <- x
 
   ## Formatting (to character)
@@ -131,7 +108,8 @@ write.fwf <- function(x,
     ## NA should not increase the width of column with width 1, while wider
     ## value for 'na' should increase the width
     test <- is.na(y[, i])
-    ## Make a copy to make sure we get character after first format() - Date class caused problems
+    ## Make a copy to make sure we get character after first format()
+    ## Date class caused problems
     x2 <- character(length=nRow)
     ## Add formatted values
     x2[!test] <- format(y[!test, i], justify=justify, width=tmp, ...)
@@ -174,37 +152,20 @@ write.fwf <- function(x,
     }
   }
 
-  ## --- Write ---
-
+  ## Write
   if(colnames) {
     if(rownames && is.null(rowCol)) colnamesMy <- colnamesMy[-1]
-    write.table(t(as.matrix(colnamesMy)),
-                file=file,
-                append=append,
-                quote=quote,
-                sep=sep,
-                eol=eol,
-                na=na,
-                row.names=FALSE,
-                col.names=FALSE,
+    write.table(t(as.matrix(colnamesMy)), file=file, append=append, quote=quote,
+                sep=sep, eol=eol, na=na, row.names=FALSE, col.names=FALSE,
                 qmethod=qmethod)
- }
+  }
 
-  write.table(x=x,
-              file=file,
-              append=(colnames || append),
-              quote=quote,
-              sep=sep,
-              eol=eol,
-              na=na,
-              row.names=FALSE,
-              col.names=FALSE,
-              qmethod=qmethod)
+  write.table(x=x, file=file, append=(colnames || append), quote=quote, sep=sep,
+              eol=eol, na=na, row.names=FALSE, col.names=FALSE, qmethod=qmethod)
 
-  ## --- Return format and fixed width information ---
-
+  ## Return format and fixed width information
   if(formatInfo) {
-    ## be carefull with these ifelse constructs
+    ## Be careful with these ifelse constructs
     retFormat$position[1] <- ifelse(quote, ifelse(quoteInfo, 1, 2), 1)
     if(ifelse(quote, quoteInfo, FALSE)) retFormat$width <- retFormat$width + 2
     N <- nrow(retFormat)
@@ -212,7 +173,7 @@ write.fwf <- function(x,
       for(i in 2:N) {
         retFormat$position[i] <- retFormat$position[i - 1] +
           retFormat$width[i - 1] + nchar(x=sep, type="chars") +
-            ifelse(quote, ifelse(quoteInfo, 0, 1), 0)
+          ifelse(quote, ifelse(quoteInfo, 0, 1), 0)
       }
     }
     if(rownames && is.null(rowCol)) {
@@ -222,6 +183,3 @@ write.fwf <- function(x,
     return(retFormat)
   }
 }
-
-###------------------------------------------------------------------------
-### write.fwf.R ends here

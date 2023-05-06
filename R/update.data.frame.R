@@ -1,28 +1,29 @@
-# This function replace rows in 'object' by corresponding rows in 'new' the have 
-# the same value for 'by'
-update.data.frame <- function(object, new, by, by.x=by, by.y=by, append=TRUE, verbose=FALSE, ...)
+# This function replaces rows in 'object' by corresponding rows in 'new' that
+# have the same value for 'by'
+update.data.frame <- function(object, new, by, by.x=by, by.y=by, append=TRUE,
+                              verbose=FALSE, ...)
 {
   x <- object
   y <- new
-  
+
   retval <- x
   x.by <- x[[by.x]]
   y.by <- y[[by.y]]
-  
+
   matches.x <- match(y.by, x.by)
   matches.y <- which(!is.na(matches.x))
   nomatch.y <- which(is.na(matches.x))
   matches.x <- matches.x[!is.na(matches.x)]
-  
+
   if(length(matches.x)>0)
     retval[matches.x, ] <- y[matches.y,]
-  
-  if(length(nomatch.y) && append)  
+
+  if(length(nomatch.y) && append)
     retval <- rbind(retval, y[nomatch.y,])
-  
+
   if(verbose)
   {
-    cat("\n")    
+    cat("\n")
     cat("Number of rows in x     :", nrow(x),           "\n")
     cat("Number of rows in y     :", nrow(y),           "\n")
     cat("\n")

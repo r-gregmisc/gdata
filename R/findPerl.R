@@ -1,17 +1,14 @@
-## s$Id: read.xls.R 1342 2009-07-16 02:49:11Z warnes $
-
-## findPerl attempts to locate a valid perl executable.  If the 'perl' argument is missing, 
-
+## findPerl attempts to locate a valid perl executable
 
 findPerl <- function(perl, verbose = "FALSE")
 {
+  errorMsg <- c("perl executable not found; ",
+                "use perl= argument to specify the correct path")
 
-  errorMsg <- "perl executable not found. Use perl= argument to specify the correct path."
-      
   if (missing(perl))
-    {
-      perl = "perl"
-    }
+  {
+    perl = "perl"
+  }
 
   perl = Sys.which(perl)
   if (perl=="" || perl=="perl")
@@ -24,11 +21,10 @@ findPerl <- function(perl, verbose = "FALSE")
         perl <- sub('^perl="([^"]*)".*', "\\1", perl.ftype)
       }
     }
-      }
-  
-  if (verbose) cat("Using perl at", perl, "\n")
-  
+  }
+
+  if (verbose)
+    cat("Using perl at", perl, "\n")
+
   perl
 }
-
-
