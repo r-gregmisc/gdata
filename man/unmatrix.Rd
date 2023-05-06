@@ -16,8 +16,8 @@ unmatrix(x, byrow=FALSE)
 }
 \value{
   A vector with names constructed from the row and column names from the
-  matrix. If the the row or column names are missing, ('r1', 'r2', ..,) or
-  ('c1', 'c2', ..) will be used as appropriate.
+  matrix. If the the row or column names are missing, ('r1', 'r2', \ldots,) or
+  ('c1', 'c2', \ldots) will be used as appropriate.
 }
 \author{Gregory R. Warnes \email{greg@warnes.net} }
 \seealso{ \code{\link[base]{as.vector}} }

@@ -3,11 +3,11 @@
 \title{Map elements of a vector according to the provided 'cases'}
 \description{
   Map elements of a vector according to the provided 'cases'.  This
-  function is useful for mapping discrete values to factor labels and 
+  function is useful for mapping discrete values to factor labels and
   is the vector equivalent to the \code{switch} function.
 }
 \usage{
-case(x, ..., default = NA)
+case(x, \dots, default = NA)
 }
 \arguments{
   \item{x}{Vector to be converted}
@@ -27,11 +27,9 @@ case(x, ..., default = NA)
 \seealso{\code{factor}, \code{switch}, \code{ifelse}}
 \examples{
 ## default = NA
-case( c(1,1,4,3), "a"=1, "b"=2, "c"=3)
+case(c(1,1,4,3), "a"=1, "b"=2, "c"=3)
 
 ## default = "foo"
-case( c(1,1,4,3), "a"=1, "b"=2, "c"=3, default="foo" )
-
-
+case(c(1,1,4,3), "a"=1, "b"=2, "c"=3, default="foo")
 }
 \keyword{ manip }

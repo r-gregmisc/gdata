@@ -4,7 +4,7 @@
 \description{Apply a function to row subsets of a data frame.}
 \usage{
 frameApply(x, by=NULL, on=by[1], fun=function(xi) c(Count=nrow(xi)),
-           subset=TRUE, simplify=TRUE, byvar.sep="\\\\$\\\\@\\\\$", ...)
+           subset=TRUE, simplify=TRUE, byvar.sep="\\\\$\\\\@\\\\$", \dots)
 }
 \arguments{
   \item{x}{a data frame}
@@ -38,7 +38,7 @@ frameApply(x, by=NULL, on=by[1], fun=function(xi) c(Count=nrow(xi)),
     \code{by} variables will be pasted together using this as the
     separator, and the result will be used as the index to form the
     subgroups.  }
-  \item{...}{additional arguments to \code{fun}.}
+  \item{\dots}{additional arguments to \code{fun}.}
 }
 \value{a data frame if \code{simplify = TRUE} (the default), assuming
   there is sufficiently structured output from \code{fun}. If
@@ -69,13 +69,11 @@ frameApply(ELISA, on = c("Signal", "Concentration"), by = c("PlateDay", "Read"),
            fun = function(dat) coef(lm(Signal ~ Concentration, data = dat)))
 
 frameApply(ELISA, on = "Signal", by = "Concentration",
-           fun = function(dat, ...) {
-                    x <- dat[[1]]
-                    out <- c(Mean = mean(x, ...),
-                             SD = sd(x, ...),
-                             N = sum(!is.na(x)))
-                  },
-           na.rm = TRUE,
+           fun = function(dat) {
+             x <- dat[[1]]
+             out <- c(Mean = mean(x, na.rm=TRUE),
+                      SD = sd(x, na.rm=TRUE),
+                      N = sum(x, na.rm=TRUE))},
            subset = !is.na(Concentration))
 }
 \author{Jim Rogers \email{james.a.rogers@pfizer.com}}

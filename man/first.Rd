@@ -6,13 +6,13 @@
 \title{Return first or last element of an object}
 \description{
   Return first or last element of an object. These functions are convenience
-  wrappers for \code{head(x, n=1, ...)} and \code{tail(x, n=1, ...)}.
+  wrappers for \code{head(x, n=1, \dots)} and \code{tail(x, n=1, \dots)}.
 }
 \usage{
-first(x, n=1, ...)
-last(x, n=1, ...)
-first(x, n=1, ...) <- value
-last(x, n=1, ...) <- value
+first(x, n=1, \dots)
+last(x, n=1, \dots)
+first(x, n=1, \dots) <- value
+last(x, n=1, \dots) <- value
 }
 \arguments{
   \item{x}{data object}
@@ -20,7 +20,7 @@ last(x, n=1, ...) <- value
     number of elements for a vector (including lists), rows for a
     matrix or data frame or lines for a function. If negative,
     all but the 'n' last/first number of elements of 'x'.}
-   \item{...}{arguments to be passed to or from other methods.}
+   \item{\dots}{arguments to be passed to or from other methods.}
    \item{value}{a vector of values to be assigned
      (should be of length \code{n})}
 }

@@ -8,11 +8,11 @@
 \description{Read a Microsoft Excel file into a data frame}
 \usage{
 read.xls(xls, sheet=1, verbose=FALSE, pattern, na.strings=c("NA","#DIV/0!"),
-         ..., method=c("csv","tsv","tab"), perl="perl")
-xls2csv(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, ..., perl="perl")
-xls2tab(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, ..., perl="perl")
-xls2tsv(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, ..., perl="perl")
-xls2sep(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, ...,
+         \dots, method=c("csv","tsv","tab"), perl="perl")
+xls2csv(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, \dots, perl="perl")
+xls2tab(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, \dots, perl="perl")
+xls2tsv(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, \dots, perl="perl")
+xls2sep(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, \dots,
         method=c("csv","tsv","tab"), perl="perl")
 }
 \arguments{
@@ -21,7 +21,7 @@ xls2sep(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, ...,
   \item{sheet}{name or number of the worksheet to read}
   \item{verbose}{logical flag indicating whether details should be
     printed as the file is processed.}
-  \item{pattern}{if specified, them skip all lines before the first 
+  \item{pattern}{if specified, them skip all lines before the first
     containing this string}
   \item{perl}{name of the perl executable to be called.}
   \item{method}{intermediate file format, "csv" for comma-separated and
@@ -31,13 +31,13 @@ xls2sep(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, ...,
 	  details.}
   \item{blank.lines.skip}{logical flag indicating whether blank lines in
     the orginal file should be ignored.}
-  \item{...}{additional arguments to read.table. The defaults for
+  \item{\dots}{additional arguments to read.table. The defaults for
     read.csv() are used.}
 }
 \value{
   \code{"read.xls"} returns a data frame.
 
-  \code{"xls2sep"} returns a temporary file in the specified format.  
+  \code{"xls2sep"} returns a temporary file in the specified format.
   \code{"xls2csv"} and \code{"xls2tab"} are simply wrappers for
   \code{"xls2sep"} specifying method as "csv" or "tab", respectively.
 }
@@ -51,16 +51,16 @@ xls2sep(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, ...,
   \code{read.table} since the first character of all lines (including
   comment lines) will be "\"" after conversion.
 
-  If you have quotes in your data which confuse the process you may wish to use 
-  \code{read.xls(..., quote = '')}.  This will cause the quotes to be regarded
-  as data and you will have to then handle the quotes yourself after reading 
+  If you have quotes in your data which confuse the process you may wish to use
+  \code{read.xls(\dots, quote = '')}.  This will cause the quotes to be regarded
+  as data and you will have to then handle the quotes yourself after reading
   the file in.
 
-  Caution: If you call \code{"xls2csv"} directly, is your responsibility 
+  Caution: If you call \code{"xls2csv"} directly, is your responsibility
   to close and delete the file after using it.
 }
-%\references{http://www.analytics.washington.edu/statcomp/downloads/xls2csv}
-\note{ Either a working version of Perl must be present in the executable
+\note{
+  Either a working version of Perl must be present in the executable
   search path, or the exact path of the perl executable must be provided
   via the \code{perl} argument.  See the examples below for an illustration.}
 \section{Warning}{
@@ -78,7 +78,7 @@ xls2sep(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, ...,
   package, it will result in lighter package maintenance and no more
   Perl warnings on the user side.
 }
-\seealso{ \code{\link[utils]{read.csv}} }
+\seealso{\code{\link[utils]{read.csv}}}
 \examples{
    \dontrun{
    # iris.xls is included in the gregmisc package for use as an example
@@ -98,16 +98,16 @@ xls2sep(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, ...,
    ## Example specifying exact Perl path for Unix systems
    iris <- read.xls(xlsfile, perl="/usr/bin/perl")
 
-   ## finding perl 
+   ## finding perl
    ## (read.xls automatically calls findPerl so this is rarely needed)
    perl <- gdata:::findPerl("perl")
    iris <- read.xls(xlsfile, perl=perl)
 
    ## read example xls file from github
    xls.url <- paste0(
-      "https://github.com/r-gregmisc/gdata/blob/master/",
-      "inst/xls/ExampleExcelFile.xls?raw=true"
-      )
+     "https://github.com/r-gregmisc/gdata/blob/master/",
+     "inst/xls/ExampleExcelFile.xls?raw=true"
+   )
    xls <- read.xls(xls.url)
 
    ## read xls file ignoring all lines prior to first containing State
@@ -117,7 +117,7 @@ xls2sep(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, ...,
 
    ## use of xls2csv - open con, print two lines, close con
    con <- xls2csv(crime.url)
-   print(readLines(con, 2)) 
+   print(readLines(con, 2))
    file.remove(summary(con)$description)
 
    ## Examples demonstrating selection of specific 'sheets'
@@ -129,21 +129,21 @@ xls2sep(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, ...,
 
    ## see the number and names of sheets:
    sheetCount(exampleFile)
-   if( 'XLSX' \%in\% xlsFormats() )  ## if XLSX is supported..
+   if( 'XLSX' \%in\% xlsFormats() )  ## if XLSX is supported
      sheetCount(exampleFile2007)
 
 
    ## show names of shets in the file
    sheetNames(exampleFile)
-   if( 'XLSX' \%in\% xlsFormats() )  ## if XLSX is supported..
+   if( 'XLSX' \%in\% xlsFormats() )  ## if XLSX is supported
    sheetNames(exampleFile2007)
 
    data <- read.xls(exampleFile)          ## default is first worksheet
    data <- read.xls(exampleFile, sheet=2) ## second worksheet by number
    data <- read.xls(exampleFile, sheet="Sheet Second",v=TRUE) ## and by name
 
-   ## load the third worksheet, skipping the first two non-data lines...
-   if( 'XLSX' \%in\% xlsFormats() )  ## if XLSX is supported..
+   ## load the third worksheet, skipping the first two non-data lines
+   if( 'XLSX' \%in\% xlsFormats() )  ## if XLSX is supported
      data <- read.xls(exampleFile2007, sheet="Sheet with initial text", skip=2)
 
    ## load a file containing data and column names using latin-1

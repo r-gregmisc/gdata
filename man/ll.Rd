@@ -8,7 +8,7 @@
 }
 \usage{
 ll(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
-   invert=FALSE, ...)
+   invert=FALSE, \dots)
 }
 \arguments{
   \item{pos}{environment position number, environment name, data frame,
@@ -23,7 +23,7 @@ ll(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
     classes.}
   \item{invert}{whether to invert the \code{class} filter, so specified
     classes are excluded.}
-  \item{...}{passed to \code{ls}.}
+  \item{\dots}{passed to \code{ls}.}
 }
 \value{
   A data frame with named rows and the following columns:

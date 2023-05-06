@@ -12,9 +12,9 @@
  for 'by'.
  }
 \usage{
-\method{update}{list}(object, new, unnamed=FALSE, ...)
+\method{update}{list}(object, new, unnamed=FALSE, \dots)
 \method{update}{data.frame}(object, new, by, by.x=by, by.y=by,
-       append=TRUE, verbose=FALSE, ...)
+       append=TRUE, verbose=FALSE, \dots)
 }
 \arguments{
   \item{object}{List or data frame to be updated.}
@@ -26,7 +26,7 @@
   \item{append}{Logical. If \code{TRUE}, items in \code{new} with no match
     in \code{object} will be appended to the data frame.}
   \item{verbose}{Logical. If \code{TRUE} progress messages will be displayed.}
-  \item{...}{optional method arguments (ignored).}
+  \item{\dots}{optional method arguments (ignored).}
 }
 \note{
   These methods can be called directly or as via the S3 base method for

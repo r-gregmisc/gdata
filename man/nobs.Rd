@@ -9,10 +9,10 @@
   method to handle vectors, and a method for data frames.
 }
 \usage{
-nobs(object, ...)
-\method{nobs}{default}(object, ...)
-\method{nobs}{data.frame}(object, ...)
-\method{nobs}{lm}(object, ...)
+nobs(object, \dots)
+\method{nobs}{default}(object, \dots)
+\method{nobs}{data.frame}(object, \dots)
+\method{nobs}{lm}(object, \dots)
 }
 \arguments{
   \item{object}{Target Object}

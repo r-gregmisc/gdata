@@ -7,7 +7,7 @@
   elements (rows) are duplicates.
 }
 \usage{
-duplicated2(x, bothWays=TRUE, ...)
+duplicated2(x, bothWays=TRUE, \dots)
 }
 \arguments{
   \item{x}{a vector or a data frame or an array or \code{NULL}.}
@@ -22,17 +22,17 @@ duplicated2(x, bothWays=TRUE, ...)
   only returns \code{TRUE} for the second and following copies of each
   duplicated value (second-to-last and earlier when
   \code{fromLast=TRUE}).  This function returns all duplicated
-  elementes, including the first (last) value.
+  elements, including the first (last) value.
 
   When \code{bothWays} is \code{FALSE}, \code{duplicated2()} defaults to
   a \code{\link{duplicated}} call. When \code{bothWays} is \code{TRUE},
   the following call is being executed:
-  \code{duplicated(x, ...) | duplicated(x, fromLast=TRUE, ...)}
+  \code{duplicated(x, \dots) | duplicated(x, fromLast=TRUE, \dots)}
 }
 \value{
     For a vector input, a logical vector of the same length as
-    \code{x}.  For a data frame, a logical vector with one element for
-    each row.  For a matrix or array, and when \code{MARGIN = 0}, a
+    \code{x}. For a data frame, a logical vector with one element for
+    each row. For a matrix or array, and when \code{MARGIN = 0}, a
     logical array with the same dimensions and dimnames.
 
     For more details see \code{\link{duplicated}}.

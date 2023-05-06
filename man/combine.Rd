@@ -7,7 +7,7 @@
   \code{source} indicating the source object.
 }
 \usage{
-combine(..., names=NULL)
+combine(\dots, names=NULL)
 }
 \arguments{
   \item{\dots}{vectors or matrices to combine.}
@@ -37,8 +37,8 @@ combine(..., names=NULL)
 \author{Gregory R. Warnes \email{greg@warnes.net}}
 \seealso{ \code{\link{rbind}}, \code{\link{merge}}}
 \examples{
-a  <-  matrix(rnorm(12),ncol=4,nrow=3)
-b  <-  1:4
+a <- matrix(rnorm(12),ncol=4,nrow=3)
+b <- 1:4
 combine(a,b)
 
 combine(x=a,b)

@@ -6,7 +6,7 @@
   specified environment.
 }
 \usage{
-ls.funs(...)
+ls.funs(\dots)
 }
 \arguments{
   \item{\dots}{Arguments passed to \code{ls}. See the help for

@@ -10,14 +10,14 @@
   Return the leftmost or rightmost or  columns of a matrix or data frame
 }
 \usage{
-right(x, n = 6L, ...)
-left(x, n=6L, ...)
+right(x, n = 6L, \dots)
+left(x, n=6L, \dots)
 
-\method{right}{matrix}(x, n=6L, add.col.nums=TRUE, ...)
-\method{left}{matrix}(x, n=6L, add.col.nums=TRUE, ...)
+\method{right}{matrix}(x, n=6L, add.col.nums=TRUE, \dots)
+\method{left}{matrix}(x, n=6L, add.col.nums=TRUE, \dots)
 
-\method{right}{data.frame}(x, n=6L, add.col.nums=TRUE, ...)
-\method{left}{data.frame}(x, n=6L, add.col.nums=TRUE, ...)
+\method{right}{data.frame}(x, n=6L, add.col.nums=TRUE, \dots)
+\method{left}{data.frame}(x, n=6L, add.col.nums=TRUE, \dots)
 }
 \arguments{
   \item{x}{Matrix or data frame}
@@ -60,7 +60,7 @@ colnames(right(m))
 left(m, add.col.nums = FALSE)
 colnames(left(m, add.col.nums = FALSE))
 
-right(m, add.col.nums = FALSE)            # columns are labeled 1:6 ..
+right(m, add.col.nums = FALSE)            # columns are labeled 1:6
 colnames(right(m, add.col.nums = FALSE))  #   instead of 5:10
 
 # Works for data frames too!

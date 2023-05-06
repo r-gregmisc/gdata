@@ -5,7 +5,7 @@
   Interleave rows of data frames or matrices.
 }
 \usage{
-interleave(..., append.source=TRUE, sep=": ", drop=FALSE)
+interleave(\dots, append.source=TRUE, sep=": ", drop=FALSE)
 }
 \arguments{
   \item{\dots}{objects to be interleaved.}
@@ -20,9 +20,9 @@ interleave(..., append.source=TRUE, sep=": ", drop=FALSE)
   This function creates a new matrix or data frame from its arguments.
 
   The new object will have all of the rows from the source objects
-  interleaved. IE, it will contain row 1 of object 1, followed by row 1
-  of object 2, .. row 1 of object 'n', row 2 of object 1, row 2 of
-  object 2, ... row 2 of object 'n' ...
+  interleaved. Starting with row 1 of object 1, followed by row 1
+  of object 2, \ldots, row 1 of object 'n', row 2 of object 1, row 2 of
+  object 2, \ldots, row 2 of object 'n', etc.
 }
 \value{
   Matrix containing the interleaved rows of the function arguments.

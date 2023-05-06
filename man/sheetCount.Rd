@@ -53,7 +53,7 @@ exampleFile <- system.file('xls', 'ExampleExcelFile.xls', package="gdata")
 sheetCount(exampleFile)
 sheetNames(exampleFile)
 
-if('XLSX' \%in\% xlsFormats())  # if XLSX is supported..
+if('XLSX' \%in\% xlsFormats())  # if XLSX is supported
 {
   exampleFile2007 <- system.file('xls','ExampleExcelFile.xlsx', package="gdata")
   print(sheetCount(exampleFile2007))

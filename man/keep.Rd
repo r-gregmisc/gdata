@@ -5,10 +5,10 @@
   Remove all objects from the user workspace, except those specified.
 }
 \usage{
-keep(..., list=character(), all=FALSE, sure=FALSE)
+keep(\dots, list=character(), all=FALSE, sure=FALSE)
 }
 \arguments{
-  \item{...}{objects to be kept, specified one by one, quoted or
+  \item{\dots}{objects to be kept, specified one by one, quoted or
     unquoted.}
   \item{list}{character vector of object names to be kept.}
   \item{all}{whether hidden objects (beginning with a \code{.}) should
