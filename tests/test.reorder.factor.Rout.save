@@ -1,5 +1,5 @@
 
-R version 4.2.3 (2023-03-15) -- "Shortstop Beagle"
+R version 4.3.0 (2023-04-21) -- "Already Tomorrow"
 Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -17,9 +17,9 @@ Type 'q()' to quit R.
 
 > ## Test results before and after loading gdata
 > 
-> m <- factor(c('a','b','c'))
+> m <- factor(c("a", "b", "c"))
 > 
-> ( m1 <- reorder(m, X=c(3, 2, 1)) )
+> (m1 <- reorder(m, X=c(3, 2, 1)))
 [1] a b c
 attr(,"scores")
 a b c 
@@ -43,15 +43,15 @@ The following object is masked from 'package:base':
     startsWith
 
 > 
-> ( m2 <- reorder(m, X=c(3, 2, 1)) )
+> (m2 <- reorder(m, X=c(3, 2, 1)))
 [1] a b c
 attr(,"scores")
 a b c 
 3 2 1 
 Levels: c b a
 > 
-> stopifnot(identical(m1,m2))
+> stopifnot(identical(m1, m2))
 > 
 > proc.time()
    user  system elapsed 
-  0.088   0.004   0.087 
+  0.084   0.009   0.088 

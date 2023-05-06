@@ -1,19 +1,8 @@
-### runit.cbindX.R
-###------------------------------------------------------------------------
-### What: Unit tests for cbindX
-### $Id:$
-### Time-stamp: <2008-08-05 13:40:49 ggorjan>
-###------------------------------------------------------------------------
-
-### {{{ --- Test setup ---
-
+## Test setup
 if(FALSE) {
   library("RUnit")
   library("gdata")
 }
-
-### }}}
-### {{{ --- cbindX ---
 
 test.cbindX <- function()
 {
@@ -69,13 +58,3 @@ test.cbindX <- function()
   names(tmpStand)[c(1:4, 8)] <- c("1", "2", "3", "4", "a")
   checkEquals(tmpTest, tmpStand)
 }
-
-### }}}
-### {{{ Dear Emacs
-### Local variables:
-### folded-file: t
-### end:
-### }}}
-
-###------------------------------------------------------------------------
-### runit.cbindX.R ends here

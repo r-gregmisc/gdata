@@ -1,19 +1,8 @@
-### runit.trim.R
-###------------------------------------------------------------------------
-### What: Tests for trim
-### $Id$
-### Time-stamp: <2006-08-29 14:21:02 ggorjan>
-###------------------------------------------------------------------------
-
-### {{{ --- Test setup ---
-
+## Test setup
 if(FALSE) {
   library("RUnit")
   library("gdata")
 }
-
-### }}}
-### {{{ --- trim ---
 
 test.trim <- function()
 {
@@ -34,22 +23,10 @@ test.trim <- function()
 
   checkIdentical(trim(sTrim), sTrimR)
   checkIdentical(trim(fTrim), fTrimR)
-  checkIdentical(
-                 levels(trim(fTrim, recode.factor=FALSE)),
-                 c("this is an example string", "C", "A", "B", "D")
-                 )
+  checkIdentical(levels(trim(fTrim, recode.factor=FALSE)),
+                 c("this is an example string", "C", "A", "B", "D"))
   checkIdentical(trim(lTrim), lTrimR)
   checkIdentical(trim(dfTrim), dfTrimR)
 
-  Sys.setlocale(category="LC_COLLATE", locale=tmp)  
+  Sys.setlocale(category="LC_COLLATE", locale=tmp)
 }
-
-### }}}
-### {{{ Dear Emacs
-## Local variables:
-## folded-file: t
-## End:
-### }}}
-
-###------------------------------------------------------------------------
-### runit.trim.R ends here

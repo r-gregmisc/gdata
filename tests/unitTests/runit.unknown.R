@@ -1,17 +1,8 @@
-### runit.unknown.R
-###------------------------------------------------------------------------
-### What: Tests for Change given unknown value to NA and vice versa methods
-### $Id$
-### Time-stamp: <2006-10-30 17:46:21 ggorjan>
-###------------------------------------------------------------------------
-
-### {{{ --- Test setup ---
-
+## Test setup
 library("RUnit")
 library("gdata")
 
-
-### {{{ --- Vectors ---
+## Vectors
 
 intUnk <- 9999
 xInt        <- as.integer(c(NA,     1:2, NA,     5, 6, 7, 8, 9))
@@ -74,8 +65,7 @@ xPOSIXctTest <- xPOSIXltTest
 xPOSIXct1Unk  <- c(tmp, POSIXctUnk, NA)
 xPOSIXct1Test <- xPOSIXlt1Test
 
-### }}}
-### {{{ --- Lists and data.frames ---
+## Lists and data frames
 
 xList <- list(xInt, xCha, xNum, xFac)
 xListN <- list(int=xInt, cha=xCha, num=xNum, fac=xFac)
@@ -92,14 +82,14 @@ xDFUnkTest <- as.data.frame(xListNUnkTest)
 
 unkC <- c(intUnk, chaUnk, numUnk, facUnk)
 unkL <- list(intUnk, chaUnk, numUnk, facUnk)
-unkLN <- list(num=numUnk, cha=chaUnk, fac=facUnk, int=intUnk) ## mixed as it is named
+unkLN <- list(num=numUnk, cha=chaUnk, fac=facUnk, int=intUnk)  # mixed as it is named
 unkLMN <- list(cha=chaUnk, int=intUnk, num=c(intUnk, numUnk),
                fac=c(chaUnk1, facUnk))
 
 xListMNUnkF <- list(int=as.integer(c(9999, 1, 2, 9999, 5, 6, 7, 8, 9)),
-                   cha=c("A", "B", "notAvail", "C", "notAvail", "-", "7", "8", "9"),
-                   num=c(9999, 0, 1.5, 0, 5, 6, 7, 8, 9),
-                   fac=factor(c("A", "0", "0", "NA", "NA", 9999, "0", "-", "notAvail")))
+                    cha=c("A", "B", "notAvail", "C", "notAvail", "-", "7", "8", "9"),
+                    num=c(9999, 0, 1.5, 0, 5, 6, 7, 8, 9),
+                    fac=factor(c("A", "0", "0", "NA", "NA", 9999, "0", "-", "notAvail")))
 xListMNUnkFTest <- list(int=c(1, 0, 0, 1, 0, 0, 0, 0, 0),
                         cha=c(0, 0, 1, 0, 1, 0, 0, 0, 0),
                         num=c(1, 1, 0, 1, 0, 0, 0, 0, 0),
@@ -152,9 +142,9 @@ unkL2 <- as.list(unkC2)
 unkLN2 <- unkL2[c(2, 1)]
 names(unkLN2) <- c("cha", "int")
 xListUnk2a <- list(as.integer(c(NA, 1, 2, NA, 5, 6, 7, 8, 9)),
-                  c("A", "B", unkLN2[[2]], "C", unkLN2[[2]], "-", "7", "8", "9"),
-                  c(9999, NA, 1.5, NA, 5, 6, 7, 8, 9),
-                  factor(c("A", "0", "0", "NA", "NA", "9999", "0", "-", unkLN2[[2]])))
+                   c("A", "B", unkLN2[[2]], "C", unkLN2[[2]], "-", "7", "8", "9"),
+                   c(9999, NA, 1.5, NA, 5, 6, 7, 8, 9),
+                   factor(c("A", "0", "0", "NA", "NA", "9999", "0", "-", unkLN2[[2]])))
 xListUnk2aTest <- xListUnk2a
 xListUnk2aTest[[1]] <- xListUnk2aTest[[1]] %in% unkLN2[1]
 xListUnk2aTest[[2]] <- xListUnk2aTest[[2]] %in% unkLN2[2]
@@ -166,8 +156,7 @@ xList2a <- list(xListUnk2a[[1]],
                 xListUnk2a[[3]],
                 factor(c("A", NA, NA, "NA", "NA", 9999, NA, "-", NA)))
 
-### }}}
-### {{{ --- Matrix ---
+## Matrix
 
 matUnk <- 9999
 mat        <- matrix(1:25, nrow=5, ncol=5)
@@ -180,8 +169,7 @@ matUnkTest <- matUnk1Test <- is.na(mat)
 
 matUnk2Test <- matUnkTest | mat == 1
 
-### }}}
-### {{{ --- Use of unknown=list(.default=, ...) or similarly named vector ---
+## Use of unknown=list(.default=, ...) or similarly named vector
 
 D1 <- "notAvail"
 unkLND1 <- list(.default=D1)
@@ -201,9 +189,9 @@ DSO2 <- c("notAvail", 5678)
 unkLNDSO2 <- as.list(DSO2)
 names(unkLNDSO2) <- c(".default", "someOther")
 xListUnkDSO2 <- list(as.integer(c(NA, 1:2, NA, 5, 6, 7, 8, 9)),
-                      c("A", "B", DSO2[1], "C", DSO2[1], "-", "7", "8", "9"),
-                      c(9999, NA, 1.5, NA, 5, 6, 7, 8, 9),
-                      factor(c("A", "0", 0, "NA", "NA", intUnk, numUnk, "-", DSO2[2])))
+                     c("A", "B", DSO2[1], "C", DSO2[1], "-", "7", "8", "9"),
+                     c(9999, NA, 1.5, NA, 5, 6, 7, 8, 9),
+                     factor(c("A", "0", 0, "NA", "NA", intUnk, numUnk, "-", DSO2[2])))
 xListUnkDSO2Test <- lapply(xListUnkDSO2, function(x) x %in% DSO2)
 
 unkLND3 <- list(.default="notAvail", num=0, int=9999)
@@ -219,16 +207,11 @@ xListNUnkD3Test$fac <- xListNUnkD3Test$fac %in% unkLND3[[1]]
 
 unkLND2E <- list(.default="notAvail", 9999)
 
-### }}}
-
-### }}}
-### {{{ --- isUnknown ---
+## isUnknown
 
 test.isUnknown <- function()
 {
-  ## --- base methods for vectors ---
-
-  ## base ...
+  ## Base methods for vectors
   checkIdentical(isUnknown(xIntUnk, unknown=as.integer(intUnk)), xIntUnkTest)
   checkIdentical(isUnknown(xIntUnk, unknown=intUnk),             xIntUnkTest)
   checkIdentical(isUnknown(xNumUnk, unknown=numUnk),             xNumUnkTest)
@@ -236,7 +219,7 @@ test.isUnknown <- function()
   checkIdentical(isUnknown(xChaUnk, unknown=chaUnk),             xChaUnkTest)
   checkIdentical(isUnknown(xFacUnk, unknown=facUnk),             xFacUnkTest)
 
-  ## multiple values are allowed for vector methods in vector or list form
+  ## Multiple values are allowed for vector methods in vector or list form
   checkIdentical(isUnknown(xIntUnk, unknown=unkC), xIntUnkTest)
   checkIdentical(isUnknown(xIntUnk, unknown=unkL), xIntUnkTest)
 
@@ -254,7 +237,7 @@ test.isUnknown <- function()
   checkIdentical(isUnknown(xPOSIXctUnk, unknown=POSIXctUnk), xPOSIXctTest)
   checkIdentical(isUnknown(xPOSIXct1Unk, unknown=POSIXctUnk), xPOSIXct1Test)
 
-  ## --- lists and data.frames ---
+  ## Lists and data frames
 
   ## with vector of single unknown values
   checkIdentical(isUnknown(xListUnk, unknown=unkC), xListUnkTest)
@@ -296,30 +279,26 @@ test.isUnknown <- function()
   ## list(.default=, 99) ERROR as we do not know where to apply 99
   checkException(isUnknown(x=xListNUnk, unknown=unkLND2E))
 
-  ## --- matrix ---
-
+  ## Matrix
   checkIdentical(isUnknown(x=mat, unknown=NA), matUnkTest)
   checkIdentical(isUnknown(x=matUnk1, unknown=matUnk), matUnkTest)
   checkIdentical(isUnknown(x=matUnk1, unknown=c(1, matUnk)), matUnk2Test)
 }
 
-### }}}
-### {{{ --- unknownToNA ---
+## unknownToNA
 
 test.unknownToNA <- function()
 {
-  ## --- base methods for vectors ---
-
-  ## base ...
+  ## Base methods for vectors
   checkIdentical(unknownToNA(xIntUnk, as.integer(intUnk)), xInt)
-  checkIdentical(unknownToNA(xIntUnk, intUnk),             xInt) ## with numeric
+  checkIdentical(unknownToNA(xIntUnk, intUnk),             xInt)  # with numeric
   checkIdentical(unknownToNA(xNumUnk, numUnk),             xNum)
   checkIdentical(unknownToNA(xNumUnk, as.integer(numUnk)), xNum)
   checkIdentical(unknownToNA(xChaUnk, chaUnk),             xCha)
   checkIdentical(unknownToNA(xChaUnk, chaUnk),             xCha)
   checkIdentical(unknownToNA(xFacUnk, facUnk),             xFac)
 
-  ## multiple values are allowed for vector methods in vector or list form
+  ## Multiple values are allowed for vector methods in vector or list form
   checkIdentical(unknownToNA(xIntUnk, unknown=unkC), xInt)
   checkIdentical(unknownToNA(xIntUnk, unknown=unkL), xInt)
 
@@ -333,7 +312,6 @@ test.unknownToNA <- function()
   checkIdentical(unknownToNA(xDateUnk, unknown=dateUnk), xDate)
   checkIdentical(unknownToNA(xPOSIXctUnk, unknown=POSIXctUnk), xPOSIXct)
 
-  ####
   ## Per Brian Ripley on 2014-01-15:
   ##
   ## On platforms where POSIXlt has a gmtoff component, it does not need to be set.  So
@@ -356,34 +334,23 @@ test.unknownToNA <- function()
   ## With:
   tmp_unknownToNA <- unknownToNA(xPOSIXltUnk, unknown=POSIXltUnk)
   tmp_xPOSIXlt   <- xPOSIXlt
-  ##
+
   tmp_unknownToNA$gmtoff <- NULL  # Remove $gmtoff to avoid comparison
   tmp_xPOSIXlt$gmtoff   <- NULL
-  ##
-  isdst.unknown <- unique(
-      c(which(is.na(tmp_unknownToNA$isdst) |
-              tmp_unknownToNA$isdst==-1
-              )
-        )
-      ,
-      c(which(is.na(tmp_xPOSIXlt$isdst) |
-              tmp_xPOSIXlt$isdst==-1
-              )
-        )
 
-      )
-  ##
+  isdst.unknown <- unique(
+    c(which(is.na(tmp_unknownToNA$isdst) | tmp_unknownToNA$isdst==-1)),
+    c(which(is.na(tmp_xPOSIXlt$isdst) | tmp_xPOSIXlt$isdst==-1)))
+
   checkIdentical(tmp_unknownToNA$isdst[!isdst.unknown],
                  tmp_xPOSIXlt$isds[!isdst.unknown])
-  ##
-  tmp_unknownToNA$isdst <- NULL   # Remove $isdst to avoid comparison
+
+  tmp_unknownToNA$isdst <- NULL   # remove $isdst to avoid comparison
   tmp_xPOSIXlt$isdst   <- NULL    # by checkIdentical
-  ##
+
   checkIdentical(tmp_unknownToNA, tmp_xPOSIXlt)
-  ####
 
-
-  ## --- lists and data.frames ---
+  ## Lists and data frames
 
   ## with vector of single unknown values
   checkIdentical(unknownToNA(xListUnk, unknown=unkC), xList)
@@ -419,7 +386,7 @@ test.unknownToNA <- function()
 
   ## but we should get some results with named x
   checkIdentical(unknownToNA(xListNUnk2, unknown=unkL2), xListN)
-  ## not also necesarilly with recycling of names lists, as it is
+  ## not also necesarily with recycling of names lists, as it is
   ## not clear how to properly recycle named lists (only names that match
   ## can be really properly recycled)
   checkException(unknownToNA(xListNUnk2, unknown=unkLN2))
@@ -438,21 +405,17 @@ test.unknownToNA <- function()
   ## list(.default=, 99) ERROR as we do not know where to apply 99
   checkException(unknownToNA(x=xListNUnk, unknown=unkLND2E))
 
-  ## --- matrix ---
-
+  ## Matrix
   checkEquals(unknownToNA(x=matUnk1, unknown=matUnk), mat)
 }
 
-### }}}
-### {{{ --- NAToUnknown ---
+## NAToUnknown
 
 test.NAToUnknown <- function()
 {
-  ## --- base methods for vectors ---
-
-  ## base ...
+  ## Base methods for vectors
   checkIdentical(NAToUnknown(xInt, as.integer(intUnk)), xIntUnk)
-  checkIdentical(NAToUnknown(xInt, intUnk),             xIntUnk) ## with numeric
+  checkIdentical(NAToUnknown(xInt, intUnk),             xIntUnk)  # with numeric
   checkIdentical(NAToUnknown(xNum, numUnk),             xNumUnk)
   checkIdentical(NAToUnknown(xNum, as.integer(numUnk)), xNumUnk)
   checkIdentical(NAToUnknown(xCha, chaUnk),             xChaUnk)
@@ -480,8 +443,6 @@ test.NAToUnknown <- function()
   checkIdentical(NAToUnknown(xDate, unknown=dateUnk), xDateUnk)
   checkIdentical(NAToUnknown(xPOSIXct, unknown=POSIXctUnk), xPOSIXctUnk)
 
-
-  ####
   ## Per Brian Ripley on 2014-01-15:
   ##
   ## On platforms where POSIXlt has a gmtoff component, it does not need to be set.  So
@@ -504,34 +465,23 @@ test.NAToUnknown <- function()
   ## With:
   tmp_NAToUnknown <- NAToUnknown(xPOSIXlt, unknown=POSIXltUnk)
   tmp_xPOSIXltUnk   <- xPOSIXltUnk
-  ##
-  tmp_NAToUnknown$gmtoff <- NULL  # Remove $gmtoff to avoid comparison
-  tmp_xPOSIXltUnk$gmtoff   <- NULL
-  ##
-  isdst.unknown <- unique(
-      c(which(is.na(tmp_NAToUnknown$isdst) |
-              tmp_NAToUnknown$isdst==-1
-              )
-        )
-      ,
-      c(which(is.na(tmp_xPOSIXltUnk$isdst) |
-              tmp_xPOSIXltUnk$isdst==-1
-              )
-        )
 
-      )
-  ##
+  tmp_NAToUnknown$gmtoff <- NULL  # remove $gmtoff to avoid comparison
+  tmp_xPOSIXltUnk$gmtoff   <- NULL
+
+  isdst.unknown <- unique(
+    c(which(is.na(tmp_NAToUnknown$isdst) | tmp_NAToUnknown$isdst==-1)),
+    c(which(is.na(tmp_xPOSIXltUnk$isdst) | tmp_xPOSIXltUnk$isdst==-1)))
+
   checkIdentical(tmp_NAToUnknown$isdst[!isdst.unknown],
                  tmp_xPOSIXltUnk$isds[!isdst.unknown])
-  ##
-  tmp_NAToUnknown$isdst <- NULL   # Remove $isdst to avoid comparison
-  tmp_xPOSIXltUnk$isdst   <- NULL    # by checkIdentical
-  ##
+
+  tmp_NAToUnknown$isdst <- NULL  # remove $isdst to avoid comparison
+  tmp_xPOSIXltUnk$isdst <- NULL  # by checkIdentical
+
   checkIdentical(tmp_NAToUnknown, tmp_xPOSIXltUnk)
-  ####
 
-
-  ## --- lists and data.frames ---
+  ## Lists and data frames
 
   ## with vector of single unknown values
   checkIdentical(NAToUnknown(xList, unknown=unkC), xListUnk)
@@ -586,17 +536,6 @@ test.NAToUnknown <- function()
   ## list(.default=, 99) ERROR as we do not know where to apply 99
   checkException(NAToUnknown(x=xListN, unknown=unkLND2E))
 
-  ## --- matrix ---
-
+  ## Matrix
   checkEquals(NAToUnknown(x=mat, unknown=matUnk), matUnk1)
 }
-
-### }}}
-### {{{ Dear Emacs
-### Local variables:
-### folded-file: t
-### End:
-### }}}
-
-###------------------------------------------------------------------------
-### runit.unknown.R ends here

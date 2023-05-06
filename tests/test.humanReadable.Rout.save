@@ -1,5 +1,5 @@
 
-R version 4.2.3 (2023-03-15) -- "Shortstop Beagle"
+R version 4.3.0 (2023-04-21) -- "Already Tomorrow"
 Copyright (C) 2023 The R Foundation for Statistical Computing
 Platform: x86_64-pc-linux-gnu (64-bit)
 
@@ -138,8 +138,7 @@ The following object is masked from 'package:base':
 +       humanReadable(x=IEC1, units="GiB", standard="IEC",  width=3),
 +       humanReadable(x=IEC1, units="G",   standard="Unix", width=7),
 +       humanReadable(x=IEC1, units="G",   standard="Unix", width=5),
-+       humanReadable(x=IEC1, units="G",   standard="Unix", width=3)
-+       )
++       humanReadable(x=IEC1, units="G",   standard="Unix", width=3))
       [,1]       [,2]       [,3]       [,4]        [,5]        [,6]       
  [1,] "5e-10 GB" "5e-10 GB" "5e-10 GB" "5e-10 GiB" "5e-10 GiB" "5e-10 GiB"
  [2,] "8e-07 GB" "8e-07 GB" "8e-07 GB" "6e-07 GiB" "6e-07 GiB" "6e-07 GiB"
@@ -164,19 +163,18 @@ The following object is masked from 'package:base':
 [10,] "9e+17 G" "9e+17 G" "9e+17 G"
 > 
 > # Single unit, specify digits
-> cbind(humanReadable(x=SI1, units="GB", standard="SI", width=NULL, digits=7),
-+       humanReadable(x=SI1, units="GB", standard="SI", width=NULL, digits=3),
-+       humanReadable(x=SI1, units="GB", standard="SI", width=NULL, digits=2),
-+       humanReadable(x=SI1, units="GB", standard="SI", width=NULL, digits=1),
-+       humanReadable(x=IEC1, units="GiB", standard="IEC", width=NULL, digits=7),
-+       humanReadable(x=IEC1, units="GiB", standard="IEC", width=NULL, digits=3),
-+       humanReadable(x=IEC1, units="GiB", standard="IEC", width=NULL, digits=2),
-+       humanReadable(x=IEC1, units="GiB", standard="IEC", width=NULL, digits=1),
-+       humanReadable(x=IEC1, units="G", standard="Unix", width=NULL, digits=7),
-+       humanReadable(x=IEC1, units="G", standard="Unix", width=NULL, digits=3),
-+       humanReadable(x=IEC1, units="G", standard="Unix", width=NULL, digits=2),
-+       humanReadable(x=IEC1, units="G", standard="Unix", width=NULL, digits=1)
-+       )
+> cbind(humanReadable(x=SI1,  units="GB",  standard="SI",   width=NULL, digits=7),
++       humanReadable(x=SI1,  units="GB",  standard="SI",   width=NULL, digits=3),
++       humanReadable(x=SI1,  units="GB",  standard="SI",   width=NULL, digits=2),
++       humanReadable(x=SI1,  units="GB",  standard="SI",   width=NULL, digits=1),
++       humanReadable(x=IEC1, units="GiB", standard="IEC",  width=NULL, digits=7),
++       humanReadable(x=IEC1, units="GiB", standard="IEC",  width=NULL, digits=3),
++       humanReadable(x=IEC1, units="GiB", standard="IEC",  width=NULL, digits=2),
++       humanReadable(x=IEC1, units="GiB", standard="IEC",  width=NULL, digits=1),
++       humanReadable(x=IEC1, units="G",   standard="Unix", width=NULL, digits=7),
++       humanReadable(x=IEC1, units="G",   standard="Unix", width=NULL, digits=3),
++       humanReadable(x=IEC1, units="G",   standard="Unix", width=NULL, digits=2),
++       humanReadable(x=IEC1, units="G",   standard="Unix", width=NULL, digits=1))
       [,1]              [,2]          [,3]         [,4]      
  [1,] "5.000000e-10 GB" "5.00e-10 GB" "5.0e-10 GB" "5e-10 GB"
  [2,] "7.993163e-07 GB" "7.99e-07 GB" "8.0e-07 GB" "8e-07 GB"
@@ -211,15 +209,14 @@ The following object is masked from 'package:base':
  [9,] "8.756173e+14 G" "8.76e+14 G" "8.8e+14 G" "9e+14 G"
 [10,] "9.390947e+17 G" "9.39e+17 G" "9.4e+17 G" "9e+17 G"
 > 
-> 
-> stopifnot( is.object_sizes(as.object_sizes( 2^(1:30) ) ) )
+> stopifnot( is.object_sizes(as.object_sizes(2^(1:30))))
 > stopifnot( format(as.object_sizes(124)) == "124 bytes")
 > stopifnot( format(as.object_sizes(124e8), units="auto") == "11.5 GiB")
 > stopifnot( format(as.object_sizes(124e8), humanReadable=TRUE) == "11.5 GiB")
 > stopifnot( format(as.object_sizes(124e8), units="bytes") == "1.24e+10 bytes")
 > 
 > tools::assertError( as.object_sizes(-1) )
-> tools::assertError( as.object_sizes('a') )
+> tools::assertError( as.object_sizes("a") )
 > tools::assertError( as.object_sizes(list()) )
 > tools::assertError( as.object_sizes(NULL) )
 > tools::assertError( as.object_sizes(0+1i) )
@@ -236,4 +233,4 @@ The following object is masked from 'package:base':
 > 
 > proc.time()
    user  system elapsed 
-  0.088   0.027   0.110 
+  0.105   0.008   0.108 

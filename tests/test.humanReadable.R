@@ -51,33 +51,30 @@ cbind(humanReadable(x=SI1,  units="GB",  standard="SI",   width=7),
       humanReadable(x=IEC1, units="GiB", standard="IEC",  width=3),
       humanReadable(x=IEC1, units="G",   standard="Unix", width=7),
       humanReadable(x=IEC1, units="G",   standard="Unix", width=5),
-      humanReadable(x=IEC1, units="G",   standard="Unix", width=3)
-      )
+      humanReadable(x=IEC1, units="G",   standard="Unix", width=3))
 
 # Single unit, specify digits
-cbind(humanReadable(x=SI1, units="GB", standard="SI", width=NULL, digits=7),
-      humanReadable(x=SI1, units="GB", standard="SI", width=NULL, digits=3),
-      humanReadable(x=SI1, units="GB", standard="SI", width=NULL, digits=2),
-      humanReadable(x=SI1, units="GB", standard="SI", width=NULL, digits=1),
-      humanReadable(x=IEC1, units="GiB", standard="IEC", width=NULL, digits=7),
-      humanReadable(x=IEC1, units="GiB", standard="IEC", width=NULL, digits=3),
-      humanReadable(x=IEC1, units="GiB", standard="IEC", width=NULL, digits=2),
-      humanReadable(x=IEC1, units="GiB", standard="IEC", width=NULL, digits=1),
-      humanReadable(x=IEC1, units="G", standard="Unix", width=NULL, digits=7),
-      humanReadable(x=IEC1, units="G", standard="Unix", width=NULL, digits=3),
-      humanReadable(x=IEC1, units="G", standard="Unix", width=NULL, digits=2),
-      humanReadable(x=IEC1, units="G", standard="Unix", width=NULL, digits=1)
-      )
+cbind(humanReadable(x=SI1,  units="GB",  standard="SI",   width=NULL, digits=7),
+      humanReadable(x=SI1,  units="GB",  standard="SI",   width=NULL, digits=3),
+      humanReadable(x=SI1,  units="GB",  standard="SI",   width=NULL, digits=2),
+      humanReadable(x=SI1,  units="GB",  standard="SI",   width=NULL, digits=1),
+      humanReadable(x=IEC1, units="GiB", standard="IEC",  width=NULL, digits=7),
+      humanReadable(x=IEC1, units="GiB", standard="IEC",  width=NULL, digits=3),
+      humanReadable(x=IEC1, units="GiB", standard="IEC",  width=NULL, digits=2),
+      humanReadable(x=IEC1, units="GiB", standard="IEC",  width=NULL, digits=1),
+      humanReadable(x=IEC1, units="G",   standard="Unix", width=NULL, digits=7),
+      humanReadable(x=IEC1, units="G",   standard="Unix", width=NULL, digits=3),
+      humanReadable(x=IEC1, units="G",   standard="Unix", width=NULL, digits=2),
+      humanReadable(x=IEC1, units="G",   standard="Unix", width=NULL, digits=1))
 
-
-stopifnot( is.object_sizes(as.object_sizes( 2^(1:30) ) ) )
+stopifnot( is.object_sizes(as.object_sizes(2^(1:30))))
 stopifnot( format(as.object_sizes(124)) == "124 bytes")
 stopifnot( format(as.object_sizes(124e8), units="auto") == "11.5 GiB")
 stopifnot( format(as.object_sizes(124e8), humanReadable=TRUE) == "11.5 GiB")
 stopifnot( format(as.object_sizes(124e8), units="bytes") == "1.24e+10 bytes")
 
 tools::assertError( as.object_sizes(-1) )
-tools::assertError( as.object_sizes('a') )
+tools::assertError( as.object_sizes("a") )
 tools::assertError( as.object_sizes(list()) )
 tools::assertError( as.object_sizes(NULL) )
 tools::assertError( as.object_sizes(0+1i) )

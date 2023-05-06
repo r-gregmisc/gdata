@@ -1,23 +1,11 @@
-### runit.trimSum.R
-###------------------------------------------------------------------------
-### What: Unit tests for trimSum
-### $Id$
-### Time-stamp: <2008-12-20 11:58:50 ggorjan>
-###------------------------------------------------------------------------
-
-### {{{ --- Test setup ---
-
+## Test setup
 if(FALSE) {
   library("RUnit")
   library("gdata")
 }
 
-### }}}
-### {{{ --- trimSum ---
-
 test.trimSum <- function()
 {
-
   ## 'x' must be a vector - for now
   checkException(trimSum(matrix(1:10)))
   checkException(trimSum(data.frame(1:10)))
@@ -33,7 +21,7 @@ test.trimSum <- function()
   ## Default
   x <- trimSum(x=1:10, n=5)
   x2 <- c(1:4, 45)
-  checkEquals(x, x2)  
+  checkEquals(x, x2)
 
   ## Left
   x <- trimSum(x=1:10, n=5, right=FALSE)
@@ -44,18 +32,8 @@ test.trimSum <- function()
   x <- trimSum(x=c(1:9, NA), n=5)
   x2 <- c(1:4, NA)
   checkEquals(x, x2)
-  
+
   x <- trimSum(x=c(1:9, NA), n=5, na.rm=TRUE)
   x2 <- c(1:4, 35)
   checkEquals(x, x2)
 }
-
-### }}}
-### {{{ Dear Emacs
-## Local variables:
-## folded-file: t
-## End:
-### }}}
-
-###------------------------------------------------------------------------
-### runit.trimSum.R ends here

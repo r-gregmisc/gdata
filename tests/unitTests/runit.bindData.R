@@ -1,26 +1,15 @@
-### runit.bindData.R
-###------------------------------------------------------------------------
-### What: Bind two data frames - unit tests
-### $Id$
-### Time-stamp: <2008-12-30 11:58:50 ggorjan>
-###------------------------------------------------------------------------
-
-### {{{ --- Test setup ---
-
+## Test setup
 if(FALSE) {
   library("RUnit")
   library("gdata")
 }
-
-### }}}
-### {{{ --- bindData ---
 
 test.bindData <- function()
 {
   ## 'x'/'y' must be a data.frame
   checkException(bindData(x=1:10, y=1:10))
   checkException(bindData(x=matrix(1:10), y=matrix(1:10)))
-  
+
   n1 <- 6; n2 <- 12; n3 <- 4
   ## Single trait 1
   num <- c(5:n1, 10:13)
@@ -31,7 +20,7 @@ test.bindData <- function()
                      nu=(num) + 0.5,
                      id=factor(num), stringsAsFactors=FALSE)
 
-  ## Single trait 2 with repeated records, some subjects also in tmp1 
+  ## Single trait 2 with repeated records, some subjects also in tmp1
   num <- 4:9
   tmp2 <- data.frame(y2=rnorm(n=n2),
                      f2=factor(rep(c("C", "D"), n2/2)),
@@ -63,13 +52,3 @@ test.bindData <- function()
   checkEquals(is.na(tmp123$y3), c(rep(TRUE, times=n1+n2), rep(FALSE, times=n3)))
   checkEquals(is.na(tmp123$f3), c(rep(TRUE, times=n1+n2), rep(FALSE, times=n3)))
 }
-
-### }}}
-### {{{ Dear Emacs
-## Local variables:
-## folded-file: t
-## End:
-### }}}
-
-###------------------------------------------------------------------------
-### runit.bindData.R ends here

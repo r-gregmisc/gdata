@@ -1,19 +1,8 @@
-### runit.drop.levels.R
-###------------------------------------------------------------------------
-### What: Tests for drop.levels
-### $Id$
-### Time-stamp: <2006-08-29 14:21:12 ggorjan>
-###------------------------------------------------------------------------
-
-### {{{ --- Test setup ---
-
+## Test setup
 if(FALSE) {
   library("RUnit")
   library("gdata")
 }
-
-### }}}
-### {{{ --- drop.levels ---
 
 test.drop.levels <- function()
 {
@@ -30,13 +19,3 @@ test.drop.levels <- function()
   checkIdentical(drop.levels(l), lDrop)
   checkIdentical(drop.levels(df), dfDrop)
 }
-
-### }}}
-### {{{ Dear Emacs
-## Local variables:
-## folded-file: t
-## End:
-### }}}
-
-###------------------------------------------------------------------------
-### runit.drop.levels.R ends here

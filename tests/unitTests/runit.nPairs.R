@@ -1,19 +1,8 @@
-### runit.nPairs.R
-###------------------------------------------------------------------------
-### What: Number of variable pairs - unit tests
-### $Id$
-### Time-stamp: <2008-12-30 18:24:59 ggorjan>
-###------------------------------------------------------------------------
-
-### {{{ --- Test setup ---
-
+## Test setup
 if(FALSE) {
   library("RUnit")
   library("gdata")
 }
-
-### }}}
-### {{{ --- nPairs ---
 
 test.nPairs <- function()
 {
@@ -55,14 +44,3 @@ test.nPairs <- function()
   tmp <- summary(nPairs(x=test))
   checkEquals(tmp, testCheckSumm)
 }
-
-
-### }}}
-### {{{ Dear Emacs
-### Local variables:
-### folded-file: t
-### end:
-### }}}
-
-###------------------------------------------------------------------------
-### runit.nPairs.R ends here
