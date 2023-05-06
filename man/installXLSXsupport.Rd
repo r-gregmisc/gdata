@@ -2,10 +2,10 @@
 \Rdversion{1.1}
 \alias{installXLSXsupport}
 \title{
-Install perl modules needed for read.xls to support Excel 2007+ XLSX format
+  Install perl modules needed for read.xls to support Excel 2007+ XLSX format
 }
 \description{
-Install perl modules needed for read.xls to support Excel 2007+ XLSX format
+  Install perl modules needed for read.xls to support Excel 2007+ XLSX format.
 }
 \usage{
 installXLSXsupport(perl = "perl", verbose = FALSE)
@@ -21,7 +21,6 @@ installXLSXsupport(perl = "perl", verbose = FALSE)
   has occured.
 }
 \details{
-
   This function calls the perl script 'install_modules.pl' located in
   the perl subdirectory of the gdata package directory (or inst/perl in
   the source package).  This perl script attempts to use the perl 'CPAN'
@@ -58,7 +57,7 @@ installXLSXsupport(perl = "perl", verbose = FALSE)
 
   The function \code{xlsFormats} can be used to see whether XLS and XLSX
   formats are supported by the currently available perl modules.
-  }
+}
 \section{Warning}{
   Excel file support is deprecated in gdata version 2.19.0, to be
   removed in the near future. At the user level, the functions
@@ -75,11 +74,11 @@ installXLSXsupport(perl = "perl", verbose = FALSE)
   Perl warnings on the user side.
 }
 \seealso{
-	\code{\link{read.xls}}, \code{\link{xls2csv}}, \code{\link{xlsFormats}}
+  \code{\link{read.xls}}, \code{\link{xls2csv}}, \code{\link{xlsFormats}}
 }
 \examples{
 \dontrun{
    installXLSXsupport()
 }
 }
-\keyword{ misc }
+\keyword{misc}

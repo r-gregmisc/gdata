@@ -54,7 +54,7 @@ nobs(object, \dots)
 \author{Gregory R. Warnes \email{greg@warnes.net}}
 \seealso{\code{\link{is.na}}, \code{\link{length}}}
 \examples{
-x <- c(1,2,3,5,NA,6,7,1,NA )
+x <- c(1, 2, 3, 5, NA, 6, 7, 1, NA)
 length(x)
 nobs(x)
 

@@ -2,9 +2,7 @@
 \Rdversion{1.1}
 \alias{sheetCount}
 \alias{sheetNames}
-\title{
-  Count or list sheet names in Excel spreadsheet files.
-}
+\title{Count or list sheet names in Excel spreadsheet files}
 \description{
   Count or list sheet names in Excel spreadsheet files.
 }
@@ -61,4 +59,4 @@ if('XLSX' \%in\% xlsFormats())  # if XLSX is supported
 }
 }
 }
-\keyword{ misc }
+\keyword{misc}

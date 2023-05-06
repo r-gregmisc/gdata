@@ -4,7 +4,7 @@
 \docType{package}
 \title{Various R Programming Tools for Data Manipulation}
 \description{
-Various R programming tools for data manipulation, including:
+  Various R programming tools for data manipulation, including:
   \itemize{
     \item Medical unit conversions: \code{\link{ConvertMedUnits}},
       \code{\link{MedUnits}}

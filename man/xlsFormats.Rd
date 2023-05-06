@@ -2,10 +2,10 @@
 \Rdversion{1.1}
 \alias{xlsFormats}
 \title{
-Check which file formats are supported by read.xls
+  Check which file formats are supported by read.xls
 }
 \description{
-Check which file formats are supported by read.xls
+  Check which file formats are supported by read.xls
 }
 \usage{
 xlsFormats(perl = "perl", verbose = FALSE)
@@ -34,11 +34,11 @@ xlsFormats(perl = "perl", verbose = FALSE)
   Perl warnings on the user side.
 }
 \seealso{
-	\code{\link{read.xls}}, \code{\link{xls2csv}}.
+  \code{\link{read.xls}}, \code{\link{xls2csv}}.
 }
 \examples{
-   \dontrun{
-   xlsFormats()
-   }
+\dontrun{
+xlsFormats()
 }
-\keyword{ misc }
+}
+\keyword{misc}

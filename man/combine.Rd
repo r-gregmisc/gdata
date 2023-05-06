@@ -35,7 +35,7 @@ combine(\dots, names=NULL)
   examples.
 }
 \author{Gregory R. Warnes \email{greg@warnes.net}}
-\seealso{ \code{\link{rbind}}, \code{\link{merge}}}
+\seealso{\code{\link{rbind}}, \code{\link{merge}}}
 \examples{
 a <- matrix(rnorm(12),ncol=4,nrow=3)
 b <- 1:4

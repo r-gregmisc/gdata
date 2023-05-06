@@ -23,7 +23,6 @@
   }
 }
 \details{
-
   Medical laboratories and practitioners in the United States use one
   set of units (the so-called 'Conventional' units) for reporting the
   results of clinical laboratory measurements, while the rest of the
@@ -36,13 +35,13 @@
 
   To perform the conversion from SI units to US 'Conventional' units do:
 
-     Measurement in \code{ConventionalUnit} =
-     (Measurement in \code{SIUnit}) /  \code{Conversion}
+   Measurement in \code{ConventionalUnit} =
+   (Measurement in \code{SIUnit}) /  \code{Conversion}
 
   To perform conversion from 'Conventional' to SI units do:
 
-     Measurement in \code{SIUnit} =
-     (Measurement in \code{ConventionalUnit}) * \code{Conversion}
+   Measurement in \code{SIUnit} =
+   (Measurement in \code{ConventionalUnit}) * \code{Conversion}
 
 }
 \source{
@@ -53,21 +52,19 @@
   conversion task.
 }
 \examples{
-
 data(MedUnits)
-
-# show available conversions
+# Show available conversions
 MedUnits$Measurement
 
-# utility function
-matchUnits <- function(X) MedUnits[ grep(X, MedUnits$Measurement),]
+# Utility function
+matchUnits <- function(X) MedUnits[grep(X, MedUnits$Measurement),]
 
 # Convert SI Glucose measurement to 'Conventional' units
-GlucoseSI = c(5, 5.4, 5, 5.1, 5.6, 5.1, 4.9, 5.2, 5.5) # in SI Units
-GlucoseUS = GlucoseSI / matchUnits("Glucose")$Conversion 
-cbind(GlucoseSI,GlucoseUS)
+GlucoseSI = c(5, 5.4, 5, 5.1, 5.6, 5.1, 4.9, 5.2, 5.5)  # in SI Units
+GlucoseUS = GlucoseSI / matchUnits("Glucose")$Conversion
+cbind(GlucoseSI, GlucoseUS)
 
-# also consider using ConvertMedUnits()
-ConvertMedUnits( GlucoseSI, "Glucose", to="US" )
+# Also consider using ConvertMedUnits()
+ConvertMedUnits(GlucoseSI, "Glucose", to="US")
 }
 \keyword{datasets}

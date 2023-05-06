@@ -19,19 +19,18 @@ unmatrix(x, byrow=FALSE)
   matrix. If the the row or column names are missing, ('r1', 'r2', \ldots,) or
   ('c1', 'c2', \ldots) will be used as appropriate.
 }
-\author{Gregory R. Warnes \email{greg@warnes.net} }
-\seealso{ \code{\link[base]{as.vector}} }
+\author{Gregory R. Warnes \email{greg@warnes.net}}
+\seealso{\code{\link[base]{as.vector}}}
 \examples{
-# simple, useless example
-m <- matrix( letters[1:10], ncol=5)
+# Simple example
+m <- matrix(letters[1:10], ncol=5)
 m
 unmatrix(m)
 
-# unroll model output
+# Unroll model output
 x <- rnorm(100)
 y <- rnorm(100, mean=3+5*x, sd=0.25)
-m <- coef( summary(lm( y ~ x )) )
+m <- coef(summary(lm(y ~ x)))
 unmatrix(m)
 }
 \keyword{manip}
-

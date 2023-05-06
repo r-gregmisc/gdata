@@ -57,12 +57,10 @@ ll(model, dim=TRUE)
 ll(model, sort=TRUE)
 ll(model$family)
 }
-% Basics
 \keyword{data}
 \keyword{attribute}
 \keyword{classes}
 \keyword{list}
-% Programming
 \keyword{environment}
 \keyword{print}
 \keyword{utilities}

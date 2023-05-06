@@ -41,7 +41,7 @@ left(x, n=6L, \dots)
   \code{\link[utils]{tail}}
 }
 \examples{
-m <- matrix( 1:100, ncol=10)
+m <- matrix(1:100, ncol=10)
 colnames(m) <- paste("Col",1:10, sep="_")
 
 left(m)
@@ -72,4 +72,4 @@ right(d)
 left(d, -3)
 right(d, -3)
 }
-\keyword{ manip }
+\keyword{manip}

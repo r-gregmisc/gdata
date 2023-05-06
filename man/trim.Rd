@@ -2,8 +2,8 @@
 \alias{trim}
 \title{Remove leading and trailing spaces from character strings}
 \description{
- Remove leading and trailing spaces from character strings and other
- related objects.
+  Remove leading and trailing spaces from character strings and other
+  related objects.
 }
 \usage{
 trim(s, recode.factor=TRUE, \dots)
@@ -15,21 +15,22 @@ trim(s, recode.factor=TRUE, \dots)
     \code{\link{reorder.factor}} for factors}
 }
 \details{
-\code{trim} is a generic function, where default method does nothing,
-while method for character \code{s} trims its elements and method for
-factor \code{s} trims \code{\link{levels}}. There are also methods for
-\code{list} and \code{data.frame}.
+  \code{trim} is a generic function, where default method does nothing,
+  while method for character \code{s} trims its elements and method for
+  factor \code{s} trims \code{\link{levels}}. There are also methods for
+  \code{list} and \code{data.frame}.
 
-Trimming character strings can change the sort order in some locales.
-For factors, this can affect the coding of levels. By default, factor
-levels are recoded to match the trimmed sort order, but this can be
-disabled by setting \code{recode.factor=FALSE}. Recoding is done with
-\code{\link{reorder.factor}}.
+  Trimming character strings can change the sort order in some locales.
+  For factors, this can affect the coding of levels. By default, factor
+  levels are recoded to match the trimmed sort order, but this can be
+  disabled by setting \code{recode.factor=FALSE}. Recoding is done with
+  \code{\link{reorder.factor}}.
 }
 \value{
   \code{s} with all leading and trailing spaces removed in its elements.
 }
-\author{Gregory R. Warnes \email{greg@warnes.net}  with
+\author{
+  Gregory R. Warnes \email{greg@warnes.net}  with
   contributions by Gregor Gorjanc
 }
 \seealso{\code{\link[base]{trimws}}, \code{\link[base]{sub}},

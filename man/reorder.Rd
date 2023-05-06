@@ -26,7 +26,7 @@
   so via three different mechanisms, depending on whether, \code{X}
   \emph{and} \code{FUN}, \code{new.order} or \code{sort} are provided.
 
-  If \code{X} \emph{and} \code{Fun} are provided: The data in \code{X}
+  If \code{X} \emph{and} \code{FUN} are provided: The data in \code{X}
   is grouped by the levels of \code{x} and \code{FUN} is applied.
   The groups are then sorted by this value, and the resulting order is
   used for the new factor level names.
@@ -50,16 +50,14 @@
 \value{A new factor with reordered levels}
 \author{Gregory R. Warnes \email{greg@warnes.net}}
 \seealso{
-  \code{\link{factor}}
-  and
-  \code{\link[stats]{reorder}}
+  \code{\link{factor}} and \code{\link[stats]{reorder}}
 }
 \examples{
 \dontshow{
-    set.seed(123456)
+  set.seed(123456)
 }
 # Create a 4 level example factor
-trt <- factor(sample( c("PLACEBO", "300 MG", "600 MG", "1200 MG"),
+trt <- factor(sample(c("PLACEBO", "300 MG", "600 MG", "1200 MG"),
               100, replace=TRUE))
 summary(trt)
 # Note that the levels are not in a meaningful order.
@@ -82,4 +80,4 @@ summary(trt5)
 trt6 <- reorder(trt, new.order=c("PLACEBO", "600 MG", "1200 MG"))
 summary(trt6)
 }
-\keyword{ manip }
+\keyword{manip}

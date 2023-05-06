@@ -22,7 +22,8 @@
 \alias{getSec}
 \alias{getSec.default}
 \title{Get date/time parts from date and time objects}
-\description{get* functions provide an *experimental* approach for
+\description{
+  Experimental approach for
   extracting the date/time parts from objects of a date/time class.
   They are designed to be intiutive and thus lowering the learning
   curve for work with date and time classes in \R{}.}

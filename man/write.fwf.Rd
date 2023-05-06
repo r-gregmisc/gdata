@@ -2,9 +2,9 @@
 \alias{write.fwf}
 \concept{data output}
 \concept{data export}
-\title{Write object in fixed width format}
+\title{Write object to file in fixed width format}
 \description{
-\code{write.fwf} writes object in *f*ixed *w*idth *f*ormat.
+  Write object to file in fixed width (fwf) format.
 }
 \usage{
 write.fwf(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
@@ -19,7 +19,7 @@ write.fwf(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
   \item{append}{logical, append to existing data in \code{file}}
   \item{quote}{logical, quote data in output}
   \item{na}{character, the string to use for missing values
-    i.e. \code{NA} in the output}
+    (\code{NA}) in the output}
   \item{sep}{character, separator between columns in output}
   \item{rownames}{logical, print row names}
   \item{colnames}{logical, print column names}
@@ -31,7 +31,7 @@ write.fwf(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
   \item{quoteInfo}{logical, should \code{formatInfo} account for quotes}
   \item{width}{numeric, width of the columns in the output}
   \item{eol}{the character(s) to print at the end of each line (row).
-    For example, 'eol="\\r\\n"' will produce Windows' line endings on a
+    For example, 'eol="\\r\\n"' will produce Windows line endings on a
     Unix-alike OS, and 'eol="\\r"' will produce files as expected by Mac
     OS Excel 2004.}
   \item{qmethod}{a character string specifying how to deal with embedded
@@ -42,11 +42,10 @@ write.fwf(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
   \item{scientific}{logical, if TRUE, allow numeric values to be
     formatted using scientific notation.}
   \item{\dots}{further arguments to
-    \code{\link{format.info}} and \code{\link{format}}
-  }
+    \code{\link{format.info}} and \code{\link{format}}.}
 }
 \details{
-  While *F*ixed *w*idth *f*ormat is no longer widely used, it remains
+  While fixed width format is no longer widely used, it remains
   common in some disciplines.
 
   Output is similar to \code{print(x)} or \code{format(x)}. Formatting is
@@ -69,7 +68,7 @@ write.fwf(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
   data back into \R. Check examples. Do read the details about
   \code{quoteInfo} argument.
 
-  Use only *true* character, i.e., avoid use of tabs, i.e., "\\t", or similar
+  Use only true characters, i.e., avoid use of tabs, i.e., "\\t", or similar
   separators via argument \code{sep}. Width of the separator is taken as
   the number of characters evaluated via \code{\link{nchar}(sep)}.
 

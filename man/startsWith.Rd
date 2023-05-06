@@ -1,7 +1,7 @@
 \name{startsWith}
 \alias{startsWith}
 \title{
-  Determine if a character string "starts with" with the specified characters.
+  Determine if a character string "starts with" with the specified characters
 }
 \description{
   Determine if a character string "starts with" with the specified characters.

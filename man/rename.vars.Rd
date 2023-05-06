@@ -26,9 +26,8 @@ remove.vars(data, names="", info=TRUE)
 }
 \author{Code by Don MacQueen \email{macq@llnl.gov}.
   Documentation by Gregory R. Warnes \email{greg@warnes.net}.}
-\seealso{\code{\link{names}},
-  \code{\link{colnames}},
-  \code{\link{data.frame}}
+\seealso{
+  \code{\link{names}}, \code{\link{colnames}}, \code{\link{data.frame}}
 }
 \examples{
 data <- data.frame(x=1:10,y=1:10,z=1:10)
@@ -39,4 +38,4 @@ names(data)
 data <- remove.vars(data, "second")
 names(data)
 }
-\keyword{ manip  }
+\keyword{manip}

@@ -34,19 +34,16 @@ object.size(\dots)
 \arguments{
   \item{\dots}{\code{object.size}: \R objects;
     \code{print} and \code{format}: arguments to be passed to other
-    methods.
-  }
+    methods.}
   \item{x}{output from \code{object.size}}
   \item{quote}{logical, indicating whether or not the result should be
     printed with surrounding quotes.}
   \item{humanReadable}{logical, use the \dQuote{human readable} format.}
   \item{standard,units,digits,width,sep,justify}{See the man page for
-    \code{\link{humanReadable}}.
-  }
-  \item{recursive}{See the man page for \code{\link[base]{c}}. }
+    \code{\link{humanReadable}}.}
+  \item{recursive}{See the man page for \code{\link[base]{c}}.}
 }
 \details{
-
   \emph{This is a modified copy of the man page for utils::object.size in R
     2.2.1.}
 
@@ -90,15 +87,15 @@ object.size(\dots)
   \code{\link{Memory-limits}} for the design limitations on object size,
   \code{\link{humanReadable}} for human readable format.
 }
-
 \examples{
 object.size(letters)
 object.size(ls)
 # Find the 10 largest objects in the base package
-allObj <- sapply(ls("package:base"),
-            function(x)
-                object.size(get(x, envir = baseenv()))
-            )
+allObj <- sapply(ls("package:base"), function(x)
+  object.size(get(x, envir = baseenv())))
+
+allObj <- sapply(ls("package:base"), function(x)
+  object.size(get(x, envir = baseenv())))
 
 (bigObj <- as.object_sizes(rev(sort(allObj))[1:10]))
 print(bigObj, humanReadable=TRUE)
@@ -114,14 +111,13 @@ options(humanReadable=TRUE)
   z <- object.size(letters,
                    c(letters, letters),
                    rep(letters, 100),
-                   rep(letters, 10000)
-                   )
+                   rep(letters, 10000))
 )
 is.object_sizes(z)
 as.object_sizes(14567567)
 
 \dontshow{
-    options(optionsOrig)
+  options(optionsOrig)
 }
 }
 \keyword{utilities}

@@ -32,7 +32,5 @@ ls.funs()
 ## List functions available in the base package:
 ls.funs("package:base")
 }
-% Add one or more standard keywords, see file 'KEYWORDS' in the
-% R documentation directory.
 \keyword{misc}
 \keyword{environment}

@@ -37,10 +37,8 @@ is.what(NA, verbose=TRUE)
 is.what(lm(1~1))
 is.what(is.what)
 }
-% Basics
 \keyword{classes}
 \keyword{NA}
-% Programming
 \keyword{programming}
 \keyword{error}
 \keyword{utilities}

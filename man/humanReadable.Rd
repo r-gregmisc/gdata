@@ -7,7 +7,7 @@
 }
 \usage{
 humanReadable(x, units="auto", standard=c("IEC", "SI", "Unix"),
-              digits=1, width=NULL, sep=" ", justify=c("right", "left") )
+              digits=1, width=NULL, sep=" ", justify=c("right", "left"))
 }
 \arguments{
   \item{x}{integer, byte size}
@@ -123,6 +123,6 @@ matrix(humanReadable(c(60810, 124141, 124, 13412513), width=NULL, digits=2))
 
 # Change the justification
 matrix(humanReadable(c(60810, 124141, 124, 13412513), width=NULL,
-                    justify=c("right", "right") ))
+                    justify=c("right", "right")))
 }
 \keyword{misc}

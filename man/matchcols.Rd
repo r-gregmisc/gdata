@@ -20,10 +20,10 @@ matchcols(object, with, without, method=c("and","or"), \dots)
   none of the patterns specified in \code{without}.
 }
 \author{Gregory R. Warnes \email{greg@warnes.net}}
-\seealso{ \code{\link[base]{grep}} }
+\seealso{\code{\link[base]{grep}}}
 \examples{
-# Create a matrix with a lot of named columns
-x <- matrix( ncol=30, nrow=5 )
+# Create a matrix with many named columns
+x <- matrix(ncol=30, nrow=5)
 colnames(x) <- c("AffyID","Overall Group Means: Control",
                  "Overall Group Means: Moderate",
                  "Overall Group Means: Marked",
@@ -61,6 +61,6 @@ matchcols(x, with=c("Pr", "Std. Error"),
              method="or")
 
 # Get just the column which give the p-value for the intercept
-matchcols(x, with=c("Intercept", "Pr") )
+matchcols(x, with=c("Intercept", "Pr"))
 }
 \keyword{manip}

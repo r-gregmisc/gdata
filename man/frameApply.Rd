@@ -37,10 +37,11 @@ frameApply(x, by=NULL, on=by[1], fun=function(xi) c(Count=nrow(xi)),
     found anywhere in the values of the \code{by} variables. The
     \code{by} variables will be pasted together using this as the
     separator, and the result will be used as the index to form the
-    subgroups.  }
+    subgroups.}
   \item{\dots}{additional arguments to \code{fun}.}
 }
-\value{a data frame if \code{simplify = TRUE} (the default), assuming
+\value{
+  A data frame if \code{simplify = TRUE} (the default), assuming
   there is sufficiently structured output from \code{fun}. If
   \code{simplify = FALSE} and \code{by} is not NULL, the return value
   will be a list with two elements. The first element, named "by", will

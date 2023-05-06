@@ -32,7 +32,6 @@ Args(glm)
 Args(scan)
 Args(legend, sort=TRUE)
 }
-% Programming
 \keyword{programming}
 \keyword{utilities}
 \keyword{documentation}

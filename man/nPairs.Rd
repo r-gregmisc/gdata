@@ -16,39 +16,39 @@ nPairs(x, margin=FALSE, names=TRUE, abbrev=TRUE, \dots)
   \item{\dots}{other arguments passed to \code{\link{abbreviate}}}
 }
 \details{
-The class of returned matrix is nPairs and matrix. There is a summary method,
-which shows the opposite information - counts how many times each variable is
-known, while the other variable of a pair is not. See examples.
+  The class of returned matrix is nPairs and matrix. There is a summary method,
+  which shows the opposite information - counts how many times each variable is
+  known, while the other variable of a pair is not. See examples.
 }
 \value{
-Matrix of order \eqn{k}, where \eqn{k} is the number of columns in \code{x}.
-Values in a matrix represent the number of pairs between columns/variables in
-\code{x}. If \code{margin=TRUE}, the number of columns is \eqn{k+1} and the
-last column represents the cumulative number of pairing all variables.
+  Matrix of order \eqn{k}, where \eqn{k} is the number of columns in \code{x}.
+  Values in a matrix represent the number of pairs between columns/variables in
+  \code{x}. If \code{margin=TRUE}, the number of columns is \eqn{k+1} and the
+  last column represents the cumulative number of pairing all variables.
 }
 \author{Gregor Gorjanc}
 \seealso{\code{\link{abbreviate}}}
 \examples{
-## Test data
+# Test data
 test <- data.frame(V1=c(1, 2, 3, 4, 5),
                    V2=c(NA, 2, 3, 4, 5),
                    V3=c(1, NA, NA, NA, NA),
                    V4=c(1, 2, 3, NA, NA))
 
-## Number of variable pairs
+# Number of variable pairs
 nPairs(x=test)
 
-## Without names
+# Without names
 nPairs(x=test, names=FALSE)
 
-## Longer names
+# Longer names
 colnames(test) <- c("Variable1", "Variable2", "Variable3", "Variable4")
 nPairs(x=test)
 
-## Margin
+# Margin
 nPairs(x=test, margin=TRUE)
 
-## Summary
+# Summary
 summary(object=nPairs(x=test))
 }
 \keyword{misc}

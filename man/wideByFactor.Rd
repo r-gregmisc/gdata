@@ -2,8 +2,8 @@
 \alias{wideByFactor}
 \title{Create multivariate data by a given factor}
 \description{
-\code{wideByFactor} modifies data.frame in such a way that variables are
-\dQuote{separated} into several columns by factor levels.
+  Modify data frame in such a way that variables are
+  \dQuote{separated} into several columns by factor levels.
 }
 \usage{
   wideByFactor(x, factor, common, sort=TRUE, keepFactor=TRUE)
@@ -18,7 +18,7 @@
   \item{keepFactor}{logical, keep the \sQuote{factor} column}
 }
 \details{
-  Given data frame is modified in such a way, that output represents a data
+  Given data frame is modified so that the output represents a data
   frame with \eqn{c + f + n * v} columns, where \eqn{c} is a number of common
   columns for all levels of a factor, \eqn{f} is a factor column, \eqn{n} is a
   number of levels in factor \eqn{f} and \eqn{v} is a number of variables that

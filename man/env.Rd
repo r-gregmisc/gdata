@@ -34,8 +34,6 @@ env(unit="KB", digits=0)
 env()
 }
 }
-% Basics
 \keyword{data}
-% Programming
 \keyword{environment}
 \keyword{utilities}

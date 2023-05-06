@@ -5,7 +5,7 @@
 \alias{lowerTriangle<-}
 \title{Extract or replace the upper/lower triangular portion of a matrix}
 \description{
-  Extract or replace the upper/lower triangular portion of a matrix
+  Extract or replace the upper/lower triangular portion of a matrix.
 }
 \usage{
 upperTriangle(x, diag=FALSE, byrow=FALSE)
@@ -32,11 +32,11 @@ lowerTriangle(x, diag=FALSE, byrow=FALSE) <- value
 \note{
   By default, the elements are returned/replaced in R's default column-wise
   order. Thus
-  \preformatted{  lowerTriangle(x) <- upperTriangle(x)}
+  \preformatted{lowerTriangle(x) <- upperTriangle(x)}
   will not yield a symmetric matrix.  Instead use:
-  \preformatted{  lowerTriangle(x) <- upperTriangle(x, byrow=TRUE)}
+  \preformatted{lowerTriangle(x) <- upperTriangle(x, byrow=TRUE)}
   or equivalently:
-  \preformatted{  lowerTriangle(x, byrow=TRUE) <- upperTriangle(x)}
+  \preformatted{lowerTriangle(x, byrow=TRUE) <- upperTriangle(x)}
 }
 \author{Gregory R. Warnes \email{greg@warnes.net}}
 \seealso{
@@ -45,7 +45,7 @@ lowerTriangle(x, diag=FALSE, byrow=FALSE) <- value
   \code{\link[base]{upper.tri}}
 }
 \examples{
-x <- matrix( 1:25, nrow=5, ncol=5)
+x <- matrix(1:25, nrow=5, ncol=5)
 x
 upperTriangle(x)
 upperTriangle(x, diag=TRUE)

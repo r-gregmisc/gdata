@@ -36,7 +36,6 @@ keep(trees)
 # To remove all objects except trees, run:
 # keep(trees, sure=TRUE)
 }
-% Programming
 \keyword{data}
 \keyword{environment}
 \keyword{utilities}
