@@ -38,17 +38,16 @@ xls2sep <- function(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, ...,
 
   ## Filesheet
   tf <- NULL
-  if(
-    startsWith(xls, "https://") ||
-    startsWith(xls, "http://") ||
-    startsWith(xls, "ftp://")
-  )
+  if(startsWith(xls, "https://") ||
+     startsWith(xls, "http://") ||
+     startsWith(xls, "ftp://"))
   {
     tf <- paste(tempfile(), "xls", sep = ".")
     if(verbose)
       message("Downloading ", dQuote(xls), " to \n", dQuote(tf), "..\n")
     download.file(xls, tf, mode = "wb")
-    if(verbose) cat("Done.\n")
+    if(verbose)
+      cat("Done.\n")
     xls <- tf
   }
 
@@ -98,7 +97,7 @@ xls2sep <- function(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, ...,
   results <- try(system(cmd, intern=!verbose))
 
   if(inherits(results, "try-error"))
-    stop( "unable to read xls file '", xls, "':", results)
+    stop("unable to read xls file '", xls, "':", results)
 
   if(verbose)
     cat(results, "\n\n")
@@ -107,12 +106,12 @@ xls2sep <- function(xls, sheet=1, verbose=FALSE, blank.lines.skip=TRUE, ...,
 
   ## Check that target file was created
   if(!file.exists(targetFile))
-    stop( "Intermediate file '", targetFile, "' missing!" )
+    stop("intermediate file '", targetFile, "' missing!" )
 
   ## Create file object to hand to the next stage
   retval <- try(file(targetFile))
   if(inherits(retval, "try-error"))
-    stop("Unable to open intermediate file '", targetFile, "':", retval)
+    stop("unable to open intermediate file '", targetFile, "':", retval)
 
   return(retval)
 }

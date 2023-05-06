@@ -1,4 +1,4 @@
-rename.vars <- function(data,from='',to='',info=TRUE)
+rename.vars <- function(data, from="", to="", info=TRUE)
 {
   dsn <- deparse(substitute(data))
   dfn <- names(data)
@@ -28,8 +28,9 @@ rename.vars <- function(data,from='',to='',info=TRUE)
 
   dfn.new <- dfn
   dfn.new[chng] <- to
-  if (info) cat('\nChanging in',dsn)
-  tmp <- rbind(from,to)
+  if (info)
+    cat('\nChanging in', dsn)
+  tmp <- rbind(from, to)
   dimnames(tmp)[[1]] <- c('From:', 'To:')
   dimnames(tmp)[[2]] <- rep('', length(from))
   if (info)
@@ -41,7 +42,7 @@ rename.vars <- function(data,from='',to='',info=TRUE)
   data
 }
 
-remove.vars <- function( data, names, info=TRUE)
+remove.vars <- function(data, names, info=TRUE)
 {
   dsn <- deparse(substitute(data))
   if (info) cat('\nChanging in', dsn, "\n")

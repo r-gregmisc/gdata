@@ -1,4 +1,3 @@
-
 drop.levels  <- function(x, reorder=TRUE, ...)
   UseMethod("drop.levels")
 

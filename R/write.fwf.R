@@ -23,7 +23,7 @@ write.fwf <- function(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
   if(!scientific)
   {
     option.scipen <- getOption("scipen")
-    on.exit( function() options("scipen"=option.scipen) )
+    on.exit(function() options("scipen"=option.scipen))
     options("scipen"=100)
   }
 
@@ -34,8 +34,8 @@ write.fwf <- function(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
     colnames(x)[1] <- rowColVal
   }
   colnamesMy <- colnames(x)
-  if(length(colnamesMy)==0)
-    colnamesMy <- paste("V", 1:ncol(x), sep="")
+  if(length(colnamesMy) == 0)
+    colnamesMy <- paste0("V", 1:ncol(x))
 
   nRow <- nrow(x)
   nCol <- length(colnamesMy)
@@ -65,16 +65,18 @@ write.fwf <- function(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
 
   ## Which columns are factors -> convert them to character
   isFac <- dapply(x, is.factor)
-  if(any(isFac))
+  if(any(isFac)) {
     ## This conditional is necessary because if x is a matrix, even if
     ## all(isFAC==FALSE), this assignment will coerce it to mode
     ## character.  This isn't a problem for dataframes.
     x[, isFac] <- sapply(x[, isFac, drop=FALSE], as.character)
+  }
 
   ## Collect information about how format() will format columns.
   ## We need this info since format will turn all columns to character
   tmp <- dapply(x, format.info, ..., simplify=FALSE)
-  if(is.matrix(x)) tmp <- as.data.frame(tmp)
+  if(is.matrix(x))
+    tmp <- as.data.frame(tmp)
   tmp1 <- sapply(tmp, length)
   tmp <- t(as.data.frame(tmp))
   retFormat$width <- tmp[, 1]
@@ -146,9 +148,8 @@ write.fwf <- function(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
       tmpCol <- paste(colnamesMy[test], collapse=", ")
       tmpWidth <- paste(width[test], collapse=", ")
       tmpNeed <- paste(retFormat$width[test], collapse=", ")
-      stop(paste("'width' (", tmpWidth, ") was too small for columns: ",
-                 tmpCol, "\n 'width' should be at least (", tmpNeed, ")",
-                 sep=""))
+      stop(paste0("'width' (", tmpWidth, ") was too small for columns: ",
+                  tmpCol, "\n 'width' should be at least (", tmpNeed, ")"))
     }
   }
 

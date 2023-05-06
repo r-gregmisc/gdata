@@ -1,5 +1,3 @@
-# This function replaces rows in 'object' by corresponding rows in 'new' that
-# have the same value for 'by'
 update.data.frame <- function(object, new, by, by.x=by, by.y=by, append=TRUE,
                               verbose=FALSE, ...)
 {

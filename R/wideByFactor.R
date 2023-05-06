@@ -1,5 +1,3 @@
-### Reshape by factor levels
-
 wideByFactor <- function(x, factor, common, sort=TRUE, keepFactor=TRUE)
 {
   ## Setup

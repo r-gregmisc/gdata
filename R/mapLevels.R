@@ -1,7 +1,4 @@
-## Mapping levels
-
-mapLevels <- function(x, codes=TRUE, sort=TRUE, drop=FALSE,
-                      combine=FALSE, ...)
+mapLevels <- function(x, codes=TRUE, sort=TRUE, drop=FALSE, combine=FALSE, ...)
 {
   UseMethod("mapLevels")
 }
@@ -178,7 +175,7 @@ c.levelsMap <- function(..., sort=TRUE, recursive=FALSE)
 {
   x <- list(...)
   class(x) <- "listLevelsMap"
-  ## we use recursive=TRUE here because ... is a lists of lists
+  ## We use recursive=TRUE here because ... is a lists of lists
   c(x, sort=sort, recursive=TRUE)
 }
 

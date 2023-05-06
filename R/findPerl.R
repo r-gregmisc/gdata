@@ -1,5 +1,3 @@
-## findPerl attempts to locate a valid perl executable
-
 findPerl <- function(perl, verbose = "FALSE")
 {
   errorMsg <- c("perl executable not found; ",

@@ -1,5 +1,3 @@
-## Column-bind objects with different number of rows
-
 cbindX <- function(...)
 {
   ## Setup

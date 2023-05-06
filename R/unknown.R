@@ -1,14 +1,3 @@
-### unknown.R
-###------------------------------------------------------------------------
-### What: Change given unknown value to NA and vice versa
-### $Id$
-### Time-stamp: <2007-04-26 13:16:10 ggorjan>
-###------------------------------------------------------------------------
-
-### {{{ isUnknown
-
-###------------------------------------------------------------------------
-
 isUnknown <- function(x, unknown=NA, ...)
   UseMethod("isUnknown")
 
@@ -55,11 +44,6 @@ isUnknown.matrix <- function(x, unknown=NA, ...)
   apply(X=x, MARGIN=ifelse(ncol(x) > nrow(x), 1, 2), FUN=isUnknown,
         unknown=unknown)
 
-### }}}
-### {{{ unknownToNA
-
-###------------------------------------------------------------------------
-
 unknownToNA <- function(x, unknown, warning=FALSE, ...)
   UseMethod("unknownToNA")
 
@@ -101,11 +85,6 @@ unknownToNA.data.frame <- function(x, unknown, warning=FALSE, ...)
   x[] <- unknownToNA.list(x=x, unknown=unknown, warning=warning)
   x
 }
-
-### }}}
-### {{{ NAToUnknown
-
-###------------------------------------------------------------------------
 
 NAToUnknown <- function(x, unknown, force=FALSE, call.=FALSE, ...)
   UseMethod("NAToUnknown")
@@ -160,14 +139,9 @@ NAToUnknown.data.frame <- function(x, unknown, force=FALSE, call.=FALSE, ...)
   x
 }
 
-### }}}
-### {{{ .unknownList
-###------------------------------------------------------------------------
-
 .unknownList <- function(x, unknown)
 {
-  ## --- Setup ---
-
+  ## Setup
   n <- length(x)
   unkN <- length(unknown)
   namesX <- names(x)
@@ -178,23 +152,22 @@ NAToUnknown.data.frame <- function(x, unknown, force=FALSE, call.=FALSE, ...)
   defInd <- unkNames %in% ".default"
   def <- unknown[defInd]
 
-  if(defInNames) { ## Remove default
+  if(defInNames) {  # remove default
     unkN <- unkN - 1
     unkNames <- unkNames[!defInd]
     unknown <- unknown[!defInd]
   }
 
-  if(!namesXNullTest) { ## Check for nonexistent name
+  if(!namesXNullTest) {  # check for nonexistent name
     test <- !(unkNames %in% namesX)
     if(any(test)) stop(sprintf("name(s) %s not in names of 'x'",
-                       paste(sQuote(unkNames[test]), collapse=" ")))
+                               paste(sQuote(unkNames[test]), collapse=" ")))
   }
 
-  ## --- Recycle ---
-
+  ## Recycle
   if(unkN < n) {
     if(unkNamesNullTest | defInNames) {
-      if(defInNames) { # handling .default
+      if(defInNames) {  # handling .default
         names(def) <- NULL
         unknownDef <- rep(def, length=(n - unkN))
         names(unknownDef) <- namesX[!(namesX %in% unkNames)]
@@ -208,25 +181,14 @@ NAToUnknown.data.frame <- function(x, unknown, force=FALSE, call.=FALSE, ...)
     }
   }
 
-  ## --- Names ---
-
-  if(!namesXNullTest) { ## no need if namesX NULL
-    if(unkNamesNullTest) { ## missing unkNames
+  ## Names
+  if(!namesXNullTest) {  # no need if namesX NULL
+    if(unkNamesNullTest) {  # missing unkNames
       names(unknown) <- namesX
-    } else {                ## unkNames known
+    } else {                # unkNames known
       unknown <- unknown[match(namesX, names(unknown))]
     }
   }
 
   unknown
 }
-
-### }}}
-### {{{ Dear Emacs
-### Local variables:
-### folded-file: t
-### End:
-### }}}
-
-###------------------------------------------------------------------------
-### unknown.R ends here
