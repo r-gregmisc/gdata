@@ -30,9 +30,7 @@
 }
 \author{Gregor Gorjanc}
 \seealso{
-  \code{\link[stats]{reshape}} in the \pkg{stats} package,
-  \code{\link[reshape2]{melt}} and \code{\link[reshape2]{cast}} in
-  the \pkg{reshape2} package
+  \code{\link[stats]{reshape}} in the \pkg{stats} package.
 }
 \examples{
 n <- 10
@@ -40,7 +38,7 @@ f <- 2
 tmp <- data.frame(y1=rnorm(n=n),
                   y2=rnorm(n=n),
                   f1=factor(rep(letters[1:f], n/2)),
-                  f2=factor(c(rep(c("M"), n/2), rep(c("F"), n/2))),
+                  f2=factor(c(rep("M", n/2), rep("F", n/2))),
                   c1=1:n,
                   c2=2*(1:n))
 
