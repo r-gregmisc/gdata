@@ -11,7 +11,7 @@ interleave <- function(..., append.source=TRUE, sep=": ", drop=FALSE)
   nrows <- sapply(sources, nrow)
   mrows <- max(nrows)
   if(any(nrows!=mrows & nrows!=1))
-    stop("arguments have differening numbers of rows")
+    stop("arguments have differing numbers of rows")
 
   sources <- lapply(sources, function(x)
     if(nrow(x)==1) x[rep(1,mrows),,drop=drop] else x)
