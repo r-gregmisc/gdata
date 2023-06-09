@@ -97,7 +97,7 @@ write.fwf(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
   that there is no way to properly read the data back to \R if
   \code{quote=TRUE & quoteInfo=FALSE} arguments were used for
   export. \code{quoteInfo} applies only when \code{quote=TRUE}. Assume
-  that there is a file with quoted data as shown bellow (column numbers in
+  that there is a file with quoted data as shown below (column numbers in
   first three lines are only for demonstration of the values in the
   output).
 

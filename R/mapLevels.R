@@ -17,7 +17,7 @@ mapLevels.character <- function(x, codes=TRUE, sort=TRUE, drop=FALSE,
 }
 
 ## Could coerce character to factor and then use factor method, but that
-## is more expensive than simple unique and length used bellow in factor
+## is more expensive than simple unique and length used below in factor
 ## method
 
 mapLevels.factor <- function(x, codes=TRUE, sort=TRUE, drop=FALSE,

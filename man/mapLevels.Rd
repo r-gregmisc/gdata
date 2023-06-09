@@ -59,7 +59,7 @@ mapLevels(x) <- value
   When \code{codes=TRUE} \bold{integer \dQuote{levelsMap}} with
   information on mapping internal codes with levels is produced. Output
   can be used to transform integer to factor or remap factor levels as
-  described bellow. With \code{codes=FALSE} \bold{character
+  described below. With \code{codes=FALSE} \bold{character
     \dQuote{levelsMap}} is produced. The later is usefull, when one would
   like to remap factors or combine factors with some overlap in levels as
   described in \code{mapLevels<-} section and shown in examples.
