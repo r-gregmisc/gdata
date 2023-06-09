@@ -20,9 +20,6 @@
       \code{\link{humanReadable}}, \code{\link{is.what}},
       \code{\link{ll}}, \code{\link{keep}}, \code{\link{ls.funs}},
       \code{\link{Args}}, \code{\link{nPairs}}, \code{\link{nobs}}
-    \item Manipulating MS-Excel formatted files: \code{\link{read.xls}},
-      \code{\link{installXLSXsupport}}, \code{\link{sheetCount}},
-      \code{\link{xlsFormats}}
     \item Generating fixed-width format files: \code{\link{write.fwf}}
     \item Extracting components of date & time objects:
       \code{\link{getYear}}, \code{\link{getMonth}},

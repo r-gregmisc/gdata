@@ -1,6 +1,4 @@
-
-export(
-       .onAttach,
+export(.onAttach,
        ans,
        Args,
        bindData,
@@ -13,14 +11,13 @@ export(
        duplicated2,
        env,
        first,
-       'first<-',
+       "first<-",
        frameApply,
-       installXLSXsupport,
        interleave,
        is.what,
        keep,
        last,
-       'last<-',
+       "last<-",
        left,
        ll,
        ls.funs,
@@ -30,15 +27,11 @@ export(
        nobs,  # default method now provided by stats package
        nPairs,
        mv,
-       read.xls,
        rename.vars,
        remove.vars,
        reorder.factor,
        resample,
        right,
-       # runPerlScript,
-       sheetCount,
-       sheetNames,
        startsWith,
        trim,
        trimSum,
@@ -49,11 +42,6 @@ export(
        "upperTriangle<-",
        wideByFactor,
        write.fwf,
-       xls2csv,
-       xls2tab,
-       xls2tsv,
-       xls2sep,
-       xlsFormats,
 
        ## Object size stuff
        object.size, as.object_sizes, is.object_sizes, humanReadable,
@@ -72,7 +60,7 @@ importFrom(stats, reorder)
 importFrom(stats, nobs)
 importFrom(gtools, mixedsort)
 importFrom(methods, is, slot, slotNames)
-importFrom(utils, data, download.file, head, read.csv, read.delim, read.table, tail, write.table)
+importFrom(utils, data, head, read.table, tail, write.table)
 
 S3method(reorder, factor)
 

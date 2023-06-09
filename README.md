@@ -12,8 +12,6 @@ Various R programming tools for data manipulation, including:
 - factor manipulation (`levels`, `reorder.factor`, `mapLevels`),
 - obtaining information about R objects (`object.size`, `env`, `humanReadable`,
   `is.what`, `ll`, `keep`, `ls.funs`, `Args`, `nPairs`, `nobs`),
-- manipulating MS-Excel formatted files (`read.xls`, `installXLSXsupport`,
-  `sheetCount`, `xlsFormats`),
 - generating fixed-width format files (`write.fwf`),
 - extracting components of date & time objects (`getYear`, `getMonth`,
   `getDay`, `getHour`, `getMin`, `getSec`),
