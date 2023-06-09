@@ -38,10 +38,10 @@ nobs(object, \dots)
 }
 \note{
   The base R package \code{stats} now provides a S3 dispatch function for
-  \code{nobs}, and methods for for objects of classes "lm", "glm",
+  \code{nobs}, and methods for objects of classes "lm", "glm",
   "nls" and "logLik", as well as a default method.
 
-  Since they provided a subset of the the functionality, the base
+  Since they provided a subset of the functionality, the base
   method dispatch (\code{nobs}) function and method for "lm" objects
   (\code{nobs.lm}) are, as of \code{gdata} version 2.10.1, simply
   aliases for the equivalent functions in the base R \code{stats}
