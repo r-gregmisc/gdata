@@ -90,13 +90,10 @@ object.size(\dots)
 \examples{
 object.size(letters)
 object.size(ls)
+
 # Find the 10 largest objects in the base package
 allObj <- sapply(ls("package:base"), function(x)
   object.size(get(x, envir = baseenv())))
-
-allObj <- sapply(ls("package:base"), function(x)
-  object.size(get(x, envir = baseenv())))
-
 (bigObj <- as.object_sizes(rev(sort(allObj))[1:10]))
 print(bigObj, humanReadable=TRUE)
 
