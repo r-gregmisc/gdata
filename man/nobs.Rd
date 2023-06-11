@@ -67,5 +67,13 @@ nobs(df)
 
 fit <- lm(y ~ x, data=df)
 nobs(fit)
+
+# Comparison
+# gdata
+nobs(x)
+nobs(df)
+# stats
+length(na.omit(x))
+sapply(df, function(x) length(na.omit(x)))
 }
 \keyword{attribute}

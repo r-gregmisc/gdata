@@ -93,28 +93,29 @@ object.size(ls)
 
 # Find the 10 largest objects in the base package
 allObj <- sapply(ls("package:base"), function(x)
-  object.size(get(x, envir = baseenv())))
+  object.size(get(x, envir=baseenv())))
 (bigObj <- as.object_sizes(rev(sort(allObj))[1:10]))
 print(bigObj, humanReadable=TRUE)
 
 as.object_sizes(14567567)
 
-\dontshow{
-  optionsOrig <- options("humanReadable")
-}
-
-options(humanReadable=TRUE)
-(
-  z <- object.size(letters,
-                   c(letters, letters),
-                   rep(letters, 100),
-                   rep(letters, 10000))
-)
+oldopt <- options(humanReadable=TRUE)
+(z <- object.size(letters,
+                  c(letters, letters),
+                  rep(letters, 100),
+                  rep(letters, 10000)))
 is.object_sizes(z)
 as.object_sizes(14567567)
+options(oldopt)
 
-\dontshow{
-  options(optionsOrig)
-}
+# Comparison
+# gdata
+print(object.size(loadNamespace), humanReadable=TRUE)
+print(bigObj, humanReadable=TRUE)
+# utils
+print(utils::object.size(loadNamespace), units="auto")
+sapply(bigObj, utils:::format.object_size, units="auto")
+# ll
+ll("package:base")[order(-ll("package:base")$KB)[1:10],]
 }
 \keyword{utilities}

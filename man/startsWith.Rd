@@ -44,5 +44,13 @@ names(s) <- s
 startsWith(s, 'Test')        # ' Testing', 'testing', and 'Texting' do not match
 startsWith(s, 'Test', trim=TRUE)        # Now ' Testing' matches
 startsWith(s, 'Test', ignore.case=TRUE) # Now 'testing' matches
+
+# Comparison
+# gdata
+startsWith(s, 'Test', trim=TRUE)
+startsWith(s, 'Test', ignore.case=TRUE)
+# base
+startsWith(trimws(s), 'Test')
+startsWith(tolower(s), tolower('Test'))
 }
 \keyword{character}
