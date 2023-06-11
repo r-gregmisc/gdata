@@ -68,7 +68,7 @@ write.fwf <- function(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
   if(any(isFac)) {
     ## This conditional is necessary because if x is a matrix, even if
     ## all(isFAC==FALSE), this assignment will coerce it to mode
-    ## character.  This isn't a problem for dataframes.
+    ## character.  This isn't a problem for data frames.
     x[, isFac] <- sapply(x[, isFac, drop=FALSE], as.character)
   }
 

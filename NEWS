@@ -135,7 +135,7 @@ New features:
   of an object.
 
 - New functions left() and right() to return the leftmost or
-  rightmost n (default to 6) columns of a matrix or dataframe.
+  rightmost n (default to 6) columns of a matrix or data frame.
 
 - New 'scientific' argument to write.fwf().  Set 'scientific=FALSE' to
   prevent numeric columns from being displayed using scientific

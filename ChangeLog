@@ -130,7 +130,7 @@
 	* [r1968] Update .save files
 	* [r1967] Missed on commit.
 	* [r1966] Modfy write.fwf() to properly handle matrix argument,
-	  avoiding conversion to dataframe unless rownames=TRUE. Add
+	  avoiding conversion to data frame unless rownames=TRUE. Add
 	  corresponding unit tests.
 	* [r1965] Installing PERL modules was failing. Adding CPAN
 	  configuration option fixed the problem.

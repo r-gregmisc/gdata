@@ -9,7 +9,7 @@
 matchcols(object, with, without, method=c("and","or"), \dots)
 }
 \arguments{
-  \item{object}{Matrix or dataframe}
+  \item{object}{Matrix or data frame}
   \item{with, without}{Vector of regular expression patterns}
   \item{method}{One of "and" or "or"}
   \item{\dots}{Optional arguments to \code{grep}}

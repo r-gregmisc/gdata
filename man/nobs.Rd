@@ -24,7 +24,7 @@ nobs(object, \dots)
   \itemize{
     \item{For numeric vectors, this is simply the number of non-NA
       elements, as computed by \code{sum(!is.na(object))}.}
-    \item{For dataframe objects, the result is a vector containing the
+    \item{For data frames, the result is a vector containing the
       number of non-NA elementes of each column.}
   }
 
@@ -47,7 +47,7 @@ nobs(object, \dots)
   aliases for the equivalent functions in the base R \code{stats}
   package.
 
-  Since \code{gdata}'s default method (\code{nobs.default}) processes
+  \code{gdata}'s default method (\code{nobs.default}) processes
   vectors and hands any other data/object types to
   \code{stats:::nobs.default}.
 }
