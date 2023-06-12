@@ -3,7 +3,7 @@ env <- function(unit="KB", digits=0)
   get.object.size <- function(object.name, pos)
   {
     object <- get(object.name, pos=pos)
-    size <- try(unclass(object.size(object)), silent=TRUE)
+    size <- try(unclass(utils::object.size(object)), silent=TRUE)
     if(inherits(size, "try-error"))
       size <- 0
     size

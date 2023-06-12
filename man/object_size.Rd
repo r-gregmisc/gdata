@@ -62,7 +62,8 @@ object_size(\dots)
   implementation. This eliminates ambiguity and makes it less likely to
   get errors when running parts of an existing script without first
   loading the \code{gdata} package. The old \code{object.size} function
-  name is still provided by the \code{gdata} package as an alias.
+  name is now deprecated in the \code{gdata} package, pointing users to
+  \code{object_size} and \code{utils::gdata} instead.
 }
 \seealso{
   \code{\link[utils]{object.size}} in package 'utils' for the base R

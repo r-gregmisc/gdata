@@ -58,5 +58,7 @@ c.object_sizes <- function(..., recursive=FALSE)
 
 object.size <- function(...)
 {
+  .Deprecated(old="gdata::object.size",
+              new="object_size() or utils::object.size()")
   object_size(...)
 }

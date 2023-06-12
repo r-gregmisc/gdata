@@ -16,7 +16,7 @@
     \item Factor manipulation: \code{\link{levels}},
       \code{\link{reorder.factor}}, \code{\link{mapLevels}}
     \item Obtaining information about R objects:
-      \code{\link{object.size}}, \code{\link{env}},
+      \code{\link{object_size}}, \code{\link{env}},
       \code{\link{humanReadable}}, \code{\link{is.what}},
       \code{\link{ll}}, \code{\link{keep}}, \code{\link{ls.funs}},
       \code{\link{Args}}, \code{\link{nPairs}}, \code{\link{nobs}}

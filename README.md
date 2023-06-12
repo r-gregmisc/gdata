@@ -10,7 +10,7 @@ Various R programming tools for data manipulation, including:
 - combining objects (`bindData`, `cbindX`, `combine`, `interleave`),
 - character vector operations (`centerText`, `startsWith`, `trim`),
 - factor manipulation (`levels`, `reorder.factor`, `mapLevels`),
-- obtaining information about R objects (`object.size`, `env`, `humanReadable`,
+- obtaining information about R objects (`object_size`, `env`, `humanReadable`,
   `is.what`, `ll`, `keep`, `ls.funs`, `Args`, `nPairs`, `nobs`),
 - generating fixed-width format files (`write.fwf`),
 - extracting components of date & time objects (`getYear`, `getMonth`,
