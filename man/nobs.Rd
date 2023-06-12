@@ -35,7 +35,10 @@ n_obs(object, \dots)
   \code{gdata} implementation is being used.
 }
 \author{Gregory R. Warnes \email{greg@warnes.net}}
-\seealso{\code{\link{is.na}}, \code{\link{length}}}
+\seealso{
+  \code{\link[stats]{nobs}} in package 'stats' for the base R implementation,
+  \code{\link{is.na}}, \code{\link{length}}
+}
 \examples{
 x <- c(1, 2, 3, 5, NA, 6, 7, 1, NA)
 length(x)
