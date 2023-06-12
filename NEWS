@@ -1,4 +1,4 @@
-Changes in 3.0.0 (2023-06-09)
+Changes in 3.0.0 (2023-06-13)
 -----------------------------
 
 Other changes:
@@ -6,6 +6,9 @@ Other changes:
 - Removed installXLSXsupport(), read.xls(), sheetCount(), sheetNames(),
   xls2csv(), xls2tab(), xls2tsv(), xls2sep(), and xlsFormats(). See gdata 2.19.0
   NEWS entry announcing their deprecation.
+
+- Added aliases n_obs(), object_size(), and starts_with(). Deprecated
+  gdata::object.size().
 
 
 
