@@ -467,7 +467,7 @@ Changes in 2.8.0 (2010-04-03)
 
 Enhancements:
 
-- When loaded, gtools (via an .onAttach() function) now checks:
+- When loaded, gdata (via an .onAttach() function) now checks:
    1) if perl is available
    2) whether the perl libraries for XLS support are available
    3) whether the perl libraries for XLSX support are available

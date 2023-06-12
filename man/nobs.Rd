@@ -28,7 +28,7 @@ nobs(object, \dots)
       number of non-NA elementes of each column.}
   }
 
-  The \code{nobs} and \code{nobs.lm} functions defined in gtools are
+  The \code{nobs} and \code{nobs.lm} functions defined in gdata are
   simply aliases for the functions in the base R \code{stats} package,
   provided for backwards compatibility.
 }
