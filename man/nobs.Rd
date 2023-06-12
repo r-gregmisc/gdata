@@ -31,8 +31,8 @@ n_obs(object, \dots)
   frames.
 
   An alias function \code{n_obs} is also provided, equivalent to
-  \code{gdata::nobs}. Using \code{n_obs} in scripts makes it explicit that the
-  \code{gdata} implementation is being used.
+  \code{gdata::nobs}. Using \code{n_obs} in scripts makes it explicitly
+  clear that the \code{gdata} implementation is being used.
 }
 \author{Gregory R. Warnes \email{greg@warnes.net}}
 \seealso{
