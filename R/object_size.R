@@ -1,4 +1,4 @@
-object.size <- function(...)
+object_size <- function(...)
 {
   structure(sapply(list(...), utils::object.size),
             class=c("object_sizes", "numeric"))
@@ -54,4 +54,9 @@ c.object_sizes <- function(..., recursive=FALSE)
   x <- NextMethod()
   if(is.numeric(x)) class(x) <- c("object_sizes", "numeric")
   x
+}
+
+object.size <- function(...)
+{
+  object_size(...)
 }

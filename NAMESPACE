@@ -45,7 +45,7 @@ export(.onAttach,
        write.fwf,
 
        ## Object size stuff
-       object.size, as.object_sizes, is.object_sizes, humanReadable,
+       object_size, as.object_sizes, is.object_sizes, humanReadable, object.size,
 
        ## getDateTime stuff
        getYear, getMonth, getDay, getHour, getMin, getSec,

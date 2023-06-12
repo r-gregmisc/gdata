@@ -1,21 +1,17 @@
-% Some material taken from src/library/utils/man/object.size.Rd
-% Part of the R package, http://www.R-project.org
-% Copyright 1995-2007 R Core Development Team
-% Distributed under GPL 2 or later
-
-\name{object.size}
-\alias{object.size}
+\name{object_size}
+\alias{object_size}
 \alias{c.object_sizes}
 \alias{as.object_sizes}
 \alias{is.object_sizes}
 \alias{format.object_sizes}
 \alias{print.object_sizes}
+\alias{object.size}
 \title{Report the Space Allocated for Objects}
 \description{
   Provides an estimate of the memory that is being used to store \R objects.
 }
 \usage{
-object.size(\dots)
+object_size(\dots)
 
 \method{is}{object_sizes}(x)
 
@@ -25,82 +21,69 @@ object.size(\dots)
 
 \method{format}{object_sizes}(x, humanReadable=getOption("humanReadable"),
        standard="IEC", units, digits=1, width=NULL, sep=" ",
-       justify = c("right", "left"), \dots)
+       justify=c("right", "left"), \dots)
 
 \method{print}{object_sizes}(x, quote=FALSE,
       humanReadable=getOption("humanReadable"), standard="IEC", units, digits=1,
-      width=NULL, sep=" ", justify = c("right", "left"), \dots)
+      width=NULL, sep=" ", justify=c("right", "left"), \dots)
 }
 \arguments{
-  \item{\dots}{\code{object.size}: \R objects;
-    \code{print} and \code{format}: arguments to be passed to other
-    methods.}
-  \item{x}{output from \code{object.size}}
-  \item{quote}{logical, indicating whether or not the result should be
-    printed with surrounding quotes.}
-  \item{humanReadable}{logical, use the \dQuote{human readable} format.}
-  \item{standard,units,digits,width,sep,justify}{See the man page for
+  \item{\dots}{\code{object_size}: \R objects;
+    \code{print} and \code{format}: arguments to be passed to other methods.}
+  \item{x}{output from \code{object_size}.}
+  \item{quote}{whether or not the result should be printed with
+    surrounding quotes.}
+  \item{humanReadable}{whether to use the \dQuote{human readable} format.}
+  \item{standard,units,digits,width,sep,justify}{passed to
     \code{\link{humanReadable}}.}
-  \item{recursive}{See the man page for \code{\link[base]{c}}.}
-}
-\details{
-  \emph{This is a modified copy of the man page for utils::object.size in R
-    2.2.1.}
-
-  Exactly which parts of the memory allocation should be attributed
-  to which object is not clear-cut.  This function merely provides a
-  rough indication: it should be reasonably accurate for atomic
-  vectors, but does not detect if elements of a list are shared, for
-  example.  (Sharing amongst elements of a character vector is taken
-  into account, but not that between character vectors in a single
-  object.)
-
-  The calculation is of the size of the object, and excludes the
-  space needed to store its name in the symbol table.
-
-  Associated space (e.g., the environment of a function and what the
-  pointer in a \code{EXTPTRSXP} points to) is not included in the
-  calculation.
-
-  Object sizes are larger on 64-bit builds than 32-bit ones, but
-  will very likely be the same on different platforms with the same
-  word length and pointer size.
-
-  \emph{Changes}
-
-  Class of returned object is \code{c("object_sizes", "numeric")} with
-  appropriate \code{print} and \code{c} methods.
-
-  By default \code{object.size} outputs size in bytes, but human
-  readable format similar to \code{ls}, \code{df} or \code{du} shell
-  commands can be displayed by calling \code{humanReadable} directly,
-  calling \code{print} with the argument \code{humanReadable=TRUE}, or
-  by setting \code{options(humanReadable=TRUE)}.
+  \item{recursive}{passed to the \code{\link[base]{c}} method.}
 }
 \value{
   A numeric vector class \code{c("object_sizes", "numeric")} containing
   estimated memory allocation attributable to the objects in bytes.
 }
+\details{
+  The base R package \code{utils} provides an \code{object.size}
+  function that handles a single object. The \code{gdata} package
+  provides a similar \code{object_size} function that handles multiple
+  objects.
+
+  Both the \code{utils} and \code{gdata} implementations store the
+  object size in bytes, but offer a slightly different user interface
+  for showing the object size in other formats. The \code{gdata}
+  implementation offers human readable format similar to \code{ls},
+  \code{df} or \code{du} shell commands, by calling \code{humanReadable}
+  directly, calling \code{print} with the argument
+  \code{humanReadable=TRUE}, or by setting
+  \code{options(humanReadable=TRUE)}.
+
+  The 3.0.0 release of \code{gdata} renamed this function to
+  \code{object_size}, allowing users to explicitly call the \code{gdata}
+  implementation. This eliminates ambiguity and makes it less likely to
+  get errors when running parts of an existing script without first
+  loading the \code{gdata} package. The old \code{object.size} function
+  name is still provided by the \code{gdata} package as an alias.
+}
 \seealso{
-  \code{\link[utils]{object.size}} in package 'utils' for the standard
-  version of this function,
+  \code{\link[utils]{object.size}} in package 'utils' for the base R
+  implementation,
   \code{\link{Memory-limits}} for the design limitations on object size,
   \code{\link{humanReadable}} for human readable format.
 }
 \examples{
-object.size(letters)
-object.size(ls)
+object_size(letters)
+object_size(ls)
 
 # Find the 10 largest objects in the base package
 allObj <- sapply(ls("package:base"), function(x)
-  object.size(get(x, envir=baseenv())))
+  object_size(get(x, envir=baseenv())))
 (bigObj <- as.object_sizes(rev(sort(allObj))[1:10]))
 print(bigObj, humanReadable=TRUE)
 
 as.object_sizes(14567567)
 
 oldopt <- options(humanReadable=TRUE)
-(z <- object.size(letters,
+(z <- object_size(letters,
                   c(letters, letters),
                   rep(letters, 100),
                   rep(letters, 10000)))
@@ -110,7 +93,7 @@ options(oldopt)
 
 # Comparison
 # gdata
-print(object.size(loadNamespace), humanReadable=TRUE)
+print(object_size(loadNamespace), humanReadable=TRUE)
 print(bigObj, humanReadable=TRUE)
 # utils
 print(utils::object.size(loadNamespace), units="auto")
