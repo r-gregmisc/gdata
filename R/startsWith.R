@@ -3,7 +3,6 @@ startsWith <- function(x, prefix, trim=FALSE, ignore.case=FALSE)
   if(trim) x <- trim(x)
 
   if(ignore.case)
-
   {
     x <- toupper(x)
     prefix <- toupper(prefix)
@@ -11,3 +10,5 @@ startsWith <- function(x, prefix, trim=FALSE, ignore.case=FALSE)
 
   base::startsWith(x, prefix)
 }
+
+starts_with <- function(...) startsWith(...)
