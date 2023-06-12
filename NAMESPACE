@@ -24,7 +24,8 @@ export(.onAttach,
        lowerTriangle,
        "lowerTriangle<-",
        matchcols,
-       nobs,  # default method now provided by stats package
+       nobs,
+       n_obs,
        nPairs,
        mv,
        rename.vars,
@@ -120,7 +121,7 @@ S3method(sort, levelsMap)
 ## nobs stuff
 S3method(nobs, data.frame)
 S3method(nobs, default)
-S3method(nobs, lm)      # now provided by stats package
+S3method(nobs, lm)
 
 ## Object size stuff
 S3method(c,      object_sizes)

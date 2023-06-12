@@ -1,55 +1,38 @@
 \name{nobs}
-\alias{nobs}  % Now provided by stats
+\alias{nobs}
+\alias{n_obs}
 \alias{nobs.data.frame}
 \alias{nobs.default}
-\alias{nobs.lm}  % Now provided by stats
-\title{Compute the Number of Non-missing Observations}
+\alias{nobs.lm}
+\title{Compute the Number of Non-Missing Observations}
 \description{
-  Compute the number of non-missing observations. Provides a 'default'
-  method to handle vectors, and a method for data frames.
+  Compute the number of non-missing observations. Provides a new default
+  method to handle numeric and logical vectors, and a method for data frames.
 }
 \usage{
 nobs(object, \dots)
 \method{nobs}{default}(object, \dots)
 \method{nobs}{data.frame}(object, \dots)
 \method{nobs}{lm}(object, \dots)
+n_obs(object, \dots)
 }
 \arguments{
-  \item{object}{Target Object}
-  \item{\dots}{Optional parameters (currently ignored)}
-}
-\details{
-  Calculate the number of observations in \code{object}.
-
-  \itemize{
-    \item{For numeric vectors, this is simply the number of non-NA
-      elements, as computed by \code{sum(!is.na(object))}.}
-    \item{For data frames, the result is a vector containing the
-      number of non-NA elementes of each column.}
-  }
-
-  The \code{nobs} and \code{nobs.lm} functions defined in gdata are
-  simply aliases for the functions in the base R \code{stats} package,
-  provided for backwards compatibility.
+  \item{object}{Numeric or logical vector, data frame, or a model object.}
+  \item{\dots}{Further arguments to be passed to methods.}
 }
 \value{
   Either single numeric value (for vectors) or a vector of numeric
-  values (for data.frames) giving the number of non-missing values.
+  values (for data frames) giving the number of non-missing values.
 }
 \note{
-  The base R package \code{stats} now provides a S3 dispatch function for
-  \code{nobs}, and methods for objects of classes "lm", "glm",
-  "nls" and "logLik", as well as a default method.
+  The base R package \code{stats} provides a generic \code{nobs}
+  function with methods for fitted model objects. The \code{gdata}
+  package adds methods for numeric and logical vectors, as well as data
+  frames.
 
-  Since they provided a subset of the functionality, the base
-  method dispatch (\code{nobs}) function and method for "lm" objects
-  (\code{nobs.lm}) are, as of \code{gdata} version 2.10.1, simply
-  aliases for the equivalent functions in the base R \code{stats}
-  package.
-
-  \code{gdata}'s default method (\code{nobs.default}) processes
-  vectors and hands any other data/object types to
-  \code{stats:::nobs.default}.
+  An alias function \code{n_obs} is also provided, equivalent to
+  \code{gdata::nobs}. Using \code{n_obs} in scripts makes it explicit that the
+  \code{gdata} implementation is being used.
 }
 \author{Gregory R. Warnes \email{greg@warnes.net}}
 \seealso{\code{\link{is.na}}, \code{\link{length}}}
@@ -62,11 +45,11 @@ df <- data.frame(x=rnorm(100), y=rnorm(100))
 df[1,1] <- NA
 df[1,2] <- NA
 df[2,1] <- NA
-
 nobs(df)
 
-fit <- lm(y ~ x, data=df)
+fit <- lm(y~x, data=df)
 nobs(fit)
+n_obs(fit)
 
 # Comparison
 # gdata
