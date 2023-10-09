@@ -31,13 +31,13 @@ write.fwf(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
   \item{quoteInfo}{logical, should \code{formatInfo} account for quotes}
   \item{width}{numeric, width of the columns in the output}
   \item{eol}{the character(s) to print at the end of each line (row).
-    For example, 'eol="\\r\\n"' will produce Windows line endings on a
-    Unix-alike OS, and 'eol="\\r"' will produce files as expected by Mac
+    For example, \code{eol="\\r\\n"} will produce Windows line endings on a
+    Unix-alike OS, and \code{eol="\\r"} will produce files as expected by Mac
     OS Excel 2004.}
   \item{qmethod}{a character string specifying how to deal with embedded
     double quote characters when quoting strings.  Must be one of
-    '"escape"' (default), in which case the quote character is
-    escaped in C style by a backslash, or '"double"', in which
+    \code{"escape"} (default), in which case the quote character is
+    escaped in C style by a backslash, or \code{"double"}, in which
     case it is doubled.  You can specify just the initial letter.}
   \item{scientific}{logical, if TRUE, allow numeric values to be
     formatted using scientific notation.}
@@ -68,8 +68,8 @@ write.fwf(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
   data back into \R. Check examples. Do read the details about
   \code{quoteInfo} argument.
 
-  Use only true characters, i.e., avoid use of tabs, i.e., "\\t", or similar
-  separators via argument \code{sep}. Width of the separator is taken as
+  Use only true characters, i.e., avoid use of tabs, i.e., \code{"\\t"} or
+  similar separators via argument \code{sep}. Width of the separator is taken as
   the number of characters evaluated via \code{\link{nchar}(sep)}.
 
   Use argument \code{na} to convert missing/unknown values. Only single value
@@ -78,8 +78,8 @@ write.fwf(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
 
   If \code{rowCol} is not \code{NULL} and \code{rownames=TRUE}, rownames
   will also have column name with \code{rowCol} value. This is mainly for
-  flexibility with tools outside \R. Note that (at least in \R 2.4.0) it
-  is not "easy" to import data back to \R with \code{\link{read.fwf}} if
+  flexibility with tools outside \R. Note that it may not be
+  easy to import data back to \R with \code{\link{read.fwf}} if
   you also export rownames. This is the reason, that default is
   \code{rownames=FALSE}.
 
@@ -136,8 +136,8 @@ V3            14     4
 }
 \value{
   Besides its effect to write/export data \code{write.fwf} can provide
-  information on format and width. A data.frame is returned with the
-  following columns:
+  information on format and width. If \code{formatInfo = FALSE}, then a
+  data frame is returned with the following columns:
   \item{colname}{name of the column}
   \item{nlevels}{number of unique values (unused levels of factors are
     dropped), 0 for numeric column}
@@ -192,7 +192,7 @@ write.fwf(x=testData[, 1:4], sep="-mySep-")
 ## Force wider columns
 write.fwf(x=testData[, 1:5], width=20)
 
-## Show effect of 'scienfic' option
+## Show effect of 'scientific' option
 testData$num3 <- testData$num3 * 1e8
 write.fwf(testData, scientific=TRUE)
 write.fwf(testData, scientific=FALSE)
