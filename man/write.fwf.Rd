@@ -13,41 +13,38 @@ write.fwf(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
   qmethod=c("escape", "double"),  scientific=TRUE, \dots)
 }
 \arguments{
-  \item{x}{data.frame or matrix, the object to be written}
+  \item{x}{data.frame or matrix, the object to be written.}
   \item{file}{character, name of file or connection, look in
-    \code{\link{write.table}} for more}
-  \item{append}{logical, append to existing data in \code{file}}
-  \item{quote}{logical, quote data in output}
+    \code{\link{write.table}} for more.}
+  \item{append}{logical, append to existing data in \code{file}.}
+  \item{quote}{logical, quote data in output.}
   \item{na}{character, the string to use for missing values
-    (\code{NA}) in the output}
-  \item{sep}{character, separator between columns in output}
-  \item{rownames}{logical, print row names}
-  \item{colnames}{logical, print column names}
-  \item{rowCol}{character, rownames column name}
-  \item{justify}{character, alignment of character columns; see
-    \code{\link{format}}}
+    (\code{NA}) in the output.}
+  \item{sep}{character, separator between columns in output.}
+  \item{rownames}{logical, print row names.}
+  \item{colnames}{logical, print column names.}
+  \item{rowCol}{character, rownames column name.}
+  \item{justify}{character, alignment of character columns, see
+    \code{\link{format}}.}
   \item{formatInfo}{logical, return information on number of levels,
-    widths and format}
-  \item{quoteInfo}{logical, should \code{formatInfo} account for quotes}
-  \item{width}{numeric, width of the columns in the output}
+    widths and format.}
+  \item{quoteInfo}{logical, should \code{formatInfo} account for quotes.}
+  \item{width}{numeric, width of the columns in the output.}
   \item{eol}{the character(s) to print at the end of each line (row).
     For example, \code{eol="\\r\\n"} will produce Windows line endings on a
     Unix-alike OS, and \code{eol="\\r"} will produce files as expected by Mac
     OS Excel 2004.}
   \item{qmethod}{a character string specifying how to deal with embedded
-    double quote characters when quoting strings.  Must be one of
+    double quote characters when quoting strings. Must be one of
     \code{"escape"} (default), in which case the quote character is
     escaped in C style by a backslash, or \code{"double"}, in which
-    case it is doubled.  You can specify just the initial letter.}
-  \item{scientific}{logical, if TRUE, allow numeric values to be
+    case it is doubled. You can specify just the initial letter.}
+  \item{scientific}{logical, allow numeric values to be
     formatted using scientific notation.}
   \item{\dots}{further arguments to
     \code{\link{format.info}} and \code{\link{format}}.}
 }
 \details{
-  While fixed width format is no longer widely used, it remains
-  common in some disciplines.
-
   Output is similar to \code{print(x)} or \code{format(x)}. Formatting is
   done completely by \code{\link{format}} on a column basis. Columns in
   the output are by default separated with a space i.e. empty column with
@@ -95,7 +92,7 @@ write.fwf(x, file="", append=FALSE, quote=FALSE, sep=" ", na="",
   quotes. Return value (with \code{formatInfo=TRUE}) can account for this
   in two ways; controlled with argument \code{quoteInfo}. However, note
   that there is no way to properly read the data back to \R if
-  \code{quote=TRUE & quoteInfo=FALSE} arguments were used for
+  \code{quote=TRUE} and \code{quoteInfo=FALSE} arguments were used for
   export. \code{quoteInfo} applies only when \code{quote=TRUE}. Assume
   that there is a file with quoted data as shown below (column numbers in
   first three lines are only for demonstration of the values in the
@@ -131,7 +128,7 @@ V3            14     4
   in the output. This argument is passed to the width argument of
   \code{\link{format}} function. Values in \code{width} are recycled if
   there is less values than the number of columns. If the specified width
-  is to short in comparison to the "width" of the data in particular
+  is too short in comparison to the "width" of the data in particular
   column, error is issued.
 }
 \value{
@@ -148,12 +145,12 @@ V3            14     4
     there is no exponential representation, while 1 represents exponent
     of length one i.e. \code{1e+6} and 2 \code{1e+06} or \code{1e+16}}
 }
-\author{Gregor Gorjanc}
+\author{Gregor Gorjanc.}
 \seealso{
   \code{\link{format.info}}, \code{\link{format}},
   \code{\link{NAToUnknown}}, \code{\link{write.table}},
   \code{\link{read.fwf}}, \code{\link{read.table}} and
-  \code{\link{trim}}
+  \code{\link{trim}}.
 }
 \examples{
 ## Some data
