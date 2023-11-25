@@ -41,8 +41,8 @@ ll <- function(pos=1, unit="KB", digits=0, dim=FALSE, sort=FALSE, class=NULL,
     pos <- sapply(slotNames(pos), slot, object=pos, simplify=FALSE)
   if(is.list(pos))  # pos is a list-like object
   {
-    if(is.null(names(pos)))
-      stop("All elements of a list must be named")
+    if(length(unique(names(pos))) != length(names(pos)))
+      stop("All elements must be uniquely named")
     original.rank <- rank(names(pos))
     pos <- as.environment(pos)
   }
