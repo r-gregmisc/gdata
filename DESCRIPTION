@@ -1,6 +1,6 @@
 Package: gdata
-Version: 3.0.0
-Date: 2023-10-09
+Version: 3.0.1
+Date: 2024-10-22
 Title: Various R Programming Tools for Data Manipulation
 Authors@R: c(person(c("Gregory", "R."), "Warnes", role="aut", email="greg@warnes.net"),
              person("Gregor", "Gorjanc", role="aut"),
@@ -25,6 +25,6 @@ Description: Various R programming tools for data manipulation, including
   vectors, operations on data frames, value of last evaluated expression, and a
   resample() wrapper for sample() that ensures consistent behavior for both
   scalar and vector arguments.
-License: GPL-2
+License: GPL-3
 URL: https://github.com/r-gregmisc/gdata
 BugReports: https://github.com/r-gregmisc/gdata/issues
