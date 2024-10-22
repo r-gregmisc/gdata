@@ -20,11 +20,10 @@ is.what(object, verbose=FALSE)
 \note{
   The following procedure is used to look for valid tests:
   \enumerate{
-    \item{}{Find all objects named \code{is.*} in all loaded
-      environments.}
-    \item{}{Discard objects that are not functions.}
-    \item{}{Include test result only if it is of class \code{"logical"},
-      not an \code{NA}, and of length 1.}
+    \item Find all objects named \code{is.*} in all loaded environments.
+    \item Discard objects that are not functions.
+    \item Include test result only if it is of class \code{"logical"},
+      not an \code{NA}, and of length 1.
   }
 }
 \seealso{
