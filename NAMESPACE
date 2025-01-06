@@ -44,7 +44,7 @@ export(.onAttach,
        write.fwf,
 
        ## Object size stuff
-       object_size, as.object_sizes, is.object_sizes, humanReadable, object.size,
+       object_size, as.object_sizes, is.object_sizes, humanReadable,
 
        ## getDateTime stuff
        getYear, getMonth, getDay, getHour, getMin, getSec,
@@ -60,7 +60,7 @@ importFrom(stats, reorder)
 importFrom(stats, nobs)
 importFrom(gtools, mixedsort)
 importFrom(methods, is, slot, slotNames)
-importFrom(utils, data, head, read.table, tail, write.table)
+importFrom(utils, data, head, object.size, read.table, tail, write.table)
 
 S3method(reorder, factor)
 

@@ -1,7 +1,7 @@
 
-R version 4.3.0 (2023-04-21) -- "Already Tomorrow"
-Copyright (C) 2023 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
+R version 4.4.2 (2024-10-31) -- "Pile of Leaves"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -23,10 +23,6 @@ The following object is masked from 'package:stats':
 
     nobs
 
-The following object is masked from 'package:utils':
-
-    object.size
-
 The following object is masked from 'package:base':
 
     startsWith
@@ -38,4 +34,4 @@ The following object is masked from 'package:base':
 > 
 > proc.time()
    user  system elapsed 
-  0.088   0.008   0.093 
+  0.085   0.020   0.099 

@@ -1,3 +1,13 @@
+Changes in 3.1.0 (2025-01-06)
+-----------------------------
+
+Other changes:
+
+- Removed object.size(), renamed to object_size() in 2023.
+
+
+
+
 Changes in 3.0.1 (2024-10-22)
 -----------------------------
 

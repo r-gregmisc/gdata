@@ -1,7 +1,7 @@
 
-R version 4.3.0 (2023-04-21) -- "Already Tomorrow"
-Copyright (C) 2023 The R Foundation for Statistical Computing
-Platform: x86_64-pc-linux-gnu (64-bit)
+R version 4.4.2 (2024-10-31) -- "Pile of Leaves"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -22,10 +22,6 @@ Attaching package: 'gdata'
 The following object is masked from 'package:stats':
 
     nobs
-
-The following object is masked from 'package:utils':
-
-    object.size
 
 The following object is masked from 'package:base':
 
@@ -220,4 +216,4 @@ HI! num1 num2 num3 int1 fac1 fac2 cha1 cha2 Date POSIXt
 > 
 > proc.time()
    user  system elapsed 
-  0.104   0.020   0.119 
+  0.121   0.021   0.136 

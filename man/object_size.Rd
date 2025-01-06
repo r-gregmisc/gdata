@@ -5,7 +5,6 @@
 \alias{is.object_sizes}
 \alias{format.object_sizes}
 \alias{print.object_sizes}
-\alias{object.size}
 \title{Report the Space Allocated for Objects}
 \description{
   Provides an estimate of the memory that is being used to store \R objects.
@@ -42,28 +41,25 @@ object_size(\dots)
   A numeric vector class \code{c("object_sizes", "numeric")} containing
   estimated memory allocation attributable to the objects in bytes.
 }
-\details{
-  The base R package \code{utils} provides an \code{object.size}
-  function that handles a single object. The \code{gdata} package
-  provides a similar \code{object_size} function that handles multiple
-  objects.
+\note{
+  The base R package \code{utils} provides an \code{object.size} function that
+  handles a single object. The \code{gdata} package provides a similar
+  \code{object_size} function that handles multiple objects.
 
-  Both the \code{utils} and \code{gdata} implementations store the
-  object size in bytes, but offer a slightly different user interface
-  for showing the object size in other formats. The \code{gdata}
-  implementation offers human readable format similar to \code{ls},
-  \code{df} or \code{du} shell commands, by calling \code{humanReadable}
-  directly, calling \code{print} with the argument
-  \code{humanReadable=TRUE}, or by setting
-  \code{options(humanReadable=TRUE)}.
+  Both the \code{utils} and \code{gdata} implementations store the object size
+  in bytes, but offer a slightly different user interface for showing the object
+  size in other formats. The \code{gdata} implementation offers human readable
+  format similar to \code{ls}, \code{df} or \code{du} shell commands, by calling
+  \code{humanReadable} directly, calling \code{print} with the argument
+  \code{humanReadable=TRUE}, or by setting \code{options(humanReadable=TRUE)}.
 
-  The 3.0.0 release of \code{gdata} renamed this function to
-  \code{object_size}, allowing users to explicitly call the \code{gdata}
-  implementation. This eliminates ambiguity and makes it less likely to
-  get errors when running parts of an existing script without first
-  loading the \code{gdata} package. The old \code{object.size} function
-  name is now deprecated in the \code{gdata} package, pointing users to
-  \code{object_size} and \code{utils::gdata} instead.
+  The \code{object_size} function in the \code{gdata} package used to be called
+  \code{object.size}, masking the base R function of the same name. This was a
+  potential source of ambiguity and errors when running scripts, depending on
+  whether the \code{gdata} package was loaded or not. This was improved in the
+  3.0.0 release of \code{gdata} by renaming the function to \code{object_size}
+  and in version 3.1.0 when \code{object.size} was removed from the \code{gdata}
+  package.
 }
 \seealso{
   \code{\link[utils]{object.size}} in package 'utils' for the base R
